@@ -1,635 +1,260 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
-<meta name="description" content="Soul Experience — Café y bebidas que conectan. Menú digital."/>
-<meta name="theme-color" content="#1b1410"/>
-<title>Soul Experience — Menú Digital</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
-<style>
-:root{
-  --ink:#1b1410;--parch:#f7f2eb;--warm:#faf8f5;--esp:#2c1e16;--mocha:#3e2c20;
-  --caramel:#c8a87c;--caramel-s:rgba(200,168,124,0.5);--caramel-f:rgba(200,168,124,0.15);
-  --cream:#e8ddd0;--smoke:rgba(27,20,16,0.04);
-  --c1:#d4c4b0;--c2:#c9b697;--c3:#d4a86a;--c4:#9e7b5a;--c5:#b89a7a;
-  --tag-vg:#2d5a27;--tag-vg-t:#b8f0b0;
-  --tag-gl:#5a4327;--tag-gl-t:#f0d9b0;
-  --tag-az:#27455a;--tag-az-t:#b0daf0;
-  --fd:'DM Serif Display',serif;--fu:'Manrope',sans-serif;
-  --ease:cubic-bezier(0.16,1,0.3,1);
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:var(--fu);background:var(--parch);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
-a{color:inherit;text-decoration:none}
-button{font-family:inherit;cursor:pointer;border:none;background:none}
-input{font-family:var(--fu);border:none;outline:none;background:none}
-::-webkit-scrollbar{width:4px}
-::-webkit-scrollbar-thumb{background:var(--caramel-f);border-radius:9px}
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+  <meta name="description" content="Soul Experience — Café y bebidas que conectan. Menú digital. Quinta Paredes, Bogotá."/>
+  <meta name="theme-color" content="#2c1e16"/>
+  <meta property="og:title" content="Soul Experience — Menú Digital"/>
+  <meta property="og:description" content="Café y bebidas que conectan ☕ Infusiones, Cacao, Pizza, Cervezas artesanales. Quinta Paredes, Bogotá."/>
+  <title>Soul Experience — Menú Digital</title>
 
-@keyframes fadeOut{to{opacity:0;pointer-events:none}}
-@keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-@keyframes scaleIn{from{opacity:0;transform:scale(0.96)}to{opacity:1;transform:scale(1)}}
-@keyframes breathe{0%,100%{opacity:0.3}50%{opacity:0.7}}
-@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
-@keyframes toastUp{from{opacity:0;transform:translate(-50%,12px)}to{opacity:1;transform:translate(-50%,0)}}
-@keyframes slideDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
 
-.view{display:none}.view.active{display:block}
-
-/* ════════════ SPLASH ════════════ */
-#splash{
-  position:fixed;inset:0;z-index:9999;
-  background:var(--esp);
-  display:flex;align-items:center;justify-content:center;
-  flex-direction:column;
-  transition:opacity 0.7s ease;
-}
-#splash.bye{animation:fadeOut 0.7s ease forwards}
-#splash p{
-  font-family:var(--fu);font-size:10px;font-weight:500;
-  letter-spacing:5px;text-transform:uppercase;
-  color:var(--caramel-s);margin-top:28px;
-  animation:breathe 1.8s ease-in-out infinite;
-}
-
-/* ════════════ CATEGORY CARDS (home) ════════════ */
-.home{padding:20px 16px 0;max-width:520px;margin:0 auto}
-.home__brand{
-  text-align:center;padding:16px 0 28px;
-}
-.home__brand svg{margin:0 auto 10px}
-.home__brand-tag{
-  font-size:12px;font-weight:500;letter-spacing:3px;
-  text-transform:uppercase;color:var(--caramel);
-}
-
-.cat-card{
-  display:flex;align-items:center;justify-content:flex-end;
-  position:relative;overflow:hidden;
-  border-radius:20px;
-  min-height:140px;
-  margin-bottom:14px;
-  cursor:pointer;
-  transition:transform 0.35s var(--ease),box-shadow 0.35s var(--ease);
-}
-.cat-card:active{transform:scale(0.97)}
-.cat-card:hover{box-shadow:0 8px 30px rgba(27,20,16,0.12)}
-.cat-card__bg{
-  position:absolute;inset:0;
-  border-radius:20px;
-}
-.cat-card__emoji{
-  position:absolute;left:20px;top:50%;transform:translateY(-50%);
-  font-size:64px;
-  filter:drop-shadow(0 4px 12px rgba(0,0,0,0.15));
-  z-index:2;
-  transition:transform 0.4s var(--ease);
-}
-.cat-card:hover .cat-card__emoji{transform:translateY(-50%) scale(1.08)}
-.cat-card__text{
-  position:relative;z-index:2;
-  text-align:right;padding:24px 28px;
-}
-.cat-card__title{
-  font-family:var(--fd);font-size:28px;
-  color:var(--ink);line-height:1.15;
-  letter-spacing:0.3px;
-}
-.cat-card__sub{
-  font-size:12px;font-weight:500;letter-spacing:2.5px;
-  text-transform:uppercase;color:rgba(27,20,16,0.5);
-  margin-top:2px;
-}
-.cat-card__count{
-  font-size:11px;font-weight:600;letter-spacing:1px;
-  color:rgba(27,20,16,0.35);margin-top:6px;
-}
-
-/* Card color themes */
-.cat-card--0 .cat-card__bg{background:linear-gradient(135deg,#e8ddd0 0%,#d4c4b0 100%)}
-.cat-card--1 .cat-card__bg{background:linear-gradient(135deg,#e0d2be 0%,#c9b697 100%)}
-.cat-card--2 .cat-card__bg{background:linear-gradient(135deg,#edd9bf 0%,#d4a86a 60%)}
-.cat-card--3 .cat-card__bg{background:linear-gradient(135deg,#c9b69a 0%,#9e7b5a 100%)}
-.cat-card--3 .cat-card__title,.cat-card--3 .cat-card__sub{color:var(--parch)}
-.cat-card--3 .cat-card__count{color:rgba(247,242,235,0.5)}
-.cat-card--4 .cat-card__bg{background:linear-gradient(135deg,#d8c4aa 0%,#b89a7a 100%)}
-.cat-card--4 .cat-card__title{color:var(--parch)}
-.cat-card--4 .cat-card__sub{color:rgba(247,242,235,0.7)}
-.cat-card--4 .cat-card__count{color:rgba(247,242,235,0.45)}
-/* Extra themes cycle */
-.cat-card--5 .cat-card__bg{background:linear-gradient(135deg,#ddd0c0 0%,#c4a882 100%)}
-.cat-card--6 .cat-card__bg{background:linear-gradient(135deg,#e5d8c8 0%,#bfa88e 100%)}
-.cat-card--7 .cat-card__bg{background:linear-gradient(135deg,#d0c0aa 0%,#a8916e 100%)}
-.cat-card--5 .cat-card__title,.cat-card--6 .cat-card__title,.cat-card--7 .cat-card__title{color:var(--ink)}
-
-/* ════════════ DETAIL VIEW (items inside a category) ════════════ */
-.detail{max-width:520px;margin:0 auto;padding:0 16px 40px}
-.detail__back{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:18px 0 14px;
-  font-size:13px;font-weight:600;color:var(--caramel);
-  letter-spacing:0.5px;
-  transition:opacity 0.2s;
-}
-.detail__back:hover{opacity:0.7}
-.detail__head{
-  display:flex;align-items:center;gap:14px;
-  padding:4px 0 24px;
-}
-.detail__icon{font-size:38px}
-.detail__title{font-family:var(--fd);font-size:32px;color:var(--ink)}
-.detail__line{width:50px;height:2px;background:linear-gradient(90deg,var(--caramel),transparent);margin-top:4px}
-
-/* Tag filter strip */
-.detail__tags{display:flex;gap:6px;margin-bottom:20px;flex-wrap:wrap}
-.dtag{
-  padding:6px 16px;border-radius:99px;
-  font-size:10px;font-weight:700;letter-spacing:0.8px;
-  text-transform:uppercase;
-  background:var(--smoke);color:rgba(27,20,16,0.4);
-  transition:all 0.25s var(--ease);
-}
-.dtag:hover{background:rgba(27,20,16,0.08)}
-.dtag.on[data-t="vegano"]{background:var(--tag-vg);color:var(--tag-vg-t)}
-.dtag.on[data-t="sin gluten"]{background:var(--tag-gl);color:var(--tag-gl-t)}
-.dtag.on[data-t="sin azúcar"]{background:var(--tag-az);color:var(--tag-az-t)}
-
-/* Item cards */
-.icard{
-  background:var(--warm);
-  border-radius:16px;
-  padding:18px 20px;margin-bottom:8px;
-  display:flex;justify-content:space-between;align-items:flex-start;
-  gap:14px;
-  border:1.5px solid transparent;
-  transition:all 0.3s var(--ease);
-}
-.icard:hover{border-color:var(--cream);box-shadow:0 2px 12px rgba(27,20,16,0.05);transform:translateY(-1px)}
-.icard__left{flex:1;min-width:0}
-.icard__name{font-family:var(--fd);font-size:18px;color:var(--ink)}
-.icard__desc{font-size:12px;font-weight:300;color:rgba(27,20,16,0.45);margin-top:3px;line-height:1.5}
-.icard__tags{display:flex;gap:5px;margin-top:6px;flex-wrap:wrap}
-.icard__tag{
-  padding:2px 10px;border-radius:99px;
-  font-size:8.5px;font-weight:700;letter-spacing:0.5px;
-  text-transform:uppercase;
-}
-.icard__tag[data-t="vegano"]{background:var(--tag-vg);color:var(--tag-vg-t)}
-.icard__tag[data-t="sin gluten"]{background:var(--tag-gl);color:var(--tag-gl-t)}
-.icard__tag[data-t="sin azúcar"]{background:var(--tag-az);color:var(--tag-az-t)}
-.icard__price{
-  font-size:16px;font-weight:700;color:var(--esp);
-  white-space:nowrap;padding-top:2px;letter-spacing:0.3px;
-}
-.icard__empty{text-align:center;padding:48px 20px;color:rgba(27,20,16,0.3)}
-.icard__empty h3{font-family:var(--fd);font-size:20px;margin-bottom:10px}
-.icard__empty button{padding:9px 24px;border-radius:99px;border:1.5px solid rgba(27,20,16,0.12);font-size:12px;font-weight:500;color:var(--ink);transition:all 0.2s}
-.icard__empty button:hover{background:var(--smoke)}
-
-/* ════════════ CONTACT FOOTER ════════════ */
-.contact{
-  background:var(--esp);padding:48px 24px;text-align:center;
-  position:relative;
-}
-.contact::before{
-  content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
-  width:60px;height:1px;
-  background:linear-gradient(90deg,transparent,var(--caramel-f),transparent);
-}
-.contact__name{font-family:var(--fd);font-size:24px;color:var(--parch);margin-bottom:4px}
-.contact__tag{font-size:12px;font-weight:400;color:var(--caramel-s);margin-bottom:20px}
-.contact__row{
-  display:flex;align-items:center;justify-content:center;gap:8px;
-  font-size:13px;font-weight:400;color:rgba(247,242,235,0.55);
-  margin-bottom:10px;
-}
-.contact__row svg{flex-shrink:0;opacity:0.6}
-.contact__socials{display:flex;gap:12px;justify-content:center;margin-top:24px}
-.contact__socials a{
-  width:46px;height:46px;border-radius:50%;
-  border:1px solid rgba(200,168,124,0.15);
-  display:flex;align-items:center;justify-content:center;
-  color:var(--caramel);transition:all 0.3s var(--ease);
-}
-.contact__socials a:hover{border-color:var(--caramel);background:rgba(200,168,124,0.08);transform:translateY(-2px)}
-.contact__wa{
-  display:inline-flex;align-items:center;gap:10px;
-  margin-top:28px;padding:14px 32px;border-radius:99px;
-  background:var(--caramel);color:var(--esp);
-  font-size:13px;font-weight:700;letter-spacing:0.5px;
-  transition:all 0.3s var(--ease);
-}
-.contact__wa:hover{background:#d4b892;transform:translateY(-2px);box-shadow:0 0 30px rgba(200,168,124,0.2)}
-.contact__bottom{margin-top:36px;padding-top:20px;border-top:1px solid rgba(200,168,124,0.06)}
-.contact__admin{
-  font-size:9px;font-weight:600;letter-spacing:3px;
-  color:rgba(200,168,124,0.12);text-transform:uppercase;
-  transition:color 0.25s;
-}
-.contact__admin:hover{color:rgba(200,168,124,0.3)}
-
-/* ════════════ LOGIN ════════════ */
-.login{
-  min-height:100vh;background:var(--esp);
-  display:flex;align-items:center;justify-content:center;
-  padding:24px;position:relative;
-}
-.login::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 50% at 50% 45%,rgba(200,168,124,0.05),transparent 70%);pointer-events:none}
-.login__box{position:relative;z-index:1;text-align:center;width:100%;max-width:340px}
-.login__label{font-size:11px;font-weight:500;letter-spacing:4px;text-transform:uppercase;color:var(--caramel-s);margin:28px 0 36px}
-.login__inp{
-  width:100%;padding:15px 20px;
-  background:rgba(247,242,235,0.04);border:1.5px solid rgba(247,242,235,0.1);
-  border-radius:10px;color:var(--parch);font-size:14px;
-  text-align:center;letter-spacing:3px;transition:border-color 0.3s;
-}
-.login__inp:focus{border-color:rgba(200,168,124,0.3)}
-.login__inp.err{border-color:#c44}
-.login__inp.shk{animation:shake 0.4s ease}
-.login__err{color:#e77;font-size:12px;margin-top:8px;display:none}
-.login__go{
-  width:100%;padding:15px;margin-top:18px;
-  background:var(--caramel);border-radius:10px;
-  color:var(--esp);font-size:12px;font-weight:700;
-  letter-spacing:2.5px;text-transform:uppercase;
-  transition:all 0.25s;
-}
-.login__go:hover{background:#d4b892;transform:translateY(-1px)}
-.login__back{margin-top:24px;color:rgba(200,168,124,0.35);font-size:12px;display:inline-flex;align-items:center;gap:6px;transition:color 0.2s}
-.login__back:hover{color:var(--caramel-s)}
-
-/* ════════════ ADMIN ════════════ */
-.admin{min-height:100vh;background:var(--esp);color:var(--parch)}
-.admin__bar{
-  position:sticky;top:0;z-index:60;
-  background:rgba(44,30,22,0.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-  border-bottom:1px solid rgba(247,242,235,0.04);
-  padding:10px 20px;display:flex;justify-content:space-between;align-items:center;
-}
-.admin__bar-left{display:flex;align-items:center;gap:10px}
-.admin__bar-name{font-family:var(--fd);font-size:15px;color:var(--parch)}
-.admin__bar-badge{font-size:10px;font-weight:600;color:var(--caramel-s);letter-spacing:1px;padding:3px 10px;border-radius:99px;background:rgba(200,168,124,0.08)}
-.admin__bar-right{display:flex;gap:8px}
-.bg{padding:7px 16px;border-radius:8px;border:1px solid rgba(200,168,124,0.2);font-size:11px;font-weight:600;color:var(--caramel);letter-spacing:0.5px;display:flex;align-items:center;gap:5px;transition:all 0.2s}
-.bg:hover{background:rgba(200,168,124,0.06)}
-.bd{padding:7px 16px;border-radius:8px;background:rgba(200,60,60,0.1);font-size:11px;font-weight:600;color:#e88;display:flex;align-items:center;gap:5px;transition:background 0.2s}
-.bd:hover{background:rgba(200,60,60,0.18)}
-.admin__body{max-width:700px;margin:0 auto;padding:24px 16px 80px}
-.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:28px}
-.stat{background:rgba(247,242,235,0.03);border-radius:12px;padding:18px 20px;border:1px solid rgba(247,242,235,0.04)}
-.stat__n{font-family:var(--fd);font-size:32px;color:var(--caramel)}
-.stat__l{font-size:10px;font-weight:600;color:var(--caramel-s);letter-spacing:1.5px;text-transform:uppercase;margin-top:2px}
-.ac{margin-bottom:16px;background:rgba(247,242,235,0.025);border-radius:14px;border:1px solid rgba(247,242,235,0.04);overflow:hidden}
-.ac__h{padding:14px 18px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(247,242,235,0.03)}
-.ac__hl{display:flex;align-items:center;gap:10px}
-.ac__ic{font-size:22px}
-.ac__nm{font-family:var(--fd);font-size:16px}
-.ac__ct{font-size:11px;color:var(--caramel-s)}
-.ac__btns{display:flex;gap:2px}
-.ib{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--caramel-s);transition:all 0.2s}
-.ib:hover{background:rgba(200,168,124,0.08);color:var(--caramel)}
-.ib.x{color:rgba(238,136,136,0.4)}.ib.x:hover{background:rgba(200,60,60,0.1);color:#e88}
-.ai{padding:12px 18px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(247,242,235,0.02);transition:background 0.15s}
-.ai:hover{background:rgba(247,242,235,0.015)}
-.ai__i{flex:1;min-width:0}
-.ai__n{font-size:13px;font-weight:500}
-.ai__d{font-size:11px;font-weight:300;color:var(--caramel-s);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ai__r{display:flex;align-items:center;gap:8px}
-.ai__p{font-size:13px;font-weight:700;color:var(--caramel);white-space:nowrap}
-.ai__tg{font-size:7.5px;padding:1.5px 7px;border-radius:99px;font-weight:700;letter-spacing:0.4px;text-transform:uppercase;display:inline-block;margin-left:3px}
-.ai__tg[data-t="vegano"]{background:var(--tag-vg);color:var(--tag-vg-t)}
-.ai__tg[data-t="sin gluten"]{background:var(--tag-gl);color:var(--tag-gl-t)}
-.ai__tg[data-t="sin azúcar"]{background:var(--tag-az);color:var(--tag-az-t)}
-.addr{width:100%;padding:13px;border-top:1px dashed rgba(247,242,235,0.05);font-size:12px;color:rgba(200,168,124,0.3);display:flex;align-items:center;justify-content:center;gap:6px;transition:all 0.2s}
-.addr:hover{color:var(--caramel);background:rgba(247,242,235,0.015)}
-.addc{width:100%;padding:18px;border-radius:14px;border:1.5px dashed rgba(200,168,124,0.12);font-size:13px;font-weight:600;color:var(--caramel);letter-spacing:0.5px;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.25s}
-.addc:hover{border-color:rgba(200,168,124,0.3);background:rgba(200,168,124,0.03)}
-
-/* Forms */
-.af{padding:18px;background:rgba(200,168,124,0.04);border-bottom:1px solid rgba(247,242,235,0.03);animation:scaleIn 0.25s var(--ease)}
-.af__g{display:grid;gap:8px;margin-bottom:8px}
-.af__g.duo{grid-template-columns:1fr 130px}
-.af__in{width:100%;padding:11px 16px;background:rgba(247,242,235,0.05);border:1.5px solid rgba(247,242,235,0.08);border-radius:8px;color:var(--parch);font-size:13px;transition:border-color 0.2s}
-.af__in:focus{border-color:rgba(200,168,124,0.25)}
-.af__in::placeholder{color:rgba(200,168,124,0.25)}
-.af__tgs{display:flex;gap:6px;margin-bottom:12px}
-.atg{padding:5px 12px;border-radius:99px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;background:rgba(247,242,235,0.04);color:rgba(200,168,124,0.35);transition:all 0.2s}
-.atg.on[data-t="vegano"]{background:var(--tag-vg);color:var(--tag-vg-t)}
-.atg.on[data-t="sin gluten"]{background:var(--tag-gl);color:var(--tag-gl-t)}
-.atg.on[data-t="sin azúcar"]{background:var(--tag-az);color:var(--tag-az-t)}
-.af__a{display:flex;gap:8px}
-.bs{padding:9px 24px;border-radius:8px;background:var(--caramel);color:var(--esp);font-size:12px;font-weight:700;letter-spacing:0.5px;transition:all 0.2s}
-.bs:hover{background:#d4b892;transform:translateY(-1px)}
-.bc{padding:9px 24px;border-radius:8px;border:1px solid rgba(247,242,235,0.08);font-size:12px;color:var(--caramel-s);transition:all 0.2s}
-.bc:hover{border-color:rgba(247,242,235,0.15)}
-.ejs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
-.ejs button{font-size:22px;padding:4px 8px;border-radius:8px;border:1.5px solid transparent;transition:all 0.15s}
-.ejs button:hover{background:rgba(200,168,124,0.08)}
-.ejs button.on{background:rgba(200,168,124,0.15);border-color:rgba(200,168,124,0.25)}
-
-.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:var(--tag-vg);color:var(--tag-vg-t);padding:11px 28px;border-radius:99px;font-size:13px;font-weight:600;z-index:999;box-shadow:0 8px 30px rgba(0,0,0,0.3);animation:toastUp 0.35s var(--ease);pointer-events:none;display:none}
-
-@media(max-width:480px){
-  .cat-card{min-height:120px;border-radius:16px}
-  .cat-card__emoji{font-size:50px;left:16px}
-  .cat-card__text{padding:20px 22px}
-  .cat-card__title{font-size:24px}
-  .detail__title{font-size:28px}
-  .icard__name{font-size:16px}
-  .af__g.duo{grid-template-columns:1fr}
-  .contact__socials a{width:42px;height:42px}
-}
-</style>
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/styles.css"/>
 </head>
 <body>
 
-<!-- ════════════ SPLASH ════════════ -->
-<div id="splash">
-  <svg width="100" height="100" viewBox="0 0 120 120" fill="none">
-    <circle cx="60" cy="60" r="56" stroke="rgba(200,168,124,0.15)" stroke-width="1.5" fill="none"/>
-    <circle cx="60" cy="60" r="48" stroke="rgba(200,168,124,0.06)" stroke-width="0.8" fill="none"/>
-    <text x="60" y="50" text-anchor="middle" font-family="'DM Serif Display',serif" font-size="16" fill="#f7f2eb" letter-spacing="2">Soul</text>
-    <text x="60" y="67" text-anchor="middle" font-family="'Manrope',sans-serif" font-size="7.5" fill="rgba(200,168,124,0.7)" letter-spacing="5" font-weight="500">EXPERIENCE</text>
-    <line x1="36" y1="75" x2="84" y2="75" stroke="rgba(200,168,124,0.12)" stroke-width="0.5"/>
-    <text x="60" y="86" text-anchor="middle" font-family="'Manrope',sans-serif" font-size="5.5" fill="rgba(200,168,124,0.3)" letter-spacing="3" font-weight="400">BOGOTÁ</text>
-  </svg>
-  <p>Cargando</p>
-</div>
+  <!-- ═══════════ SPLASH ═══════════ -->
+  <div id="splash">
+    <img src="assets/logo-soul-experience.png" alt="Soul Experience" width="110" height="110" style="border-radius:50%;object-fit:contain;filter:brightness(1.1);" />
+    <p>Cargando</p>
+  </div>
 
-<!-- ════════════ MENU VIEW ════════════ -->
-<div id="view-menu" class="view active">
-  <!-- Home: category cards -->
-  <div id="home-screen">
-    <div class="home">
-      <div class="home__brand">
-        <svg width="72" height="72" viewBox="0 0 120 120" fill="none" style="display:block;margin:0 auto 10px">
-          <circle cx="60" cy="60" r="56" stroke="rgba(27,20,16,0.15)" stroke-width="1.5"/>
-          <circle cx="60" cy="60" r="48" stroke="rgba(27,20,16,0.06)" stroke-width="0.8"/>
-          <text x="60" y="50" text-anchor="middle" font-family="'DM Serif Display',serif" font-size="16" fill="#1b1410" letter-spacing="2">Soul</text>
-          <text x="60" y="67" text-anchor="middle" font-family="'Manrope',sans-serif" font-size="7.5" fill="rgba(27,20,16,0.5)" letter-spacing="5" font-weight="500">EXPERIENCE</text>
-          <line x1="36" y1="75" x2="84" y2="75" stroke="rgba(27,20,16,0.1)" stroke-width="0.5"/>
-        </svg>
-        <p class="home__brand-tag">Menú Digital</p>
+
+  <!-- ═══════════ LANDING PAGE ═══════════ -->
+  <div id="view-landing" class="view active">
+    <div class="landing">
+      <div class="landing__deco-line"></div>
+      <div class="landing__deco-circle"></div>
+
+      <div class="landing__inner">
+        <!-- Logo -->
+        <div class="landing__logo">
+          <img src="assets/logo-soul-experience.png" alt="Soul Experience" width="130" height="130" style="border-radius:50%;object-fit:contain;" />
+        </div>
+
+        <!-- Brand info -->
+        <h1 class="landing__name">Soul Experience</h1>
+        <p class="landing__tagline">Café y bebidas que conectan</p>
+        <div class="landing__info">
+          <span>☕ Infusiones · Cacao · Pizza Artesanal</span>
+          <span>🍺 Cervezas Importadas & Artesanales</span>
+          <span>🍰 Vegano · Sin Gluten · Sin Azúcar</span>
+        </div>
+
+        <!-- Badges -->
+        <div class="landing__badges">
+          <span class="landing__badge">📍 Quinta Paredes</span>
+          <span class="landing__badge">🐾 Pet Friendly</span>
+        </div>
+
+        <!-- 3 Action Buttons -->
+        <div class="landing__actions">
+          <!-- 1. Ver Menú -->
+          <button class="landing__btn landing__btn--menu" onclick="go('menu')">
+            <span class="landing__btn-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h12"/></svg>
+            </span>
+            Ver Menú Digital
+          </button>
+
+          <!-- 2. Ubicación -->
+          <a class="landing__btn landing__btn--location" href="https://maps.google.com/?q=Cra.+44a+%2322-19,+Teusaquillo,+Bogota" target="_blank">
+            <span class="landing__btn-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </span>
+            Cómo Llegar
+          </a>
+
+          <!-- 3. Redes Sociales -->
+          <button class="landing__btn landing__btn--social" onclick="openSocials()">
+            <span class="landing__btn-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+            </span>
+            Nuestras Redes
+          </button>
+        </div>
+
+        <!-- Details -->
+        <div class="landing__details">
+          <div class="landing__detail-row">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Cra. 44a #22-19 · Quinta Paredes · Teusaquillo
+          </div>
+          <div class="landing__detail-row">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            +57 320 367 8524
+          </div>
+        </div>
+
+        <div class="landing__divider"></div>
+
+        <div class="landing__footer">
+          <button class="landing__admin-btn" onclick="go('login')">Administrar</button>
+        </div>
       </div>
-      <div id="cat-cards"></div>
     </div>
   </div>
 
-  <!-- Detail: items in a category -->
-  <div id="detail-screen" style="display:none">
-    <div class="detail">
-      <button class="detail__back" onclick="backToHome()">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-        Volver al menú
+
+  <!-- ═══════════ SOCIAL MODAL ═══════════ -->
+  <div id="social-modal" class="modal-overlay">
+    <div class="modal">
+      <button class="modal__close" onclick="closeSocials()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
-      <div id="detail-head"></div>
-      <div id="detail-tags"></div>
-      <div id="detail-items"></div>
+
+      <h2 class="modal__title">Síguenos</h2>
+      <p class="modal__sub">Conecta con nosotros en redes</p>
+
+      <!-- WhatsApp -->
+      <a class="social-link social-link--whatsapp" href="https://wa.me/573203678524" target="_blank">
+        <div class="social-link__icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </div>
+        <div class="social-link__text">
+          <div class="social-link__name">WhatsApp</div>
+          <div class="social-link__handle">Escríbenos directo</div>
+        </div>
+        <span class="social-link__arrow">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </span>
+      </a>
+
+      <!-- Instagram -->
+      <a class="social-link social-link--instagram" href="https://www.instagram.com/soul_experience._" target="_blank">
+        <div class="social-link__icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+        </div>
+        <div class="social-link__text">
+          <div class="social-link__name">Instagram</div>
+          <div class="social-link__handle">@soul_experience._</div>
+        </div>
+        <span class="social-link__arrow">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </span>
+      </a>
+
+      <!-- Facebook -->
+      <a class="social-link social-link--facebook" href="https://www.facebook.com/profile.php?id=61565793215913" target="_blank">
+        <div class="social-link__icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12c0-6.627-5.373-12-12-12S0 5.373 0 12c0 5.99 4.388 10.954 10.125 11.854V15.47H7.078V12h3.047V9.356c0-3.007 1.792-4.668 4.533-4.668 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.875V12h3.328l-.532 3.47h-2.796v8.385C19.612 22.954 24 17.99 24 12z"/></svg>
+        </div>
+        <div class="social-link__text">
+          <div class="social-link__name">Facebook</div>
+          <div class="social-link__handle">Soul Experience</div>
+        </div>
+        <span class="social-link__arrow">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </span>
+      </a>
     </div>
   </div>
 
-  <!-- Contact footer -->
-  <footer class="contact">
-    <p class="contact__name">Soul Experience</p>
-    <p class="contact__tag">Café y bebidas que conectan</p>
-    <div class="contact__row">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-      Cra. 44a #22-19 · Quinta Paredes · Teusaquillo
-    </div>
-    <div class="contact__row">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-      +57 320 367 8524
-    </div>
-    <div class="contact__socials">
-      <a href="https://wa.me/573203678524" target="_blank" title="WhatsApp"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
-      <a href="https://www.instagram.com/soul_experience._" target="_blank" title="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
-      <a href="https://www.facebook.com/profile.php?id=61565793215913" target="_blank" title="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12c0-6.627-5.373-12-12-12S0 5.373 0 12c0 5.99 4.388 10.954 10.125 11.854V15.47H7.078V12h3.047V9.356c0-3.007 1.792-4.668 4.533-4.668 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.875V12h3.328l-.532 3.47h-2.796v8.385C19.612 22.954 24 17.99 24 12z"/></svg></a>
-      <a href="https://maps.google.com/?q=Cra.+44a+%2322-19,+Teusaquillo" target="_blank" title="Ubicación"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
-    </div>
-    <a class="contact__wa" href="https://wa.me/573203678524" target="_blank">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      Escríbenos por WhatsApp
-    </a>
-    <div class="contact__bottom">
-      <button class="contact__admin" onclick="go('login')">Administrar menú</button>
-    </div>
-  </footer>
-</div>
 
-<!-- ════════════ LOGIN ════════════ -->
-<div id="view-login" class="view">
-  <div class="login">
-    <div class="login__box">
-      <svg width="90" height="90" viewBox="0 0 120 120" fill="none" style="margin:0 auto">
-        <circle cx="60" cy="60" r="56" stroke="rgba(200,168,124,0.2)" stroke-width="1.5"/>
-        <circle cx="60" cy="60" r="48" stroke="rgba(200,168,124,0.08)" stroke-width="0.8"/>
-        <text x="60" y="50" text-anchor="middle" font-family="'DM Serif Display',serif" font-size="16" fill="#f7f2eb" letter-spacing="2">Soul</text>
-        <text x="60" y="67" text-anchor="middle" font-family="'Manrope',sans-serif" font-size="7.5" fill="rgba(200,168,124,0.7)" letter-spacing="5" font-weight="500">EXPERIENCE</text>
-      </svg>
-      <p class="login__label">Panel de Administración</p>
-      <input id="lp" class="login__inp" type="password" placeholder="Contraseña"/>
-      <p id="le" class="login__err">Contraseña incorrecta</p>
-      <button class="login__go" onclick="tryLogin()">Ingresar</button>
-      <button class="login__back" onclick="go('menu')">← Volver al menú</button>
+  <!-- ═══════════ MENU VIEW ═══════════ -->
+  <div id="view-menu" class="view">
+    <!-- Home: category cards -->
+    <div id="home-screen">
+      <div class="menu-home">
+        <div class="menu-home__head">
+          <div class="menu-home__head-left">
+            <span class="menu-home__head-logo">Soul Experience</span>
+            <span class="menu-home__head-badge">Menú</span>
+          </div>
+          <button class="menu-home__back-btn" onclick="go('landing')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            Inicio
+          </button>
+        </div>
+        <div id="cat-cards"></div>
+      </div>
+    </div>
+
+    <!-- Detail: items in a category -->
+    <div id="detail-screen" style="display:none">
+      <div class="detail">
+        <button class="detail__back" onclick="backToHome()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          Volver al menú
+        </button>
+        <div id="detail-head"></div>
+        <div id="detail-tags"></div>
+        <div id="detail-items"></div>
+      </div>
+    </div>
+
+    <!-- Contact footer -->
+    <footer class="contact">
+      <p class="contact__name">Soul Experience</p>
+      <p class="contact__tag">Café y bebidas que conectan</p>
+      <div class="contact__row">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Cra. 44a #22-19 · Quinta Paredes · Teusaquillo
+      </div>
+      <div class="contact__row">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        +57 320 367 8524
+      </div>
+      <a class="contact__wa" href="https://wa.me/573203678524" target="_blank">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Escríbenos por WhatsApp
+      </a>
+      <div class="contact__bottom">
+        <button class="contact__admin" onclick="go('login')">Administrar menú</button>
+      </div>
+    </footer>
+  </div>
+
+
+  <!-- ═══════════ LOGIN ═══════════ -->
+  <div id="view-login" class="view">
+    <div class="login">
+      <div class="login__box">
+        <img src="assets/logo-soul-experience.png" alt="Soul Experience" width="100" height="100" style="margin:0 auto;display:block;border-radius:50%;object-fit:contain;filter:brightness(1.1);" />
+        <p class="login__label">Panel de Administración</p>
+        <input id="lp" class="login__inp" type="password" placeholder="Contraseña"/>
+        <p id="le" class="login__err">Contraseña incorrecta</p>
+        <button class="login__go" onclick="tryLogin()">Ingresar</button>
+        <button class="login__back" onclick="go('landing')">← Volver al inicio</button>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- ════════════ ADMIN ════════════ -->
-<div id="view-admin" class="view">
-  <div class="admin">
-    <div class="admin__bar">
-      <div class="admin__bar-left"><span class="admin__bar-name">Soul Experience</span><span class="admin__bar-badge">Admin</span></div>
-      <div class="admin__bar-right">
-        <button class="bg" onclick="go('menu')"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8l-4 4 4 4M16 12H8"/></svg> Ver Menú</button>
-        <button class="bd" onclick="go('menu')"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg> Salir</button>
+
+  <!-- ═══════════ ADMIN ═══════════ -->
+  <div id="view-admin" class="view">
+    <div class="admin">
+      <div class="admin__bar">
+        <div class="admin__bar-left">
+          <span class="admin__bar-name">Soul Experience</span>
+          <span class="admin__bar-badge">Admin</span>
+        </div>
+        <div class="admin__bar-right">
+          <button class="bg" onclick="go('menu')">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8l-4 4 4 4M16 12H8"/></svg>
+            Ver Menú
+          </button>
+          <button class="bd" onclick="go('landing')">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            Salir
+          </button>
+        </div>
       </div>
+      <div id="ab" class="admin__body"></div>
     </div>
-    <div id="ab" class="admin__body"></div>
   </div>
-</div>
 
-<div id="toast" class="toast"></div>
 
-<script>
-const PW='soul2024',SK='soul_menu_v3';
-const DEFS=[
-  {id:'cafe',name:'Café & Infusiones',icon:'☕',items:[
-    {id:'c1',name:'Espresso',price:4500,desc:'Shot clásico de café colombiano',tags:[]},
-    {id:'c2',name:'Americano',price:5000,desc:'Espresso con agua caliente',tags:[]},
-    {id:'c3',name:'Cappuccino',price:7500,desc:'Espresso, leche vaporizada y espuma',tags:[]},
-    {id:'c4',name:'Latte',price:7500,desc:'Espresso con leche cremosa',tags:[]},
-    {id:'c5',name:'Mocaccino',price:8500,desc:'Espresso, chocolate y leche',tags:[]},
-    {id:'c6',name:'Infusión de hierbas',price:5500,desc:'Selección de infusiones naturales',tags:['vegano','sin gluten']},
-    {id:'c7',name:'Chai Latte',price:8000,desc:'Té chai especiado con leche',tags:[]},
-    {id:'c8',name:'Chocolate de mesa',price:6500,desc:'Chocolate tradicional colombiano',tags:[]},
-  ]},
-  {id:'cacao',name:'Cacao & Bebidas Especiales',icon:'🍫',items:[
-    {id:'ca1',name:'Cacao ceremonial',price:12000,desc:'Cacao 100% orgánico de origen',tags:['vegano','sin gluten','sin azúcar']},
-    {id:'ca2',name:'Cacao con especias',price:10000,desc:'Cacao con canela y cardamomo',tags:['vegano']},
-    {id:'ca3',name:'Smoothie de cacao',price:11000,desc:'Cacao, banana y leche vegetal',tags:['vegano','sin gluten']},
-    {id:'ca4',name:'Malteada especial',price:12000,desc:'Malteada artesanal de la casa',tags:[]},
-  ]},
-  {id:'pizza',name:'Pizzas Artesanales',icon:'🍕',items:[
-    {id:'p1',name:'Margarita',price:18000,desc:'Tomate, mozzarella y albahaca',tags:[]},
-    {id:'p2',name:'Hawaiana',price:20000,desc:'Jamón, piña y mozzarella',tags:[]},
-    {id:'p3',name:'Vegetariana',price:20000,desc:'Champiñones, pimentón, cebolla y aceitunas',tags:['vegano']},
-    {id:'p4',name:'BBQ Chicken',price:22000,desc:'Pollo, salsa BBQ y cebolla caramelizada',tags:[]},
-    {id:'p5',name:'Pizza sin gluten',price:22000,desc:'Masa especial sin gluten, toppings a elección',tags:['sin gluten']},
-  ]},
-  {id:'cervezas',name:'Cervezas',icon:'🍺',items:[
-    {id:'b1',name:'Cerveza artesanal local',price:9000,desc:'Selección rotativa de cervecerías locales',tags:[]},
-    {id:'b2',name:'IPA artesanal',price:12000,desc:'India Pale Ale de cuerpo intenso',tags:[]},
-    {id:'b3',name:'Cerveza importada',price:14000,desc:'Selección premium importada',tags:[]},
-    {id:'b4',name:'Cerveza sin gluten',price:12000,desc:'Opción artesanal libre de gluten',tags:['sin gluten']},
-  ]},
-  {id:'postres',name:'Postres & Snacks',icon:'🍰',items:[
-    {id:'d1',name:'Brownie de cacao',price:7000,desc:'Brownie artesanal con cacao de origen',tags:[]},
-    {id:'d2',name:'Cheesecake vegano',price:9000,desc:'Base de frutos secos, topping de frutos rojos',tags:['vegano','sin gluten','sin azúcar']},
-    {id:'d3',name:'Galletas artesanales',price:4000,desc:'Variedad de galletas horneadas del día',tags:[]},
-    {id:'d4',name:'Torta del día',price:8000,desc:'Pregunta por la opción del día',tags:[]},
-  ]},
-];
+  <div id="toast" class="toast"></div>
 
-let D=[],curCat=null,dTag=null;
-const $=s=>document.getElementById(s);
-const uid=()=>Math.random().toString(36).slice(2,8);
-const fmt=n=>new Intl.NumberFormat('es-CO',{style:'currency',currency:'COP',minimumFractionDigits:0}).format(n);
-const save=()=>{try{localStorage.setItem(SK,JSON.stringify(D))}catch(e){}};
-const load=()=>{try{const r=localStorage.getItem(SK);if(r){const p=JSON.parse(r);if(Array.isArray(p)&&p.length)return p}}catch(e){}return JSON.parse(JSON.stringify(DEFS))};
-function toast(m){const t=$('toast');t.textContent=m;t.style.display='block';setTimeout(()=>t.style.display='none',2600)}
+  <!-- Script -->
+  <script src="js/app.js"></script>
 
-/* ════ VIEWS ════ */
-function go(v){
-  document.querySelectorAll('.view').forEach(e=>e.classList.remove('active'));
-  $('view-'+v).classList.add('active');
-  window.scrollTo(0,0);
-  document.body.style.background=v==='menu'?'#f7f2eb':'#2c1e16';
-  if(v==='menu'){curCat=null;dTag=null;showHome()}
-  if(v==='login'){$('lp').value='';$('le').style.display='none';$('lp').classList.remove('err','shk')}
-  if(v==='admin')renderAdmin();
-}
-
-/* ════ LOGIN ════ */
-function tryLogin(){const i=$('lp');if(i.value===PW){go('admin')}else{$('le').style.display='block';i.classList.add('err','shk');setTimeout(()=>i.classList.remove('shk'),500)}}
-document.addEventListener('keydown',e=>{if(e.key==='Enter'&&$('view-login').classList.contains('active'))tryLogin()});
-
-/* ════ HOME (category cards) ════ */
-function showHome(){
-  $('home-screen').style.display='block';
-  $('detail-screen').style.display='none';
-  renderCatCards();
-}
-
-function renderCatCards(){
-  let h='';
-  D.forEach((c,i)=>{
-    const ci=i%8;
-    h+=`<div class="cat-card cat-card--${ci}" onclick="openCat('${c.id}')" style="animation:rise 0.5s var(--ease) ${i*0.07}s both">
-      <div class="cat-card__bg"></div>
-      <span class="cat-card__emoji">${c.icon}</span>
-      <div class="cat-card__text">
-        <div class="cat-card__title">${c.name.split('&')[0].split('y ')[0].trim().toUpperCase()}</div>
-        ${c.name.includes('&')||c.name.includes(' y ')?`<div class="cat-card__sub">${c.name.includes('&')?c.name.split('&')[1].trim():c.name.split(' y ').slice(1).join(' y ').trim()}</div>`:''}
-        <div class="cat-card__count">${c.items.length} producto${c.items.length!==1?'s':''}</div>
-      </div>
-    </div>`;
-  });
-  $('cat-cards').innerHTML=h;
-}
-
-/* ════ DETAIL (items) ════ */
-function openCat(id){
-  curCat=id;dTag=null;
-  $('home-screen').style.display='none';
-  $('detail-screen').style.display='block';
-  window.scrollTo(0,0);
-  renderDetail();
-}
-function backToHome(){curCat=null;dTag=null;showHome();window.scrollTo(0,0)}
-
-function renderDetail(){
-  const c=D.find(x=>x.id===curCat);
-  if(!c)return backToHome();
-
-  $('detail-head').innerHTML=`<div class="detail__head"><span class="detail__icon">${c.icon}</span><div><div class="detail__title">${c.name}</div><div class="detail__line"></div></div></div>`;
-
-  // Collect tags in this category
-  const allT=new Set();c.items.forEach(i=>(i.tags||[]).forEach(t=>allT.add(t)));
-  if(allT.size){
-    $('detail-tags').innerHTML=`<div class="detail__tags">${[...allT].map(t=>`<button class="dtag ${dTag===t?'on':''}" data-t="${t}" onclick="dTag=dTag==='${t}'?null:'${t}';renderDetail()">${t}</button>`).join('')}</div>`;
-  } else $('detail-tags').innerHTML='';
-
-  const items=c.items.filter(i=>!dTag||(i.tags||[]).includes(dTag));
-  if(!items.length){
-    $('detail-items').innerHTML=`<div class="icard__empty"><h3>Sin productos con este filtro</h3><button onclick="dTag=null;renderDetail()">Ver todos</button></div>`;
-    return;
-  }
-  let h='';
-  items.forEach((i,x)=>{
-    const tgs=(i.tags||[]).map(t=>`<span class="icard__tag" data-t="${t}">${t}</span>`).join('');
-    h+=`<div class="icard" style="animation:rise 0.45s var(--ease) ${x*0.04}s both">
-      <div class="icard__left">
-        <div class="icard__name">${i.name}</div>
-        ${i.desc?`<p class="icard__desc">${i.desc}</p>`:''}
-        ${tgs?`<div class="icard__tags">${tgs}</div>`:''}
-      </div>
-      <div class="icard__price">${fmt(i.price)}</div>
-    </div>`;
-  });
-  $('detail-items').innerHTML=h;
-}
-
-/* ════ ADMIN ════ */
-const EJ=['☕','🍫','🍕','🍺','🍰','🥤','🧁','🥗','🍵','🍷','🥐','🧇','🫖','🧃'];
-const IE=`<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>`;
-const IX=`<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>`;
-const IP=`<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>`;
-
-function renderAdmin(){
-  const tot=D.reduce((a,c)=>a+c.items.length,0);
-  let h=`<div class="stats"><div class="stat"><div class="stat__n">${D.length}</div><div class="stat__l">Categorías</div></div><div class="stat"><div class="stat__n">${tot}</div><div class="stat__l">Productos</div></div></div>`;
-  D.forEach(c=>{
-    h+=`<div class="ac" id="ac-${c.id}"><div class="ac__h"><div class="ac__hl"><span class="ac__ic">${c.icon}</span><span class="ac__nm">${c.name}</span><span class="ac__ct">${c.items.length}</span></div><div class="ac__btns"><button class="ib" onclick="ecF('${c.id}')">${IE}</button><button class="ib x" onclick="dc('${c.id}')">${IX}</button></div></div>`;
-    c.items.forEach(i=>{
-      const tg=(i.tags||[]).map(t=>`<span class="ai__tg" data-t="${t}">${t}</span>`).join('');
-      h+=`<div class="ai" id="ai-${i.id}"><div class="ai__i"><div><span class="ai__n">${i.name}</span>${tg}</div><div class="ai__d">${i.desc||''}</div></div><div class="ai__r"><span class="ai__p">${fmt(i.price)}</span><button class="ib" onclick="eiF('${c.id}','${i.id}')">${IE}</button><button class="ib x" onclick="di('${c.id}','${i.id}')">${IX}</button></div></div>`;
-    });
-    h+=`<button class="addr" onclick="aiF('${c.id}')">${IP} Agregar producto</button></div>`;
-  });
-  h+=`<button class="addc" onclick="acF()">${IP} Nueva categoría</button>`;
-  $('ab').innerHTML=h;
-}
-
-function cfH(n,ic,sA,cA){
-  return `<div class="af"><div class="ejs">${EJ.map(e=>`<button class="${e===ic?'on':''}" onclick="this.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('on'));this.classList.add('on');this.parentElement.dataset.s='${e}'">${e}</button>`).join('')}</div><div class="af__g"><input class="af__in" id="cn" value="${n}" placeholder="Nombre de categoría"/></div><div class="af__a"><button class="bs" onclick="${sA}">Guardar</button><button class="bc" onclick="${cA}">Cancelar</button></div></div>`;
-}
-function acF(){const b=document.querySelector('.addc'),w=document.createElement('div');w.className='ac';w.id='ncf';w.innerHTML=cfH('','☕',"aC()","document.getElementById('ncf').remove();document.querySelector('.addc').style.display=''");b.before(w);b.style.display='none';$('cn').focus()}
-function aC(){const n=$('cn').value.trim(),pk=document.querySelector('#ncf .ejs'),ic=pk.dataset.s||'☕';if(!n)return;D.push({id:uid(),name:n,icon:ic,items:[]});save();toast('Categoría creada ✓');renderAdmin()}
-function ecF(id){const c=D.find(x=>x.id===id),el=$('ac-'+id).querySelector('.ac__h');el.outerHTML=cfH(c.name,c.icon,`uC('${id}')`,'renderAdmin()');$('cn').focus()}
-function uC(id){const n=$('cn').value.trim(),pk=document.querySelector('.ejs'),ic=pk.dataset.s||D.find(x=>x.id===id).icon;if(!n)return;D=D.map(c=>c.id===id?{...c,name:n,icon:ic}:c);save();toast('Actualizada ✓');renderAdmin()}
-function dc(id){if(!confirm('¿Eliminar categoría y todos sus productos?'))return;D=D.filter(c=>c.id!==id);save();toast('Eliminada');renderAdmin()}
-
-function ifH(n,p,d,tg,sA,cA){
-  const A=['vegano','sin gluten','sin azúcar'];
-  return `<div class="af"><div class="af__g duo"><input class="af__in" id="in" value="${n}" placeholder="Nombre del producto"/><input class="af__in" id="ip" value="${p}" placeholder="Precio" inputmode="numeric" oninput="this.value=this.value.replace(/\\D/g,'')"/></div><div class="af__g"><input class="af__in" id="id" value="${d}" placeholder="Descripción (opcional)"/></div><div class="af__tgs" id="itg">${A.map(t=>`<button class="atg ${tg.includes(t)?'on':''}" data-t="${t}" onclick="this.classList.toggle('on')">${t}</button>`).join('')}</div><div class="af__a"><button class="bs" onclick="${sA}">Guardar</button><button class="bc" onclick="${cA}">Cancelar</button></div></div>`;
-}
-function gD(){const n=$('in').value.trim(),p=parseInt($('ip').value)||0,d=$('id').value.trim(),tg=[];document.querySelectorAll('#itg .on').forEach(b=>tg.push(b.dataset.t));return{name:n,price:p,desc:d,tags:tg}}
-function aiF(cid){const cat=$('ac-'+cid),btn=cat.querySelector('.addr'),w=document.createElement('div');w.id='nif';w.innerHTML=ifH('','','',[],"aI('"+cid+"')","document.getElementById('nif').remove()");btn.before(w);$('in').focus()}
-function aI(cid){const d=gD();if(!d.name||!d.price)return;D.find(c=>c.id===cid).items.push({...d,id:uid()});save();toast('Producto agregado ✓');renderAdmin()}
-function eiF(cid,iid){const c=D.find(x=>x.id===cid),i=c.items.find(x=>x.id===iid),el=$('ai-'+iid);el.outerHTML=`<div id="eif">${ifH(i.name,i.price,i.desc||'',i.tags||[],"uI('"+cid+"','"+iid+"')",'renderAdmin()')}</div>`;$('in').focus()}
-function uI(cid,iid){const d=gD();if(!d.name||!d.price)return;D=D.map(c=>c.id===cid?{...c,items:c.items.map(i=>i.id===iid?{...i,...d}:i)}:c);save();toast('Actualizado ✓');renderAdmin()}
-function di(cid,iid){D=D.map(c=>c.id===cid?{...c,items:c.items.filter(i=>i.id!==iid)}:c);save();toast('Eliminado');renderAdmin()}
-
-/* ════ INIT ════ */
-document.addEventListener('DOMContentLoaded',()=>{
-  D=load();showHome();
-  setTimeout(()=>{const s=$('splash');s.classList.add('bye');setTimeout(()=>s.remove(),800)},1000);
-});
-</script>
 </body>
 </html>
