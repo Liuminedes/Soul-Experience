@@ -150,26 +150,12 @@ input { font-family: var(--fu); border: none; outline: none; background: none; }
 }
 
 .landing__info {
-  font-size: 15px; font-weight: 400;
-  color: var(--parch); letter-spacing: 0.5px;
-  margin-bottom: 16px; line-height: 2;
+  font-size: 14px; font-weight: 400;
+  color: var(--parch); letter-spacing: 1px;
+  margin-bottom: 32px; line-height: 2;
   animation: rise 0.8s var(--ease) 0.45s both;
 }
 .landing__info span { display: block; }
-
-/* ─── Badges row ─── */
-.landing__badges {
-  display: flex; gap: 8px; justify-content: center;
-  flex-wrap: wrap; margin-bottom: 36px;
-  animation: rise 0.8s var(--ease) 0.5s both;
-}
-.landing__badge {
-  padding: 8px 20px; border-radius: 99px;
-  font-size: 14px; font-weight: 600;
-  letter-spacing: 0.5px;
-  border: 1px solid rgba(200, 168, 124, 0.25);
-  color: var(--parch);
-}
 
 /* ─── 3 Action buttons ─── */
 .landing__actions {
@@ -239,10 +225,15 @@ input { font-family: var(--fu); border: none; outline: none; background: none; }
 .landing__detail-row {
   display: flex; align-items: center; justify-content: center;
   gap: 10px; padding: 8px 0;
-  font-size: 15px; font-weight: 500;
-  color: var(--parch); opacity: 0.85;
+  font-size: 13px; font-weight: 400;
+  color: rgba(247, 242, 235, 0.7);
 }
-.landing__detail-row svg { opacity: 0.8; flex-shrink: 0; }
+.landing__detail-row svg { opacity: 0.6; flex-shrink: 0; }
+.landing__detail-row--link {
+  text-decoration: none; transition: color 0.25s;
+  cursor: pointer;
+}
+.landing__detail-row--link:hover { color: var(--parch); }
 
 .landing__divider {
   width: 40px; height: 1px; margin: 20px auto;
