@@ -2,7 +2,7 @@
    Soul Experience — Digital Menu v5
    Real menu data + English + Product detail modal
    ═══════════════════════════════════════════════════════ */
-const PW='soul2024',SK='soul_menu_v5';
+const PW='soul2026',SK='soul_menu_v5';
 const DEFS=[
 {id:'hot',name:'Bebidas Calientes',nameEn:'Hot Drinks',icon:'☕',items:[
 {id:'h1',name:'Espresso Sencillo',nameEn:'Single Espresso Shot',price:4000,desc:'Shot de café intenso',descEn:'Intense coffee shot',tags:[]},
@@ -92,11 +92,11 @@ const DEFS=[
 {id:'du4',name:'Bombones',nameEn:'Chocolate Bonbons',price:5000,desc:'Bocaditos de cacao 65% rellenos de crema',descEn:'65% cacao bites filled with cream',tags:[]},
 ]},
 {id:'salty',name:'Salado',nameEn:'Salty Food',icon:'🥙',items:[
-{id:'sa1',name:'Huevos Rellenos',nameEn:'Deviled Eggs',price:11300,desc:'Escoge 3 ingredientes',descEn:'Choose 3 ingredients',tags:[]},
+{id:'sa1',name:'Huevos Rellenos',nameEn:'Deviled Eggs',price:11300,desc:'Escoge 3 ingredientes',descEn:'Choose 3 ingredients',tags:[],options:'Jamón|Pollo|Atún|Champiñón|Queso|Cebolla|Pimentón|Maíz|Aguacate|Tocineta'},
 {id:'sa2',name:'Palito De Queso',nameEn:'Cheese Stick',price:7000,desc:'',descEn:'',tags:[]},
 {id:'sa3',name:'Empanadas Argentinas',nameEn:'Argentinian Baked Empanadas',price:7500,desc:'Pregunta por los sabores disponibles',descEn:'Ask about available flavors',tags:[]},
 {id:'sa4',name:'Choripán Artesanal',nameEn:'Artisan Choripán',price:20000,desc:'Chorizos artesanales en pan de la casa',descEn:'Artisan sausages on house-baked bread',tags:[]},
-{id:'sa5',name:'¡Arma Tu Ensalada!',nameEn:'Build Your Own Salad!',price:21500,desc:'Elige 5 ingredientes',descEn:'Choose 5 ingredients',tags:[]},
+{id:'sa5',name:'¡Arma Tu Ensalada!',nameEn:'Build Your Own Salad!',price:21500,desc:'Elige 5 ingredientes',descEn:'Choose 5 ingredients',tags:[],options:'Pollo|Atún|Tomate|Lechuga|Cebolla Morada|Maíz|Aguacate|Champiñón|Zanahoria|Pepino|Aceitunas|Queso Parmesano|Tocineta|Huevo'},
 ]},
 {id:'pizza',name:'Pizza',nameEn:'Pizza',icon:'🍕',isPizza:true,items:[
 {id:'pz1',name:'¡Arma Tu Pizza!',nameEn:'Build Your Own Pizza!',price:22000,desc:'Elige 1 salsa y 4 ingredientes',descEn:'Choose 1 sauce & 4 ingredients',tags:[]},
@@ -131,10 +131,10 @@ function toast(m){const t=$('toast');t.textContent=m;t.style.display='block';set
 function go(v){
   document.querySelectorAll('.view').forEach(e=>e.classList.remove('active'));
   $('view-'+v).classList.add('active');window.scrollTo(0,0);
-  if(v==='landing')document.body.style.background='#2c1e16';
+  if(v==='landing')document.body.style.background='#c1a58d';
   else if(v==='menu'){document.body.style.background='#f7f2eb';curCat=null;dTag=null;showHome()}
   else if(v==='login'){document.body.style.background='#2c1e16';$('lp').value='';$('le').style.display='none';$('lp').classList.remove('err','shk')}
-  else if(v==='admin'){document.body.style.background='#171210';renderAdmin()}
+  else if(v==='admin'){document.body.style.background='#c1a58d';renderAdmin()}
 }
 
 /* ═══════ MODALS ═══════ */
@@ -145,6 +145,7 @@ function openProduct(catId,itemId){
   const c=D.find(x=>x.id===catId),i=c?.items.find(x=>x.id===itemId);
   if(!i)return;
   const tgs=(i.tags||[]).map(t=>`<span class="pm__tag" data-t="${t}">${t}</span>`).join('');
+  const optsHtml=i.options?`<div class="pm__divider"></div><p class="pm__opts-label">Opciones disponibles</p><div class="pm__opts">${i.options.split('|').map(o=>`<span class="pm__opt">${o.trim()}</span>`).join('')}</div>`:'';
   $('product-modal-content').innerHTML=`
     <button class="modal__close" onclick="closeProduct()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     <div class="pm__cat">${c.icon} ${c.name}</div>
@@ -154,6 +155,7 @@ function openProduct(catId,itemId){
     ${i.desc?`<div class="pm__divider"></div><p class="pm__desc">${i.desc}</p>`:''}
     ${i.descEn?`<p class="pm__desc-en">${i.descEn}</p>`:''}
     ${tgs?`<div class="pm__tags">${tgs}</div>`:''}
+    ${optsHtml}
     <a class="pm__wa" href="https://wa.me/573203678524?text=${encodeURIComponent('Hola! Me interesa: '+i.name)}" target="_blank">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
       Preguntar por WhatsApp</a>`;
@@ -242,7 +244,7 @@ function renderDetail(){
   const items=c.items.filter(i=>!dTag||(i.tags||[]).includes(dTag));
   if(!items.length){$('detail-items').innerHTML=`<div class="icard__empty"><h3>Sin productos con este filtro</h3><button onclick="dTag=null;renderDetail()">Ver todos</button></div>`;return}
   let h='';items.forEach((i,x)=>{
-    const hasDetail=i.desc||i.descEn||(i.tags&&i.tags.length);
+    const hasDetail=i.desc||i.descEn||(i.tags&&i.tags.length)||i.options;
     h+=`<div class="icard ${hasDetail?'icard--clickable':''}" onclick="${hasDetail?`openProduct('${c.id}','${i.id}')`:''}" style="animation:rise 0.45s var(--ease) ${x*0.03}s both">
       <div class="icard__left"><div class="icard__name">${i.name}</div>${i.nameEn?`<div class="icard__name-en">${i.nameEn}</div>`:''}</div>
       <div class="icard__right"><div class="icard__price">${fmt(i.price)}</div>
@@ -258,7 +260,7 @@ const IP=`<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="cu
 function renderAdmin(){
   const tot=D.reduce((a,c)=>a+c.items.length,0),avg=tot?Math.round(D.reduce((a,c)=>a+c.items.reduce((s,i)=>s+i.price,0),0)/tot):0;
   let h=`<div class="admin__welcome"><div class="admin__welcome-title">Panel de Administración</div><div class="admin__welcome-sub">Gestiona las categorías y productos de tu menú digital</div></div><div class="stats"><div class="stat"><div class="stat__n">${D.length}</div><div class="stat__l">Categorías</div></div><div class="stat"><div class="stat__n">${tot}</div><div class="stat__l">Productos</div></div><div class="stat"><div class="stat__n">${fmt(avg)}</div><div class="stat__l">Precio Prom.</div></div></div><div class="admin__section-label">Categorías del Menú</div>`;
-  D.forEach(c=>{h+=`<div class="ac" id="ac-${c.id}"><div class="ac__h"><div class="ac__hl"><span class="ac__ic">${c.icon}</span><span class="ac__nm">${c.name}</span><span class="ac__ct">${c.items.length}</span></div><div class="ac__btns"><button class="ib" onclick="ecF('${c.id}')">${IE}</button><button class="ib x" onclick="dc('${c.id}')">${IX}</button></div></div>`;c.items.forEach(i=>{const tg=(i.tags||[]).map(t=>`<span class="ai__tg" data-t="${t}">${t}</span>`).join('');h+=`<div class="ai" id="ai-${i.id}"><div class="ai__i"><div><span class="ai__n">${i.name}</span>${tg}</div><div class="ai__d">${i.desc||''}</div></div><div class="ai__r"><span class="ai__p">${fmt(i.price)}</span><button class="ib" onclick="eiF('${c.id}','${i.id}')">${IE}</button><button class="ib x" onclick="di('${c.id}','${i.id}')">${IX}</button></div></div>`});h+=`<button class="addr" onclick="aiF('${c.id}')">${IP} Agregar producto</button></div>`});
+  D.forEach(c=>{h+=`<div class="ac" id="ac-${c.id}"><div class="ac__h"><div class="ac__hl"><span class="ac__ic">${c.icon}</span><span class="ac__nm">${c.name}</span><span class="ac__ct">${c.items.length}</span></div><div class="ac__btns"><button class="ib" onclick="ecF('${c.id}')">${IE}</button><button class="ib x" onclick="dc('${c.id}')">${IX}</button></div></div>`;c.items.forEach(i=>{const tg=(i.tags||[]).map(t=>`<span class="ai__tg" data-t="${t}">${t}</span>`).join('');const optsBadge=i.options?`<span class="ai__opts">${i.options.split('|').length} opciones</span>`:'';h+=`<div class="ai" id="ai-${i.id}"><div class="ai__i"><div><span class="ai__n">${i.name}</span>${tg}${optsBadge}</div><div class="ai__d">${i.desc||''}</div></div><div class="ai__r"><span class="ai__p">${fmt(i.price)}</span><button class="ib" onclick="eiF('${c.id}','${i.id}')">${IE}</button><button class="ib x" onclick="di('${c.id}','${i.id}')">${IX}</button></div></div>`});h+=`<button class="addr" onclick="aiF('${c.id}')">${IP} Agregar producto</button></div>`});
   h+=`<button class="addc" onclick="acF()">${IP} Nueva categoría</button>`;$('ab').innerHTML=h;
 }
 function cfH(n,ic,sA,cA){return `<div class="af"><div class="ejs">${EJ.map(e=>`<button class="${e===ic?'on':''}" onclick="this.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('on'));this.classList.add('on');this.parentElement.dataset.s='${e}'">${e}</button>`).join('')}</div><div class="af__g"><input class="af__in" id="cn" value="${n}" placeholder="Nombre de categoría"/></div><div class="af__a"><button class="bs" onclick="${sA}">Guardar</button><button class="bc" onclick="${cA}">Cancelar</button></div></div>`}
