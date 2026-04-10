@@ -278,14 +278,4 @@ function uI(cid,iid){const d=gD();if(!d.name||!d.price)return;D=D.map(c=>c.id===
 function di(cid,iid){D=D.map(c=>c.id===cid?{...c,items:c.items.filter(i=>i.id!==iid)}:c);save();toast('Eliminado');renderAdmin()}
 
 /* ═══════ INIT ═══════ */
-const MAINTENANCE = true; // ← Cambiar a false para reactivar el menú
-
-document.addEventListener('DOMContentLoaded',()=>{
-  if(MAINTENANCE){
-    // Block everything — only show maintenance modal
-    const splash=$('splash');if(splash)splash.remove();
-    document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-    return;
-  }
-  D=load();go('landing');setTimeout(()=>{const s=$('splash');s.classList.add('bye');setTimeout(()=>s.remove(),800)},1000);
-});
+document.addEventListener('DOMContentLoaded',()=>{D=load();go('landing');setTimeout(()=>{const s=$('splash');s.classList.add('bye');setTimeout(()=>s.remove(),800)},1000)});
