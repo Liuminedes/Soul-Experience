@@ -1,0 +1,909 @@
+[
+  {
+    "id": "hot",
+    "name": "Bebidas Calientes",
+    "nameEn": "Hot Drinks",
+    "icon": "☕",
+    "items": [
+      {
+        "id": "h1",
+        "name": "Espresso Sencillo",
+        "nameEn": "Single Espresso Shot",
+        "price": 4000,
+        "desc": "Shot de café intenso",
+        "descEn": "Intense coffee shot",
+        "tags": []
+      },
+      {
+        "id": "h2",
+        "name": "Espresso Doble",
+        "nameEn": "Double Espresso Shot",
+        "price": 6000,
+        "desc": "Doble carga de café intenso",
+        "descEn": "Double intense coffee shot",
+        "tags": []
+      },
+      {
+        "id": "h3",
+        "name": "Americano",
+        "nameEn": "Americano",
+        "price": 5000,
+        "desc": "Café suave y equilibrado",
+        "descEn": "Smooth and balanced coffee",
+        "tags": []
+      },
+      {
+        "id": "h4",
+        "name": "Tinto Soul De Campo \"Guayaba\"",
+        "nameEn": "Guava Americano",
+        "price": 5500,
+        "desc": "Café campesino con notas dulces de guayaba",
+        "descEn": "Country-style coffee with sweet guava notes",
+        "tags": []
+      },
+      {
+        "id": "h5",
+        "name": "Café Soul House \"Maracuyá\"",
+        "nameEn": "Passion Fruit Coffee",
+        "price": 6500,
+        "desc": "Café con notas de maracuyá, panela y jengibre",
+        "descEn": "Coffee with passion fruit, panela and ginger notes",
+        "tags": []
+      },
+      {
+        "id": "h6",
+        "name": "Capuchino Soul Guanábana",
+        "nameEn": "Soursop Cappuccino",
+        "price": 8000,
+        "desc": "Endulzado artesanalmente con panela, manzanilla y guanábana",
+        "descEn": "Artisan-sweetened with panela, chamomile and soursop",
+        "tags": []
+      },
+      {
+        "id": "h7",
+        "name": "Latte",
+        "nameEn": "Latte",
+        "price": 7500,
+        "desc": "Café suave con leche cremosa",
+        "descEn": "Smooth coffee with creamy milk",
+        "tags": []
+      },
+      {
+        "id": "h8",
+        "name": "Flat White",
+        "nameEn": "Flat White",
+        "price": 6500,
+        "desc": "Café mediano intenso con leche texturizada",
+        "descEn": "Medium-intense coffee with textured milk",
+        "tags": []
+      },
+      {
+        "id": "h9",
+        "name": "Capuchino",
+        "nameEn": "Cappuccino",
+        "price": 7000,
+        "desc": "Equilibrio entre café, leche y espuma",
+        "descEn": "Balance of coffee, milk and foam",
+        "tags": []
+      },
+      {
+        "id": "h10",
+        "name": "Macchiato",
+        "nameEn": "Macchiato",
+        "price": 5500,
+        "desc": "Espresso con un toque de leche espumada",
+        "descEn": "Espresso with a touch of foamed milk",
+        "tags": []
+      },
+      {
+        "id": "h11",
+        "name": "Espresso Bombón",
+        "nameEn": "Bonbon Coffee",
+        "price": 5500,
+        "desc": "Café con leche condensada, dulce y cremoso",
+        "descEn": "Coffee with condensed milk, sweet and creamy",
+        "tags": []
+      },
+      {
+        "id": "h12",
+        "name": "Mocaccino",
+        "nameEn": "Mocha (sweet or dark)",
+        "price": 8000,
+        "desc": "Café con leche y chocolate a elección (dulce o amargo)",
+        "descEn": "Coffee with milk and chocolate of your choice",
+        "tags": []
+      },
+      {
+        "id": "h13",
+        "name": "Affogato",
+        "nameEn": "Affogato",
+        "price": 8500,
+        "desc": "Helado con espresso. Pídelo en leche o agua",
+        "descEn": "Ice cream with espresso. Order in milk or water",
+        "tags": []
+      },
+      {
+        "id": "h14",
+        "name": "Experiencia Cocoa",
+        "nameEn": "Hot Cocoa Experience",
+        "price": 9000,
+        "desc": "Esfera de chocolate al 75%",
+        "descEn": "75% chocolate sphere experience",
+        "tags": []
+      },
+      {
+        "id": "h15",
+        "name": "Chai",
+        "nameEn": "Chai",
+        "price": 10500,
+        "desc": "Té negro especiado",
+        "descEn": "Spiced black tea",
+        "tags": []
+      },
+      {
+        "id": "h16",
+        "name": "Matcha",
+        "nameEn": "Matcha",
+        "price": 11000,
+        "desc": "Té verde japonés",
+        "descEn": "Japanese green tea",
+        "tags": []
+      },
+      {
+        "id": "h17",
+        "name": "Leche Dorada",
+        "nameEn": "Golden Milk",
+        "price": 9800,
+        "desc": "Bebida a base de cúrcuma, jengibre y pimienta negra",
+        "descEn": "Turmeric, ginger and black pepper drink",
+        "tags": []
+      },
+      {
+        "id": "h18",
+        "name": "Taro",
+        "nameEn": "Taro",
+        "price": 11000,
+        "desc": "A base de raíz taiwanesa lila, suave y dulce",
+        "descEn": "Taiwanese purple root, smooth and sweet",
+        "tags": []
+      },
+      {
+        "id": "h19",
+        "name": "Infusiones",
+        "nameEn": "Infusions",
+        "price": 13500,
+        "desc": "Mezclas de té, frutales o herbales, opción para compartir. Pregunta por nuestro catálogo sensorial",
+        "descEn": "Tea blends, fruit or herbal, sharing option. Ask for our sensory catalog",
+        "tags": []
+      }
+    ]
+  },
+  {
+    "id": "cold",
+    "name": "Bebidas Frías",
+    "nameEn": "Cold Drinks",
+    "icon": "🧊",
+    "items": [
+      {
+        "id": "co1",
+        "name": "Milo Frío",
+        "nameEn": "Iced Milo",
+        "price": 10000,
+        "desc": "",
+        "descEn": "",
+        "tags": []
+      },
+      {
+        "id": "co2",
+        "name": "Americano Frío",
+        "nameEn": "Iced Americano",
+        "price": 9500,
+        "desc": "",
+        "descEn": "",
+        "tags": []
+      },
+      {
+        "id": "co3",
+        "name": "Café Soul Frío",
+        "nameEn": "Iced House Coffee",
+        "price": 8000,
+        "desc": "Endulzado con maracuyá y jengibre",
+        "descEn": "Sweetened with passion fruit and ginger",
+        "tags": []
+      },
+      {
+        "id": "co4",
+        "name": "Capuchino Soul Frío",
+        "nameEn": "Iced Cappuccino",
+        "price": 11200,
+        "desc": "Endulzado con guanábana y manzanilla",
+        "descEn": "Sweetened with soursop and chamomile",
+        "tags": []
+      },
+      {
+        "id": "co5",
+        "name": "Cocoa Fría",
+        "nameEn": "Iced Cocoa",
+        "price": 13000,
+        "desc": "Chocolate frío",
+        "descEn": "Iced chocolate",
+        "tags": []
+      },
+      {
+        "id": "co6",
+        "name": "Chai Frío",
+        "nameEn": "Iced Chai Latte",
+        "price": 12800,
+        "desc": "Té especiado frío",
+        "descEn": "Iced spiced tea",
+        "tags": []
+      },
+      {
+        "id": "co7",
+        "name": "Jugos Naturales",
+        "nameEn": "Natural Juices",
+        "price": 11500,
+        "desc": "Pídelo en leche o agua",
+        "descEn": "Order in milk or water",
+        "tags": []
+      }
+    ]
+  },
+  {
+    "id": "frappe",
+    "name": "Frappé",
+    "nameEn": "Frappé",
+    "icon": "🧋",
+    "items": [
+      {
+        "id": "fr1",
+        "name": "Frappé de Café",
+        "nameEn": "Coffee Frappé",
+        "price": 17500,
+        "desc": "Mezcla de hielo granizado y café",
+        "descEn": "Crushed ice and coffee blend",
+        "tags": []
+      },
+      {
+        "id": "fr2",
+        "name": "Frappé Nutella",
+        "nameEn": "Nutella Frappé",
+        "price": 19500,
+        "desc": "Mezcla de hielo granizado y nutella",
+        "descEn": "Crushed ice and Nutella blend",
+        "tags": []
+      },
+      {
+        "id": "fr3",
+        "name": "Frappé Arequipe",
+        "nameEn": "Dulce de Leche Frappé",
+        "price": 15500,
+        "desc": "Mezcla de hielo granizado y arequipe",
+        "descEn": "Crushed ice and dulce de leche blend",
+        "tags": []
+      },
+      {
+        "id": "fr4",
+        "name": "Frappé Chocolate",
+        "nameEn": "Chocolate Frappé",
+        "price": 14500,
+        "desc": "Mezcla de hielo granizado y cacao",
+        "descEn": "Crushed ice and cacao blend",
+        "tags": []
+      }
+    ]
+  },
+  {
+    "id": "lemon",
+    "name": "Limonadas",
+    "nameEn": "Lemonades",
+    "icon": "🍋",
+    "items": [
+      {
+        "id": "l1",
+        "name": "Limonada Natural",
+        "nameEn": "Classic Lemonade",
+        "price": 7000,
+        "desc": "",
+        "descEn": "",
+        "tags": []
+      },
+      {
+        "id": "l2",
+        "name": "Limonada Hierbabuena",
+        "nameEn": "Mint Lemonade",
+        "price": 8000,
+        "desc": "",
+        "descEn": "",
+        "tags": []
+      },
+      {
+        "id": "l3",
+        "name": "Limonada Cerezada",
+        "nameEn": "Cherry Lemonade",
+        "price": 8500,
+        "desc": "",
+        "descEn": "",
+        "tags": []
+      },
+      {
+        "id": "l4",
+        "name": "Limonada De Coco",
+        "nameEn": "Coconut Lemonade",
+        "price": 10000,
+        "desc": "",
+        "descEn": "",
+        "tags": []
+      }
+    ]
+  },
+  {
+    "id": "shakes",
+    "name": "Malteadas",
+    "nameEn": "Milkshakes",
+    "icon": "🥤",
+    "items": [
+      {
+        "id": "m1",
+        "name": "Malteada De Frutos Rojos",
+        "nameEn": "Berry Milkshake",
+        "price": 16500,
+        "desc": "",
+        "descEn": "",
+        "tags": []
+      },
+      {
+        "id": "m2",
+        "name": "Malteada De Vainilla",
+        "nameEn": "Vanilla Milkshake",
+        "price": 15500,
+        "desc": "",
+        "descEn": "",
+        "tags": []
+      },
+      {
+        "id": "m3",
+        "name": "Malteada De Chocolate",
+        "nameEn": "Chocolate Milkshake",
+        "price": 16000,
+        "desc": "",
+        "descEn": "",
+        "tags": []
+      },
+      {
+        "id": "m4",
+        "name": "Malteada De Nutella",
+        "nameEn": "Nutella Milkshake",
+        "price": 19500,
+        "desc": "",
+        "descEn": "",
+        "tags": []
+      }
+    ]
+  },
+  {
+    "id": "spirit",
+    "name": "Espirituosos",
+    "nameEn": "Spiritual Coffee",
+    "icon": "🥃",
+    "items": [
+      {
+        "id": "s1",
+        "name": "Café Espirituoso",
+        "nameEn": "Spiritual Coffee",
+        "price": 18000,
+        "desc": "Café caliente con licor a elección",
+        "descEn": "Hot coffee with your choice of liquor",
+        "tags": []
+      },
+      {
+        "id": "s2",
+        "name": "Capuchino Espirituoso",
+        "nameEn": "Spiritual Cappuccino",
+        "price": 22000,
+        "desc": "Café, leche cremosa y licor a elección",
+        "descEn": "Coffee, creamy milk and your choice of liquor",
+        "tags": []
+      },
+      {
+        "id": "s3",
+        "name": "Soul Coffee Cocktail",
+        "nameEn": "Soul Coffee Cocktail",
+        "price": 18000,
+        "desc": "Whisky con espresso doble y endulzante de panela, maracuyá y jengibre",
+        "descEn": "Whisky with double espresso, panela, passion fruit and ginger sweetener",
+        "tags": []
+      },
+      {
+        "id": "s4",
+        "name": "Espresso Martini",
+        "nameEn": "Espresso Martini",
+        "price": 20000,
+        "desc": "Espresso doble, vodka y licor de café",
+        "descEn": "Double espresso, vodka and coffee liqueur",
+        "tags": []
+      },
+      {
+        "id": "s5",
+        "name": "Orgasmo",
+        "nameEn": "Orgasm",
+        "price": 20500,
+        "desc": "Doble espresso con leche condensada, crema de whisky y amaretto",
+        "descEn": "Double espresso with condensed milk, whisky cream and amaretto",
+        "tags": []
+      },
+      {
+        "id": "s6",
+        "name": "Affogato Con Licor",
+        "nameEn": "Affogato with Liqueur",
+        "price": 21500,
+        "desc": "Espresso vertido sobre helado con licor a elección",
+        "descEn": "Espresso poured over ice cream with your choice of liquor",
+        "tags": []
+      },
+      {
+        "id": "s7",
+        "name": "Cóctel Del Mes",
+        "nameEn": "Cocktail of the Month",
+        "price": 35000,
+        "desc": "Pregunta por la creación del mes",
+        "descEn": "Ask about this month's creation",
+        "tags": []
+      }
+    ]
+  },
+  {
+    "id": "filter",
+    "name": "Filtrados",
+    "nameEn": "Filtering Coffee Methods",
+    "icon": "⏳",
+    "items": [
+      {
+        "id": "f1",
+        "name": "Chemex — 1 Taza",
+        "nameEn": "Chemex — 1 Cup",
+        "price": 13000,
+        "desc": "Método de filtrado Chemex",
+        "descEn": "Chemex filtering method",
+        "tags": []
+      },
+      {
+        "id": "f2",
+        "name": "Chemex — 2 Tazas",
+        "nameEn": "Chemex — 2 Cups",
+        "price": 24000,
+        "desc": "Para compartir",
+        "descEn": "To share",
+        "tags": []
+      },
+      {
+        "id": "f3",
+        "name": "V60 — 1 Taza",
+        "nameEn": "V60 — 1 Cup",
+        "price": 12000,
+        "desc": "Método de filtrado V60",
+        "descEn": "V60 filtering method",
+        "tags": []
+      },
+      {
+        "id": "f4",
+        "name": "V60 — 2 Tazas",
+        "nameEn": "V60 — 2 Cups",
+        "price": 22000,
+        "desc": "Para compartir",
+        "descEn": "To share",
+        "tags": []
+      },
+      {
+        "id": "f5",
+        "name": "Sifón — 1 Taza",
+        "nameEn": "Siphon — 1 Cup",
+        "price": 14000,
+        "desc": "Método de filtrado por sifón",
+        "descEn": "Siphon filtering method",
+        "tags": []
+      },
+      {
+        "id": "f6",
+        "name": "Sifón — 2 Tazas",
+        "nameEn": "Siphon — 2 Cups",
+        "price": 26000,
+        "desc": "Para compartir",
+        "descEn": "To share",
+        "tags": []
+      },
+      {
+        "id": "f7",
+        "name": "Prensa Francesa — 1 Taza",
+        "nameEn": "French Press — 1 Cup",
+        "price": 10000,
+        "desc": "Método de prensa francesa",
+        "descEn": "French press method",
+        "tags": []
+      },
+      {
+        "id": "f8",
+        "name": "Prensa Francesa — 2 Tazas",
+        "nameEn": "French Press — 2 Cups",
+        "price": 18000,
+        "desc": "Para compartir",
+        "descEn": "To share",
+        "tags": []
+      }
+    ]
+  },
+  {
+    "id": "wine",
+    "name": "Vino",
+    "nameEn": "Wine",
+    "icon": "🍷",
+    "items": [
+      {
+        "id": "w1",
+        "name": "Vino Caliente",
+        "nameEn": "Mulled Wine",
+        "price": 18000,
+        "desc": "",
+        "descEn": "",
+        "tags": []
+      },
+      {
+        "id": "w2",
+        "name": "Copa De Vino",
+        "nameEn": "Glass of Wine",
+        "price": 16000,
+        "desc": "Blanco o tinto",
+        "descEn": "White or red",
+        "tags": []
+      },
+      {
+        "id": "w3",
+        "name": "Mini Botellita De Vino",
+        "nameEn": "Mini Wine Bottle",
+        "price": 35000,
+        "desc": "",
+        "descEn": "",
+        "tags": []
+      }
+    ]
+  },
+  {
+    "id": "sodas",
+    "name": "Sodas",
+    "nameEn": "Soda Waters",
+    "icon": "🫧",
+    "items": [
+      {
+        "id": "sd1",
+        "name": "Soda Soul Coffee",
+        "nameEn": "Craft Soda",
+        "price": 12900,
+        "desc": "De café o fruta",
+        "descEn": "Coffee or fruit flavor",
+        "tags": []
+      },
+      {
+        "id": "sd2",
+        "name": "Hatsu Soda",
+        "nameEn": "Hatsu Soda",
+        "price": 6500,
+        "desc": "",
+        "descEn": "",
+        "tags": []
+      },
+      {
+        "id": "sd3",
+        "name": "Gaseosas",
+        "nameEn": "Soft Drinks",
+        "price": 5500,
+        "desc": "",
+        "descEn": "",
+        "tags": []
+      }
+    ]
+  },
+  {
+    "id": "beer",
+    "name": "Cervezas",
+    "nameEn": "Beer",
+    "icon": "🍺",
+    "items": [
+      {
+        "id": "be1",
+        "name": "Cerveza Importada",
+        "nameEn": "Imported Beer",
+        "price": 21000,
+        "desc": "Desde $21.000 hasta $30.000",
+        "descEn": "From $21,000 to $30,000",
+        "tags": []
+      },
+      {
+        "id": "be2",
+        "name": "Cerveza Artesanal",
+        "nameEn": "Craft Beer",
+        "price": 19500,
+        "desc": "",
+        "descEn": "",
+        "tags": []
+      }
+    ]
+  },
+  {
+    "id": "sweet",
+    "name": "Dulce",
+    "nameEn": "Sweet Food",
+    "icon": "🍰",
+    "items": [
+      {
+        "id": "du1",
+        "name": "Galletas Artesanales",
+        "nameEn": "Artisan Cookies",
+        "price": 5000,
+        "desc": "Desde $5.000 hasta $6.500",
+        "descEn": "From $5,000 to $6,500",
+        "tags": []
+      },
+      {
+        "id": "du2",
+        "name": "Porción De Torta Artesanal",
+        "nameEn": "Artisan Cake Slice",
+        "price": 12000,
+        "desc": "Desde $12.000 hasta $14.000. Opciones sin gluten y sin azúcar",
+        "descEn": "From $12,000 to $14,000. Gluten-free and sugar-free options available",
+        "tags": [
+          "sin gluten",
+          "sin azúcar"
+        ]
+      },
+      {
+        "id": "du3",
+        "name": "Brownie",
+        "nameEn": "Brownie",
+        "price": 8000,
+        "desc": "Cacao colombiano con capa de avellanas tostadas",
+        "descEn": "Colombian cacao with a layer of toasted hazelnuts",
+        "tags": []
+      },
+      {
+        "id": "du4",
+        "name": "Bombones",
+        "nameEn": "Chocolate Bonbons",
+        "price": 5000,
+        "desc": "Bocaditos de cacao 65% rellenos de crema",
+        "descEn": "65% cacao bites filled with cream",
+        "tags": []
+      }
+    ]
+  },
+  {
+    "id": "salty",
+    "name": "Salado",
+    "nameEn": "Salty Food",
+    "icon": "🥙",
+    "items": [
+      {
+        "id": "sa1",
+        "name": "Huevos Rellenos",
+        "nameEn": "Deviled Eggs",
+        "price": 11300,
+        "desc": "Escoge 3 ingredientes",
+        "descEn": "Choose 3 ingredients",
+        "tags": [],
+        "options": "Jamón|Pollo|Atún|Champiñón|Queso|Cebolla|Pimentón|Maíz|Aguacate|Tocineta"
+      },
+      {
+        "id": "sa2",
+        "name": "Palito De Queso",
+        "nameEn": "Cheese Stick",
+        "price": 7000,
+        "desc": "",
+        "descEn": "",
+        "tags": []
+      },
+      {
+        "id": "sa3",
+        "name": "Empanadas Argentinas",
+        "nameEn": "Argentinian Baked Empanadas",
+        "price": 7500,
+        "desc": "Pregunta por los sabores disponibles",
+        "descEn": "Ask about available flavors",
+        "tags": []
+      },
+      {
+        "id": "sa4",
+        "name": "Choripán Artesanal",
+        "nameEn": "Artisan Choripán",
+        "price": 20000,
+        "desc": "Chorizos artesanales en pan de la casa",
+        "descEn": "Artisan sausages on house-baked bread",
+        "tags": []
+      },
+      {
+        "id": "sa5",
+        "name": "¡Arma Tu Ensalada!",
+        "nameEn": "Build Your Own Salad!",
+        "price": 21500,
+        "desc": "Elige 5 ingredientes",
+        "descEn": "Choose 5 ingredients",
+        "tags": [],
+        "options": "Pollo|Atún|Tomate|Lechuga|Cebolla Morada|Maíz|Aguacate|Champiñón|Zanahoria|Pepino|Aceitunas|Queso Parmesano|Tocineta|Huevo"
+      }
+    ]
+  },
+  {
+    "id": "pizza",
+    "name": "Pizza",
+    "nameEn": "Pizza",
+    "icon": "🍕",
+    "isPizza": true,
+    "items": [
+      {
+        "id": "pz1",
+        "name": "¡Arma Tu Pizza!",
+        "nameEn": "Build Your Own Pizza!",
+        "price": 22000,
+        "desc": "Elige 1 salsa y 4 ingredientes",
+        "descEn": "Choose 1 sauce & 4 ingredients",
+        "tags": []
+      }
+    ],
+    "toppings": {
+      "salsas": {
+        "title": "Salsas",
+        "titleEn": "Sauces",
+        "icon": "🫗",
+        "note": "Elige 1",
+        "noteEn": "Choose 1",
+        "items": [
+          "Miel Mostaza|Honey Mustard",
+          "Pasta De Tomate|Tomato Paste",
+          "Pesto|Pesto"
+        ]
+      },
+      "carnes": {
+        "title": "Carnes",
+        "titleEn": "Meats",
+        "icon": "🥩",
+        "note": "",
+        "noteEn": "",
+        "items": [
+          "Pepperoni|Pepperoni",
+          "Salami|Salami",
+          "Tocineta|Bacon",
+          "Jamón De Pollo|Chicken Ham",
+          "Jamón De Cerdo|Pork Ham",
+          "Jamón De Pavo|Turkey Ham"
+        ]
+      },
+      "vegetales": {
+        "title": "Vegetales",
+        "titleEn": "Vegetables",
+        "icon": "🥬",
+        "note": "",
+        "noteEn": "",
+        "items": [
+          "Tomate Chonto|Tomato",
+          "Tomate Cherry|Cherry Tomato",
+          "Tomate Seco|Dried Tomato",
+          "Cebolla Morada|Red Onion",
+          "Champiñón|Mushroom",
+          "Maíz Tierno|Sweet Corn",
+          "Rúgula|Arugula",
+          "Albahaca|Basil",
+          "Aceituna Negra o Verde|Black or Green Olive",
+          "Jalapeños|Jalapeños",
+          "Berenjena|Eggplant"
+        ]
+      },
+      "frutas": {
+        "title": "Frutas",
+        "titleEn": "Fruits",
+        "icon": "🍓",
+        "note": "",
+        "noteEn": "",
+        "items": [
+          "Piña|Pineapple",
+          "Ciruela|Plum",
+          "Fresa|Strawberry",
+          "Banano|Banana",
+          "Durazno|Peach"
+        ]
+      },
+      "adiciones": {
+        "title": "Adiciones",
+        "titleEn": "Premium Add-ons",
+        "icon": "✨",
+        "note": "$3.000 c/u",
+        "noteEn": "$3,000 each",
+        "items": [
+          "Jamón Serrano|Serrano Ham",
+          "Burrata|Burrata",
+          "Nutella|Nutella",
+          "Guacamole|Guacamole"
+        ]
+      }
+    }
+  },
+  {
+    "id": "extras",
+    "name": "Adicionales",
+    "nameEn": "Extras",
+    "icon": "➕",
+    "items": [
+      {
+        "id": "ex1",
+        "name": "Leche Vegetal",
+        "nameEn": "Plant-Based Milk",
+        "price": 3000,
+        "desc": "",
+        "descEn": "",
+        "tags": [
+          "vegano"
+        ]
+      },
+      {
+        "id": "ex2",
+        "name": "Michelada",
+        "nameEn": "Beer Mix",
+        "price": 2000,
+        "desc": "",
+        "descEn": "",
+        "tags": []
+      },
+      {
+        "id": "ex3",
+        "name": "Zumo de Limón",
+        "nameEn": "Lemon Juice",
+        "price": 1500,
+        "desc": "",
+        "descEn": "",
+        "tags": []
+      },
+      {
+        "id": "ex4",
+        "name": "Bola de Helado",
+        "nameEn": "Ice Cream Scoop",
+        "price": 2500,
+        "desc": "",
+        "descEn": "",
+        "tags": []
+      },
+      {
+        "id": "ex5",
+        "name": "Salsa Chocolate o Caramelo",
+        "nameEn": "Chocolate or Caramel Syrup",
+        "price": 4000,
+        "desc": "",
+        "descEn": "",
+        "tags": []
+      },
+      {
+        "id": "ex6",
+        "name": "Shot Sencillo",
+        "nameEn": "Single Shot",
+        "price": 15000,
+        "desc": "",
+        "descEn": "",
+        "tags": []
+      },
+      {
+        "id": "ex7",
+        "name": "Shot Doble",
+        "nameEn": "Double Shot",
+        "price": 20000,
+        "desc": "",
+        "descEn": "",
+        "tags": []
+      },
+      {
+        "id": "ex8",
+        "name": "Endulzante de la Casa",
+        "nameEn": "House Sweetener",
+        "price": 2000,
+        "desc": "",
+        "descEn": "",
+        "tags": []
+      }
+    ]
+  }
+]

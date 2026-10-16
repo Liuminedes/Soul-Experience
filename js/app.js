@@ -119,12 +119,46 @@ adiciones:{title:'Adiciones',titleEn:'Premium Add-ons',icon:'✨',note:'$3.000 c
 ]},
 ];
 
+// API Configuration (Reemplazar con el dominio de tu Dokploy, ej: 'https://api.tudominio.com')
+const API_URL = window.SOUL_API_URL || ''; 
 let D=[],curCat=null,dTag=null;
 const $=s=>document.getElementById(s);
 const uid=()=>Math.random().toString(36).slice(2,8);
 const fmt=n=>new Intl.NumberFormat('es-CO',{style:'currency',currency:'COP',minimumFractionDigits:0}).format(n);
 const save=()=>{try{localStorage.setItem(SK,JSON.stringify(D))}catch(e){}};
-const load=()=>{try{const r=localStorage.getItem(SK);if(r){const p=JSON.parse(r);if(Array.isArray(p)&&p.length)return p}}catch(e){}return JSON.parse(JSON.stringify(DEFS))};
+
+// Carga datos: primero intenta API si está configurada, luego localStorage o defaults
+const load=()=>{
+  try{
+    const r=localStorage.getItem(SK);
+    if(r){
+      const p=JSON.parse(r);
+      if(Array.isArray(p)&&p.length)return p;
+    }
+  }catch(e){}
+  return JSON.parse(JSON.stringify(DEFS));
+};
+
+async function syncMenuFromApi(){
+  if(!API_URL) return;
+  try {
+    const res = await fetch(`${API_URL}/api/menu`);
+    if(res.ok){
+      const remoteData = await res.json();
+      if(Array.isArray(remoteData) && remoteData.length){
+        D = remoteData;
+        save();
+        if(document.getElementById('view-menu').classList.contains('active')){
+          if(curCat) renderDetail();
+          else showHome();
+        }
+      }
+    }
+  } catch(err){
+    console.warn('Usando menú local/caché (sin conexión al VPS):', err);
+  }
+}
+
 function toast(m){const t=$('toast');t.textContent=m;t.style.display='block';setTimeout(()=>t.style.display='none',2600)}
 
 /* ═══════ VIEWS ═══════ */
@@ -278,4 +312,4 @@ function uI(cid,iid){const d=gD();if(!d.name||!d.price)return;D=D.map(c=>c.id===
 function di(cid,iid){D=D.map(c=>c.id===cid?{...c,items:c.items.filter(i=>i.id!==iid)}:c);save();toast('Eliminado');renderAdmin()}
 
 /* ═══════ INIT ═══════ */
-document.addEventListener('DOMContentLoaded',()=>{D=load();go('landing');setTimeout(()=>{const s=$('splash');s.classList.add('bye');setTimeout(()=>s.remove(),800)},1000)});
+document.addEventListener('DOMContentLoaded',()=>{D=load();go('landing');syncMenuFromApi();setTimeout(()=>{const s=$('splash');if(s){s.classList.add('bye');setTimeout(()=>s.remove(),800)}},1000)});

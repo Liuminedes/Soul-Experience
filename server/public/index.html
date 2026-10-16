@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+  <title>Soul Experience — Panel Administrativo</title>
+  <link rel="icon" type="image/png" href="/assets/favicon.png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --ink: #1b1410;
+      --parch: #f7f2eb;
+      --warm: #faf8f5;
+      --esp: #2c1e16;
+      --mocha: #3e2c20;
+      --caramel: #c8a87c;
+      --caramel-light: #e8d8c3;
+      --bg: #c1a58d;
+      --accent: #b05c38;
+      --accent-soft: #f4ece4;
+      --green: #4a7c59;
+      --green-soft: #eaf2ec;
+      --red: #c0392b;
+      --red-soft: #fdf0ed;
+      --card-bg: rgba(255,255,255,0.85);
+      --fd: 'DM Serif Display', Georgia, serif;
+      --fu: 'Manrope', -apple-system, sans-serif;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--fu);
+      background: var(--bg);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+    /* Login View */
+    .view { display: none; }
+    .view.active { display: block; }
+    .login-wrapper {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #2c1e16;
+      padding: 24px;
+    }
+    .login-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(200,168,124,0.15);
+      backdrop-filter: blur(12px);
+      border-radius: 24px;
+      padding: 40px 28px;
+      width: 100%;
+      max-width: 380px;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    }
+    .login-title {
+      font-family: var(--fd);
+      font-size: 26px;
+      color: #f7f2eb;
+      margin: 16px 0 6px;
+    }
+    .login-sub {
+      font-size: 13px;
+      color: rgba(200,168,124,0.7);
+      margin-bottom: 24px;
+    }
+    .login-inp {
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: 12px;
+      border: 1.5px solid rgba(200,168,124,0.3);
+      background: rgba(255,255,255,0.06);
+      color: #fff;
+      font-size: 15px;
+      outline: none;
+      transition: all 0.2s;
+      margin-bottom: 12px;
+    }
+    .login-inp:focus {
+      border-color: var(--caramel);
+      background: rgba(255,255,255,0.1);
+    }
+    .login-btn {
+      width: 100%;
+      padding: 14px;
+      background: var(--caramel);
+      color: var(--esp);
+      font-weight: 700;
+      font-size: 15px;
+      border-radius: 12px;
+      transition: transform 0.15s, opacity 0.2s;
+    }
+    .login-btn:hover { opacity: 0.95; transform: scale(1.01); }
+    .login-btn:active { transform: scale(0.98); }
+    .login-err {
+      color: #ff7675;
+      font-size: 13px;
+      margin-bottom: 14px;
+      display: none;
+    }
+
+    /* Admin Container */
+    .admin-container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 16px 80px;
+    }
+    .admin-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 0;
+      border-bottom: 1px solid rgba(27,20,16,0.1);
+      margin-bottom: 24px;
+    }
+    .admin-logo {
+      font-family: var(--fd);
+      font-size: 22px;
+      font-weight: bold;
+    }
+    .admin-badge {
+      display: inline-block;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 3px 8px;
+      background: var(--esp);
+      color: var(--caramel);
+      border-radius: 8px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+    .admin-actions {
+      display: flex;
+      gap: 10px;
+    }
+    .btn-sync {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--esp);
+      color: #fff;
+      padding: 9px 16px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+    .btn-sync:hover { background: var(--mocha); }
+    .btn-logout {
+      background: rgba(27,20,16,0.1);
+      color: var(--ink);
+      padding: 9px 14px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+    .btn-logout:hover { background: rgba(27,20,16,0.2); }
+
+    /* Stats Grid */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+    .stat-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 18px;
+      border: 1px solid rgba(255,255,255,0.4);
+      box-shadow: 0 4px 15px rgba(27,20,16,0.04);
+      text-align: center;
+    }
+    .stat-n {
+      font-family: var(--fd);
+      font-size: 28px;
+      color: var(--esp);
+      line-height: 1.2;
+    }
+    .stat-l {
+      font-size: 12px;
+      color: rgba(27,20,16,0.6);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+
+    /* Categories & Items */
+    .cat-box {
+      background: var(--card-bg);
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 20px;
+      border: 1px solid rgba(255,255,255,0.5);
+      box-shadow: 0 4px 20px rgba(27,20,16,0.05);
+    }
+    .cat-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1.5px solid rgba(27,20,16,0.08);
+      padding-bottom: 14px;
+      margin-bottom: 14px;
+    }
+    .cat-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--fd);
+      font-size: 20px;
+      color: var(--esp);
+    }
+    .cat-count {
+      font-size: 11px;
+      background: rgba(27,20,16,0.08);
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-family: var(--fu);
+      font-weight: 600;
+    }
+    .item-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      background: rgba(255,255,255,0.6);
+      border-radius: 12px;
+      margin-bottom: 8px;
+      border: 1px solid rgba(27,20,16,0.04);
+      transition: background 0.2s;
+    }
+    .item-row:hover { background: #fff; }
+    .item-info { flex: 1; padding-right: 12px; }
+    .item-name { font-weight: 700; font-size: 15px; color: var(--ink); }
+    .item-desc { font-size: 12px; color: rgba(27,20,16,0.65); margin-top: 2px; }
+    .item-price { font-weight: 700; font-size: 15px; color: var(--accent); margin-right: 14px; white-space: nowrap; }
+    .btn-icon {
+      padding: 6px;
+      border-radius: 8px;
+      background: rgba(27,20,16,0.05);
+      color: var(--ink);
+      transition: 0.15s;
+    }
+    .btn-icon:hover { background: rgba(27,20,16,0.12); }
+    .btn-icon.del:hover { background: var(--red-soft); color: var(--red); }
+    .item-actions { display: flex; align-items: center; gap: 6px; }
+
+    .btn-add-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: 100%;
+      padding: 10px;
+      border: 1.5px dashed rgba(27,20,16,0.2);
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(27,20,16,0.7);
+      margin-top: 12px;
+      transition: 0.2s;
+    }
+    .btn-add-item:hover { border-color: var(--caramel); color: var(--esp); background: rgba(255,255,255,0.4); }
+
+    .btn-add-cat {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 16px;
+      background: var(--esp);
+      color: var(--caramel);
+      border-radius: 16px;
+      font-size: 15px;
+      font-weight: 700;
+      box-shadow: 0 4px 20px rgba(44,30,22,0.15);
+      transition: 0.2s;
+    }
+    .btn-add-cat:hover { background: var(--mocha); transform: translateY(-1px); }
+
+    /* Modals & Forms */
+    .edit-form {
+      background: #fff;
+      border: 1.5px solid var(--caramel);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+    .edit-form input {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1px solid rgba(27,20,16,0.2);
+      font-size: 14px;
+      margin-bottom: 10px;
+      outline: none;
+    }
+    .edit-form input:focus { border-color: var(--accent); }
+    .form-duo { display: grid; grid-template-columns: 2fr 1fr; gap: 10px; }
+    .form-actions { display: flex; gap: 8px; justify-content: flex-end; }
+    .form-actions button {
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .btn-save { background: var(--green); color: #fff; }
+    .btn-cancel { background: rgba(27,20,16,0.08); color: var(--ink); }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--esp);
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: 600;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      display: none;
+      z-index: 99999;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════ VISTA LOGIN ═══════════ -->
+  <div id="view-login" class="view active">
+    <div class="login-wrapper">
+      <div class="login-card">
+        <div style="font-size: 40px;">☕</div>
+        <h1 class="login-title">Soul Experience</h1>
+        <p class="login-sub">Panel de Control en la Nube (VPS)</p>
+        <div id="login-err" class="login-err">Contraseña incorrecta</div>
+        <input id="login-pwd" type="password" class="login-inp" placeholder="Contraseña de Administrador" autofocus/>
+        <button class="login-btn" onclick="login()">Ingresar al Panel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ VISTA PANEL ADMIN ═══════════ -->
+  <div id="view-admin" class="view">
+    <div class="admin-container">
+      <header class="admin-bar">
+        <div>
+          <span class="admin-logo">Soul Experience</span>
+          <span class="admin-badge">VPS Dokploy</span>
+        </div>
+        <div class="admin-actions">
+          <button class="btn-sync" onclick="saveToCloud()">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+            Guardar Cambios
+          </button>
+          <button class="btn-logout" onclick="logout()">Salir</button>
+        </div>
+      </header>
+
+      <section class="stats">
+        <div class="stat-card">
+          <div class="stat-n" id="stat-cats">0</div>
+          <div class="stat-l">Categorías</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-n" id="stat-items">0</div>
+          <div class="stat-l">Productos</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-n" id="stat-avg">$0</div>
+          <div class="stat-l">Precio Prom.</div>
+        </div>
+      </section>
+
+      <main id="cat-list"></main>
+
+      <button class="btn-add-cat" onclick="promptNewCat()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Nueva Categoría
+      </button>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script>
+    let token = localStorage.getItem('soul_admin_token') || '';
+    let menuData = [];
+
+    const $ = id => document.getElementById(id);
+    const fmt = n => new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 }).format(n);
+    const uid = () => Math.random().toString(36).slice(2, 8);
+
+    function showToast(msg) {
+      const t = $('toast');
+      t.textContent = msg;
+      t.style.display = 'block';
+      setTimeout(() => t.style.display = 'none', 2800);
+    }
+
+    async function login() {
+      const pwd = $('login-pwd').value;
+      try {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password: pwd })
+        });
+        const data = await res.json();
+        if (res.ok && data.token) {
+          token = data.token;
+          localStorage.setItem('soul_admin_token', token);
+          initAdmin();
+        } else {
+          $('login-err').style.display = 'block';
+          $('login-err').textContent = data.error || 'Acceso denegado';
+        }
+      } catch (err) {
+        $('login-err').style.display = 'block';
+        $('login-err').textContent = 'Error conectando con el servidor';
+      }
+    }
+
+    function logout() {
+      token = '';
+      localStorage.removeItem('soul_admin_token');
+      $('view-admin').classList.remove('active');
+      $('view-login').classList.add('active');
+    }
+
+    async function fetchMenu() {
+      try {
+        const res = await fetch('/api/menu');
+        menuData = await res.json();
+        renderAdmin();
+      } catch (err) {
+        showToast('Error al cargar menú desde el servidor');
+      }
+    }
+
+    async function saveToCloud() {
+      try {
+        const res = await fetch('/api/admin/menu', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+          },
+          body: JSON.stringify(menuData)
+        });
+        if (res.ok) {
+          showToast('✓ Menú guardado y actualizado en vivo');
+        } else {
+          const err = await res.json();
+          if (res.status === 401) logout();
+          else showToast('Error: ' + (err.error || 'No se pudo guardar'));
+        }
+      } catch (e) {
+        showToast('Error de conexión al guardar');
+      }
+    }
+
+    function renderAdmin() {
+      const totItems = menuData.reduce((acc, c) => acc + (c.items ? c.items.length : 0), 0);
+      const avgPrice = totItems ? Math.round(menuData.reduce((acc, c) => acc + (c.items || []).reduce((s, i) => s + (i.price || 0), 0), 0) / totItems) : 0;
+
+      $('stat-cats').textContent = menuData.length;
+      $('stat-items').textContent = totItems;
+      $('stat-avg').textContent = fmt(avgPrice);
+
+      let html = '';
+      menuData.forEach((cat, cIdx) => {
+        html += `
+          <div class="cat-box" id="cat-${cat.id}">
+            <div class="cat-head">
+              <div class="cat-title">
+                <span>${cat.icon || '☕'}</span>
+                <span>${cat.name}</span>
+                <span class="cat-count">${(cat.items || []).length}</span>
+              </div>
+              <div class="item-actions">
+                <button class="btn-icon" onclick="editCatPrompt('${cat.id}')" title="Editar Categoría">✏️</button>
+                <button class="btn-icon del" onclick="deleteCat('${cat.id}')" title="Eliminar Categoría">🗑️</button>
+              </div>
+            </div>
+            <div class="cat-items">
+              ${(cat.items || []).map(item => `
+                <div class="item-row" id="item-${item.id}">
+                  <div class="item-info">
+                    <div class="item-name">${item.name}</div>
+                    ${item.nameEn ? `<div style="font-size:12px;color:#888;">${item.nameEn}</div>` : ''}
+                    ${item.desc ? `<div class="item-desc">${item.desc}</div>` : ''}
+                  </div>
+                  <div class="item-price">${fmt(item.price)}</div>
+                  <div class="item-actions">
+                    <button class="btn-icon" onclick="editItemForm('${cat.id}', '${item.id}')">✏️</button>
+                    <button class="btn-icon del" onclick="deleteItem('${cat.id}', '${item.id}')">🗑️</button>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+            <button class="btn-add-item" onclick="addItemForm('${cat.id}')">+ Agregar Producto</button>
+          </div>
+        `;
+      });
+      $('cat-list').innerHTML = html;
+    }
+
+    function promptNewCat() {
+      const name = prompt('Nombre de la nueva categoría:');
+      if (!name) return;
+      const icon = prompt('Emoji / Icono (ej: ☕, 🍰, 🍕):', '☕') || '☕';
+      menuData.push({
+        id: uid(),
+        name: name.trim(),
+        icon: icon.trim(),
+        items: []
+      });
+      renderAdmin();
+      saveToCloud();
+    }
+
+    function editCatPrompt(catId) {
+      const cat = menuData.find(c => c.id === catId);
+      if (!cat) return;
+      const name = prompt('Nombre de la categoría:', cat.name);
+      if (name === null) return;
+      const icon = prompt('Icono / Emoji:', cat.icon || '☕');
+      cat.name = name.trim() || cat.name;
+      cat.icon = icon ? icon.trim() : cat.icon;
+      renderAdmin();
+      saveToCloud();
+    }
+
+    function deleteCat(catId) {
+      if (!confirm('¿Estás seguro de eliminar esta categoría y todos sus productos?')) return;
+      menuData = menuData.filter(c => c.id !== catId);
+      renderAdmin();
+      saveToCloud();
+    }
+
+    function deleteItem(catId, itemId) {
+      const cat = menuData.find(c => c.id === catId);
+      if (!cat) return;
+      cat.items = cat.items.filter(i => i.id !== itemId);
+      renderAdmin();
+      saveToCloud();
+    }
+
+    function addItemForm(catId) {
+      const catBox = document.getElementById('cat-' + catId);
+      const existing = catBox.querySelector('.edit-form');
+      if (existing) existing.remove();
+
+      const form = document.createElement('div');
+      form.className = 'edit-form';
+      form.innerHTML = `
+        <div class="form-duo">
+          <input id="new-item-name" placeholder="Nombre del producto (ej: Latte Vainilla)" autofocus/>
+          <input id="new-item-price" type="number" placeholder="Precio ($)"/>
+        </div>
+        <input id="new-item-desc" placeholder="Descripción breve"/>
+        <div class="form-actions">
+          <button class="btn-cancel" onclick="this.closest('.edit-form').remove()">Cancelar</button>
+          <button class="btn-save" onclick="saveNewItem('${catId}')">Guardar</button>
+        </div>
+      `;
+      catBox.querySelector('.cat-items').appendChild(form);
+    }
+
+    function saveNewItem(catId) {
+      const name = $('new-item-name').value.trim();
+      const price = parseInt($('new-item-price').value) || 0;
+      const desc = $('new-item-desc').value.trim();
+      if (!name || !price) {
+        showToast('Nombre y precio requeridos');
+        return;
+      }
+      const cat = menuData.find(c => c.id === catId);
+      if (cat) {
+        cat.items.push({ id: uid(), name, price, desc, tags: [] });
+        renderAdmin();
+        saveToCloud();
+      }
+    }
+
+    function editItemForm(catId, itemId) {
+      const cat = menuData.find(c => c.id === catId);
+      const item = cat?.items.find(i => i.id === itemId);
+      if (!item) return;
+
+      const itemEl = document.getElementById('item-' + itemId);
+      itemEl.innerHTML = `
+        <div class="edit-form" style="width:100%;margin:0;">
+          <div class="form-duo">
+            <input id="edit-name-${item.id}" value="${item.name}"/>
+            <input id="edit-price-${item.id}" type="number" value="${item.price}"/>
+          </div>
+          <input id="edit-desc-${item.id}" value="${item.desc || ''}" placeholder="Descripción"/>
+          <div class="form-actions">
+            <button class="btn-cancel" onclick="renderAdmin()">Cancelar</button>
+            <button class="btn-save" onclick="updateItem('${catId}', '${item.id}')">Actualizar</button>
+          </div>
+        </div>
+      `;
+    }
+
+    function updateItem(catId, itemId) {
+      const cat = menuData.find(c => c.id === catId);
+      const item = cat?.items.find(i => i.id === itemId);
+      if (!item) return;
+
+      item.name = document.getElementById('edit-name-' + item.id).value.trim();
+      item.price = parseInt(document.getElementById('edit-price-' + item.id).value) || 0;
+      item.desc = document.getElementById('edit-desc-' + item.id).value.trim();
+
+      renderAdmin();
+      saveToCloud();
+    }
+
+    async function initAdmin() {
+      $('view-login').classList.remove('active');
+      $('view-admin').classList.add('active');
+      await fetchMenu();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      $('login-pwd').addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
+      if (token) {
+        initAdmin();
+      }
+    });
+  </script>
+</body>
+</html>

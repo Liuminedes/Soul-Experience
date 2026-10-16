@@ -1,0 +1,19 @@
+services:
+  soul-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: soul-experience-backend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - ADMIN_PASSWORD=soul2026
+      - JWT_SECRET=soul-secret-dokploy-v1
+      - DATA_DIR=/app/data
+    volumes:
+      - soul-data:/app/data
+
+volumes:
+  soul-data:
