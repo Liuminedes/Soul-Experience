@@ -292,7 +292,7 @@
     }
     .btn-add-cat:hover { background: var(--mocha); transform: translateY(-1px); }
 
-    /* Modals & Forms */
+    /* In-line forms */
     .edit-form {
       background: #fff;
       border: 1.5px solid var(--caramel);
@@ -322,6 +322,133 @@
     .btn-save { background: var(--green); color: #fff; }
     .btn-cancel { background: rgba(27,20,16,0.08); color: var(--ink); }
 
+    /* Custom Beautiful Modals */
+    .custom-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(27,20,16,0.55);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 999999;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.25s var(--ease);
+    }
+    .custom-modal-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+    .custom-modal-card {
+      background: #faf8f5;
+      border: 1.5px solid rgba(200,168,124,0.3);
+      border-radius: 24px;
+      padding: 32px 28px;
+      max-width: 440px;
+      width: 100%;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+      transform: translateY(20px) scale(0.96);
+      transition: all 0.25s var(--ease);
+    }
+    .custom-modal-overlay.open .custom-modal-card {
+      transform: translateY(0) scale(1);
+    }
+    .modal-head {
+      margin-bottom: 16px;
+    }
+    .modal-head-title {
+      font-family: var(--fd);
+      font-size: 22px;
+      color: var(--esp);
+      line-height: 1.2;
+    }
+    .modal-head-sub {
+      font-size: 13px;
+      color: rgba(27,20,16,0.6);
+      margin-top: 4px;
+    }
+    .modal-input-group {
+      margin-bottom: 14px;
+    }
+    .modal-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: rgba(27,20,16,0.7);
+      margin-bottom: 6px;
+    }
+    .modal-input {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 1.5px solid rgba(27,20,16,0.15);
+      background: #fff;
+      font-family: var(--fu);
+      font-size: 15px;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .modal-input:focus {
+      border-color: var(--caramel);
+      box-shadow: 0 0 0 3px rgba(200,168,124,0.2);
+    }
+    .modal-btns {
+      display: flex;
+      gap: 10px;
+      margin-top: 24px;
+    }
+    .modal-btn-confirm {
+      flex: 1;
+      padding: 13px;
+      background: var(--esp);
+      color: var(--caramel);
+      font-weight: 700;
+      font-size: 14px;
+      border-radius: 12px;
+      transition: all 0.2s;
+    }
+    .modal-btn-confirm:hover { background: var(--mocha); }
+    .modal-btn-cancel {
+      padding: 13px 20px;
+      background: rgba(27,20,16,0.08);
+      color: var(--ink);
+      font-weight: 600;
+      font-size: 14px;
+      border-radius: 12px;
+      transition: background 0.2s;
+    }
+    .modal-btn-cancel:hover { background: rgba(27,20,16,0.15); }
+    .modal-btn-danger {
+      background: var(--red);
+      color: #fff;
+    }
+    .modal-btn-danger:hover { background: #a93226; }
+
+    /* Emoji Picker inside Modal */
+    .emoji-row {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      margin-bottom: 12px;
+    }
+    .emoji-btn {
+      font-size: 22px;
+      padding: 8px 12px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.7);
+      border: 1.5px solid transparent;
+      transition: 0.15s;
+    }
+    .emoji-btn:hover { background: #fff; transform: scale(1.1); }
+    .emoji-btn.active { border-color: var(--caramel); background: #fff; }
+
     /* Toast */
     .toast {
       position: fixed;
@@ -329,14 +456,20 @@
       left: 50%;
       transform: translateX(-50%);
       background: var(--esp);
-      color: #fff;
-      padding: 12px 24px;
+      color: var(--caramel);
+      border: 1px solid rgba(200,168,124,0.3);
+      padding: 14px 28px;
       border-radius: 30px;
       font-size: 14px;
-      font-weight: 600;
+      font-weight: 700;
       box-shadow: 0 10px 30px rgba(0,0,0,0.3);
       display: none;
-      z-index: 99999;
+      z-index: 9999999;
+      animation: popToast 0.3s var(--ease);
+    }
+    @keyframes popToast {
+      from { opacity: 0; transform: translate(-50%, 15px); }
+      to { opacity: 1; transform: translate(-50%, 0); }
     }
   </style>
 </head>
@@ -390,10 +523,53 @@
 
       <main id="cat-list"></main>
 
-      <button class="btn-add-cat" onclick="promptNewCat()">
+      <button class="btn-add-cat" onclick="openCategoryModal()">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         Nueva Categoría
       </button>
+    </div>
+  </div>
+
+  <!-- ═══════════ CUSTOM MODAL SYSTEM (Mismo diseño cálido de la marca) ═══════════ -->
+  <!-- 1. Modal Categoría (Crear / Editar) -->
+  <div id="modal-cat" class="custom-modal-overlay">
+    <div class="custom-modal-card">
+      <div class="modal-head">
+        <h3 class="modal-head-title" id="modal-cat-title">Nueva Categoría</h3>
+        <p class="modal-head-sub">Personaliza el nombre y el ícono</p>
+      </div>
+      <div class="modal-input-group">
+        <label class="modal-label">Icono rápido</label>
+        <div class="emoji-row" id="emoji-list">
+          <!-- Emojis cargados dinámicamente -->
+        </div>
+      </div>
+      <div class="modal-input-group">
+        <label class="modal-label">Nombre en Español</label>
+        <input id="modal-cat-name" class="modal-input" placeholder="Ej: Bebidas Frías" />
+      </div>
+      <div class="modal-input-group">
+        <label class="modal-label">Nombre en Inglés (Opcional)</label>
+        <input id="modal-cat-name-en" class="modal-input" placeholder="Ej: Cold Drinks" />
+      </div>
+      <div class="modal-btns">
+        <button class="modal-btn-cancel" onclick="closeCatModal()">Cancelar</button>
+        <button class="modal-btn-confirm" onclick="saveCategoryModal()">Guardar Categoría</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Modal Confirmación Elegante (Reemplaza el 'confirm' feo del navegador) -->
+  <div id="modal-confirm" class="custom-modal-overlay">
+    <div class="custom-modal-card">
+      <div class="modal-head">
+        <h3 class="modal-head-title" id="confirm-title">¿Estás seguro?</h3>
+        <p class="modal-head-sub" id="confirm-msg">Esta acción no se puede deshacer.</p>
+      </div>
+      <div class="modal-btns">
+        <button class="modal-btn-cancel" onclick="closeConfirmModal(false)">Cancelar</button>
+        <button class="modal-btn-confirm modal-btn-danger" id="confirm-action-btn" onclick="closeConfirmModal(true)">Eliminar</button>
+      </div>
     </div>
   </div>
 
@@ -402,6 +578,11 @@
   <script>
     let token = localStorage.getItem('soul_admin_token') || '';
     let menuData = [];
+    let editingCatId = null;
+    let selectedCatEmoji = '☕';
+    let confirmCallback = null;
+
+    const DEFAULT_EMOJIS = ['☕','🧊','🧋','🍋','🥤','🥃','⏳','🍷','🫧','🍺','🍰','🥙','🍕','➕','🍵','🍫','🥪','🥐'];
 
     const $ = id => document.getElementById(id);
     const fmt = n => new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 }).format(n);
@@ -414,6 +595,93 @@
       setTimeout(() => t.style.display = 'none', 2800);
     }
 
+    /* ══════ MODAL DE CATEGORÍA ══════ */
+    function initEmojiPicker(selected) {
+      selectedCatEmoji = selected || '☕';
+      $('emoji-list').innerHTML = DEFAULT_EMOJIS.map(e => `
+        <button type="button" class="emoji-btn ${e === selectedCatEmoji ? 'active' : ''}" onclick="selectEmoji('${e}', this)">${e}</button>
+      `).join('');
+    }
+
+    function selectEmoji(e, btn) {
+      selectedCatEmoji = e;
+      document.querySelectorAll('.emoji-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+
+    function openCategoryModal(catId = null) {
+      editingCatId = catId;
+      if (catId) {
+        const cat = menuData.find(c => c.id === catId);
+        $('modal-cat-title').textContent = 'Editar Categoría';
+        $('modal-cat-name').value = cat ? cat.name : '';
+        $('modal-cat-name-en').value = cat ? (cat.nameEn || '') : '';
+        initEmojiPicker(cat ? cat.icon : '☕');
+      } else {
+        $('modal-cat-title').textContent = 'Nueva Categoría';
+        $('modal-cat-name').value = '';
+        $('modal-cat-name-en').value = '';
+        initEmojiPicker('☕');
+      }
+      $('modal-cat').classList.add('open');
+      setTimeout(() => $('modal-cat-name').focus(), 150);
+    }
+
+    function closeCatModal() {
+      $('modal-cat').classList.remove('open');
+      editingCatId = null;
+    }
+
+    function saveCategoryModal() {
+      const name = $('modal-cat-name').value.trim();
+      const nameEn = $('modal-cat-name-en').value.trim();
+      if (!name) {
+        showToast('El nombre de la categoría es requerido');
+        return;
+      }
+
+      if (editingCatId) {
+        const cat = menuData.find(c => c.id === editingCatId);
+        if (cat) {
+          cat.name = name;
+          cat.nameEn = nameEn;
+          cat.icon = selectedCatEmoji;
+        }
+      } else {
+        menuData.push({
+          id: uid(),
+          name,
+          nameEn,
+          icon: selectedCatEmoji,
+          items: []
+        });
+      }
+
+      closeCatModal();
+      renderAdmin();
+      saveToCloud();
+    }
+
+    /* ══════ MODAL CONFIRMACIÓN ELEGANTE ══════ */
+    function customConfirm(title, message, btnText = 'Eliminar') {
+      return new Promise(resolve => {
+        $('confirm-title').textContent = title;
+        $('confirm-msg').textContent = message;
+        $('confirm-action-btn').textContent = btnText;
+        $('modal-confirm').classList.add('open');
+        confirmCallback = resolve;
+      });
+    }
+
+    function closeConfirmModal(result) {
+      $('modal-confirm').classList.remove('open');
+      if (confirmCallback) {
+        confirmCallback(result);
+        confirmCallback = null;
+      }
+    }
+
+    /* ══════ ACCIONES Y SINCRONIZACIÓN ══════ */
     async function login() {
       const pwd = $('login-pwd').value;
       try {
@@ -485,7 +753,7 @@
       $('stat-avg').textContent = fmt(avgPrice);
 
       let html = '';
-      menuData.forEach((cat, cIdx) => {
+      menuData.forEach((cat) => {
         html += `
           <div class="cat-box" id="cat-${cat.id}">
             <div class="cat-head">
@@ -495,7 +763,7 @@
                 <span class="cat-count">${(cat.items || []).length}</span>
               </div>
               <div class="item-actions">
-                <button class="btn-icon" onclick="editCatPrompt('${cat.id}')" title="Editar Categoría">✏️</button>
+                <button class="btn-icon" onclick="openCategoryModal('${cat.id}')" title="Editar Categoría">✏️</button>
                 <button class="btn-icon del" onclick="deleteCat('${cat.id}')" title="Eliminar Categoría">🗑️</button>
               </div>
             </div>
@@ -522,40 +790,17 @@
       $('cat-list').innerHTML = html;
     }
 
-    function promptNewCat() {
-      const name = prompt('Nombre de la nueva categoría:');
-      if (!name) return;
-      const icon = prompt('Emoji / Icono (ej: ☕, 🍰, 🍕):', '☕') || '☕';
-      menuData.push({
-        id: uid(),
-        name: name.trim(),
-        icon: icon.trim(),
-        items: []
-      });
-      renderAdmin();
-      saveToCloud();
-    }
-
-    function editCatPrompt(catId) {
-      const cat = menuData.find(c => c.id === catId);
-      if (!cat) return;
-      const name = prompt('Nombre de la categoría:', cat.name);
-      if (name === null) return;
-      const icon = prompt('Icono / Emoji:', cat.icon || '☕');
-      cat.name = name.trim() || cat.name;
-      cat.icon = icon ? icon.trim() : cat.icon;
-      renderAdmin();
-      saveToCloud();
-    }
-
-    function deleteCat(catId) {
-      if (!confirm('¿Estás seguro de eliminar esta categoría y todos sus productos?')) return;
+    async function deleteCat(catId) {
+      const ok = await customConfirm('¿Eliminar Categoría?', 'Se borrará la categoría y todos los productos que contiene.');
+      if (!ok) return;
       menuData = menuData.filter(c => c.id !== catId);
       renderAdmin();
       saveToCloud();
     }
 
-    function deleteItem(catId, itemId) {
+    async function deleteItem(catId, itemId) {
+      const ok = await customConfirm('¿Eliminar Producto?', '¿Seguro que deseas eliminar este producto del menú?');
+      if (!ok) return;
       const cat = menuData.find(c => c.id === catId);
       if (!cat) return;
       cat.items = cat.items.filter(i => i.id !== itemId);
