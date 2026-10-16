@@ -1,6 +1,8 @@
 {
   "rewrites": [
     { "source": "/mapa", "destination": "/mapa.html" },
+    { "source": "/admin", "destination": "http://pruebas-pruebas-jkrsbe-1f0912-72-61-15-111.sslip.io/admin/" },
+    { "source": "/admin/:path*", "destination": "http://pruebas-pruebas-jkrsbe-1f0912-72-61-15-111.sslip.io/admin/:path*" },
     { "source": "/api/:path*", "destination": "http://pruebas-pruebas-jkrsbe-1f0912-72-61-15-111.sslip.io/api/:path*" }
   ]
 }
