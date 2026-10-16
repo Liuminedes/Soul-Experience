@@ -1,5 +1,6 @@
 {
   "rewrites": [
-    { "source": "/mapa", "destination": "/mapa.html" }
+    { "source": "/mapa", "destination": "/mapa.html" },
+    { "source": "/api/:path*", "destination": "http://pruebas-pruebas-jkrsbe-1f0912-72-61-15-111.sslip.io/api/:path*" }
   ]
 }

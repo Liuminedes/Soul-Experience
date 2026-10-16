@@ -119,8 +119,8 @@ adiciones:{title:'Adiciones',titleEn:'Premium Add-ons',icon:'✨',note:'$3.000 c
 ]},
 ];
 
-// API Configuration (Reemplazar con el dominio de tu Dokploy, ej: 'https://api.tudominio.com')
-const API_URL = window.SOUL_API_URL || ''; 
+// API Configuration (Por defecto usa /api que Vercel redirige al Dokploy, o SOUL_API_URL si se define)
+const API_URL = window.SOUL_API_URL !== undefined ? window.SOUL_API_URL : ''; 
 let D=[],curCat=null,dTag=null;
 const $=s=>document.getElementById(s);
 const uid=()=>Math.random().toString(36).slice(2,8);
@@ -140,9 +140,9 @@ const load=()=>{
 };
 
 async function syncMenuFromApi(){
-  if(!API_URL) return;
   try {
-    const res = await fetch(`${API_URL}/api/menu`);
+    const endpoint = API_URL ? `${API_URL}/api/menu` : '/api/menu';
+    const res = await fetch(endpoint);
     if(res.ok){
       const remoteData = await res.json();
       if(Array.isArray(remoteData) && remoteData.length){
