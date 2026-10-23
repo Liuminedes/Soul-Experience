@@ -88,7 +88,40 @@ app.post('/api/auth/login', (req, res) => {
   res.json({ token, message: 'Autenticado correctamente' });
 });
 
+// 4. Club Soul: registro de miembros
+// shortcut: members.json (sin DB), migrar a SQLite si pasa de ~5.000 miembros
+const MEMBERS_FILE = path.join(DATA_DIR, 'members.json');
+const getMembers = () => {
+  try { return JSON.parse(fs.readFileSync(MEMBERS_FILE, 'utf8')); } catch (e) { return []; }
+};
+const clean = (v, n) => String(v || '').trim().slice(0, n);
+
+app.post('/api/club/join', (req, res) => {
+  const b = req.body || {};
+  const whatsapp = clean(b.whatsapp, 20).replace(/\D/g, '');
+  const nick = clean(b.nick, 40);
+  if (!nick || !/^(57)?3\d{9}$/.test(whatsapp) || b.consent !== true) {
+    return res.status(400).json({ error: 'Datos inválidos' });
+  }
+  const members = getMembers();
+  if (members.length >= 20000) return res.status(503).json({ error: 'Club lleno' });
+  const data = {
+    nick,
+    whatsapp: whatsapp.length === 10 ? '57' + whatsapp : whatsapp,
+    birthday: /^\d{4}-\d{2}-\d{2}$/.test(b.birthday || '') ? b.birthday : '',
+    profile: clean(b.profile, 20),
+    consentAt: new Date().toISOString()
+  };
+  const i = members.findIndex(m => m.whatsapp === data.whatsapp);
+  if (i >= 0) members[i] = { ...members[i], ...data, profile: data.profile || members[i].profile };
+  else members.push({ ...data, joinedAt: data.consentAt });
+  fs.writeFileSync(MEMBERS_FILE, JSON.stringify(members, null, 2), 'utf8');
+  res.json({ success: true });
+});
+
 // ──────────────── PROTECTED ADMIN ENDPOINTS ────────────────
+app.get('/api/admin/members', authMiddleware, (req, res) => res.json(getMembers()));
+
 // Save entire menu
 app.put('/api/admin/menu', authMiddleware, (req, res) => {
   const menu = req.body;

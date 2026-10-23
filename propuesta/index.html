@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="robots" content="noindex,nofollow"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+  <meta name="description" content="Soul Experience — Café y bebidas que conectan. Menú digital. Quinta Paredes, Bogotá."/>
+  <meta name="theme-color" content="#2c1e16"/>
+  <meta property="og:title" content="Soul Experience — Menú Digital"/>
+  <meta property="og:description" content="Café y bebidas que conectan ☕ Infusiones, Cacao, Pizza, Cervezas artesanales. Quinta Paredes, Bogotá."/>
+  <title>Soul Experience — Menú Digital</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="../assets/favicon.png"/>
+  <link rel="icon" type="image/x-icon" href="../assets/favicon.ico"/>
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png"/>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/styles.css"/>
+  <link rel="stylesheet" href="css/club.css"/>
+  <link rel="stylesheet" href="css/club-live.css"/>
+  <link rel="stylesheet" href="css/menu-live.css"/>
+  <link rel="stylesheet" href="css/ui-live.css"/>
+</head>
+<body>
+
+  <!-- ═══════════ SPLASH ═══════════ -->
+  <div id="splash">
+    <img src="../assets/Soul_Experience.png" alt="Soul Experience" style="width:100px;height:100px;object-fit:contain;animation:float 2.5s ease-in-out infinite;filter:drop-shadow(0 2px 8px rgba(27,20,16,0.1));" />
+    <p>Cargando</p>
+  </div>
+
+
+  <!-- Mascota "Soulito": los ojos siguen el puntero (--px/--py desde club.js) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+    <symbol id="soulito" viewBox="0 0 100 120">
+      <ellipse cx="50" cy="113" rx="24" ry="4.5" fill="#000" opacity=".28"/>
+      <g class="m-wave"><path d="M84 76c12-2 14-14 8-22" stroke="#6b3f22" stroke-width="7" stroke-linecap="round" fill="none"/></g>
+      <path d="M16 76C4 74 2 62 8 56" stroke="#6b3f22" stroke-width="7" stroke-linecap="round" fill="none"/>
+      <path d="M50 8C24 8 14 38 14 66c0 30 16 46 36 46s36-16 36-46C86 38 76 8 50 8z" fill="#6b3f22"/>
+      <ellipse cx="33" cy="38" rx="7" ry="15" fill="#fff" opacity=".14" transform="rotate(14 33 38)"/>
+      <path d="M50 9C45 20 55 28 50 38" stroke="#3e2210" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path d="M50 9c4-8 14-10 20-6-3 7-12 9-20 6z" fill="#4f9d4a"/>
+      <g class="m-eyes">
+        <circle cx="37" cy="68" r="9.5" fill="#fff"/><circle cx="63" cy="68" r="9.5" fill="#fff"/>
+        <circle class="m-pupil" cx="37" cy="68" r="5" fill="#1b1410"/><circle class="m-pupil" cx="63" cy="68" r="5" fill="#1b1410"/>
+      </g>
+      <circle cx="27" cy="83" r="5" fill="#ff8a7a" opacity=".65"/><circle cx="73" cy="83" r="5" fill="#ff8a7a" opacity=".65"/>
+      <path d="M42 84q8 9 16 0" stroke="#1b1410" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </symbol>
+    <!-- granos del minijuego: normal, quemado y dorado -->
+    <symbol id="bean" viewBox="0 0 40 52"><ellipse cx="20" cy="26" rx="16" ry="23" fill="#7a4a2a" transform="rotate(18 20 26)"/><ellipse cx="14" cy="16" rx="4" ry="9" fill="#fff" opacity=".2" transform="rotate(18 14 16)"/><path d="M12 6c10 10-8 20 4 28s8 12 12 12" stroke="#3e2210" stroke-width="3" fill="none" stroke-linecap="round" transform="rotate(8 20 26)"/></symbol>
+    <symbol id="bean-bad" viewBox="0 0 40 52"><ellipse cx="20" cy="30" rx="15" ry="20" fill="#2a2420" transform="rotate(18 20 30)"/><path d="M12 14c10 10-8 18 4 26" stroke="#0e0b09" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M20 12c-7-5-3-11 0-12 0 5 8 6 5 12-1 2-4 2-5 0z" fill="#ff6a2a"/><path d="M20 12c-3-2-1-5 0-6 1 2 3 3 2 5z" fill="#ffd23a"/></symbol>
+    <symbol id="bean-gold" viewBox="0 0 40 52"><ellipse cx="20" cy="26" rx="16" ry="23" fill="#f5b93a" transform="rotate(18 20 26)"/><ellipse cx="14" cy="16" rx="4" ry="9" fill="#fff" opacity=".55" transform="rotate(18 14 16)"/><path d="M12 6c10 10-8 20 4 28s8 12 12 12" stroke="#b8741a" stroke-width="3" fill="none" stroke-linecap="round" transform="rotate(8 20 26)"/><path d="M34 4l1.5 4 4 1.5-4 1.5L34 15l-1.5-4-4-1.5 4-1.5z" fill="#fff"/></symbol>
+    <symbol id="cup" viewBox="0 0 80 60"><path d="M12 14h48v20c0 12-10 22-24 22S12 46 12 34z" fill="#f7f2eb"/><path d="M60 20h6c8 0 8 16 0 16h-6" stroke="#f7f2eb" stroke-width="5" fill="none"/><ellipse cx="36" cy="14" rx="24" ry="5" fill="#6b3f22"/><ellipse cx="36" cy="58" rx="30" ry="2" fill="#000" opacity=".25"/></symbol></defs></svg>
+
+
+  <!-- ═══════════ LANDING PAGE ═══════════ -->
+  <div id="view-landing" class="view active">
+    <div class="landing">
+      <div class="landing__deco-line"></div>
+      <div class="landing__deco-circle"></div>
+      <div class="fx" id="fx" aria-hidden="true"></div>
+
+      <div class="landing__inner">
+        <!-- Logo + anillo giratorio + mascota -->
+        <div class="hero">
+          <svg class="hero__ring" viewBox="0 0 200 200" aria-hidden="true">
+            <defs><path id="ringp" d="M100,100 m-82,0 a82,82 0 1,1 164,0 a82,82 0 1,1 -164,0"/></defs>
+            <text><textPath href="#ringp">BUEN CAFÉ ✦ BUENA GENTE ✦ GRANDES HISTORIAS ✦ </textPath></text>
+          </svg>
+          <img src="../assets/Soul_Experience.png" alt="Soul Experience" class="hero__logo" />
+          <div class="hero__mascot">
+            <span class="bubble" id="bubble">¡Hola! 👋</span>
+            <svg class="mascot" viewBox="0 0 100 120"><use href="#soulito"/></svg>
+          </div>
+        </div>
+
+        <!-- Brand info -->
+        <h1 class="landing__name">Soul Experience</h1>
+        <p class="landing__tagline">Café y bebidas que conectan</p>
+        <div class="ticker" aria-hidden="true"><div class="ticker__in">
+          <span>☕ Café de origen</span><span>🍕 Pizza artesanal</span><span>🍫 Cacao 75%</span><span>🍺 Cervezas artesanales</span><span>🌱 Vegano · Sin gluten</span><span>🐾 Pet friendly</span>
+          <span>☕ Café de origen</span><span>🍕 Pizza artesanal</span><span>🍫 Cacao 75%</span><span>🍺 Cervezas artesanales</span><span>🌱 Vegano · Sin gluten</span><span>🐾 Pet friendly</span>
+        </div></div>
+
+        <!-- 3 Action Buttons -->
+        <div class="landing__actions">
+          <!-- 1. Ver Menú -->
+          <button class="landing__btn landing__btn--menu" onclick="go('menu')">
+            <span class="landing__btn-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h12"/></svg>
+            </span>
+            Ver Menú Digital
+          </button>
+
+          <!-- 1b. Club Soul -->
+          <button class="landing__btn landing__btn--club" onclick="go('club')">
+            <span class="landing__btn-icon">✦</span>
+            Club Soul · Tu Pasaporte
+          </button>
+
+          <!-- 2. Ubicación -->
+          <a class="landing__btn landing__btn--location" href="mapa.html">
+            <span class="landing__btn-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </span>
+            Cómo Llegar
+          </a>
+
+          <!-- 3. Redes Sociales -->
+          <button class="landing__btn landing__btn--social" onclick="openSocials()">
+            <span class="landing__btn-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+            </span>
+            Nuestras Redes
+          </button>
+        </div>
+
+        <!-- Details -->
+        <div class="landing__details">
+          <a class="landing__detail-row landing__detail-row--link" href="mapa.html">
+            📍 Cra. 44a #22-19, Teusaquillo, Bogotá, Colombia
+          </a>
+          <div class="landing__detail-row">
+            📞 +57 320 367 8524
+          </div>
+        </div>
+
+        <div class="landing__divider"></div>
+
+        <div class="landing__footer">
+          <a class="landing__admin-btn" href="/admin" target="_blank" style="text-decoration:none;display:inline-block;">Administrar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════ SOCIAL MODAL ═══════════ -->
+  <div id="social-modal" class="modal-overlay">
+    <div class="modal">
+      <button class="modal__close" onclick="closeSocials()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+
+      <svg class="mascot social__mascot" viewBox="0 0 100 120"><use href="#soulito"/></svg>
+      <h2 class="modal__title">Únete a la <em>comunidad</em></h2>
+      <p class="modal__sub">Buen café · Buena gente · Grandes historias</p>
+
+      <!-- WhatsApp -->
+      <a class="social-link social-link--whatsapp" href="https://wa.me/573203678524" target="_blank">
+        <div class="social-link__icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </div>
+        <div class="social-link__text">
+          <div class="social-link__name">WhatsApp</div>
+          <div class="social-link__handle">Escríbenos directo</div>
+        </div>
+        <span class="social-link__arrow">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </span>
+      </a>
+
+      <!-- Instagram -->
+      <a class="social-link social-link--instagram" href="https://www.instagram.com/soul_experience._" target="_blank">
+        <div class="social-link__icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+        </div>
+        <div class="social-link__text">
+          <div class="social-link__name">Instagram</div>
+          <div class="social-link__handle">@soul_experience._</div>
+        </div>
+        <span class="social-link__arrow">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </span>
+      </a>
+
+      <!-- Facebook -->
+      <a class="social-link social-link--facebook" href="https://www.facebook.com/profile.php?id=61565793215913" target="_blank">
+        <div class="social-link__icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12c0-6.627-5.373-12-12-12S0 5.373 0 12c0 5.99 4.388 10.954 10.125 11.854V15.47H7.078V12h3.047V9.356c0-3.007 1.792-4.668 4.533-4.668 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.875V12h3.328l-.532 3.47h-2.796v8.385C19.612 22.954 24 17.99 24 12z"/></svg>
+        </div>
+        <div class="social-link__text">
+          <div class="social-link__name">Facebook</div>
+          <div class="social-link__handle">Soul Experience</div>
+        </div>
+        <span class="social-link__arrow">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </span>
+      </a>
+
+      <button class="social__club" onclick="closeSocials();go('club')">✦ Gana sellos en el Club Soul</button>
+    </div>
+  </div>
+
+
+  <!-- ═══════════ PRODUCT DETAIL MODAL ═══════════ -->
+  <div id="product-modal" class="modal-overlay">
+    <div class="modal modal--product" id="product-modal-content"></div>
+  </div>
+
+
+  <!-- ═══════════ MENU VIEW ═══════════ -->
+  <div id="view-menu" class="view">
+    <div class="fx fx--fixed" id="fx2" aria-hidden="true"></div>
+    <!-- Home: category cards -->
+    <div id="home-screen">
+      <div class="menu-home">
+        <div class="menu-home__head">
+          <div class="menu-home__head-left">
+            <span class="menu-home__head-logo">Soul Experience</span>
+            <span class="menu-home__head-badge">Menú</span>
+          </div>
+          <button class="menu-home__back-btn" onclick="go('landing')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            Inicio
+          </button>
+        </div>
+        <div id="suggest" class="suggest"></div>
+        <h2 class="menu-home__q">¿Qué se te antoja <em>hoy?</em></h2>
+        <div id="cat-cards"></div>
+      </div>
+    </div>
+
+    <!-- Detail: items in a category -->
+    <div id="detail-screen" style="display:none">
+      <div class="detail">
+        <button class="detail__back" onclick="backToHome()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          Volver al menú
+        </button>
+        <div id="detail-head"></div>
+        <div id="detail-tags"></div>
+        <div id="detail-items"></div>
+      </div>
+    </div>
+
+    <!-- Contact footer -->
+    <footer class="contact">
+      <p class="contact__name">Soul Experience</p>
+      <p class="contact__tag">Café y bebidas que conectan</p>
+      <div class="contact__row">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Cra. 44a #22-19 · Quinta Paredes · Teusaquillo
+      </div>
+      <div class="contact__row">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        +57 320 367 8524
+      </div>
+      <a class="contact__wa" href="https://wa.me/573203678524" target="_blank">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Escríbenos por WhatsApp
+      </a>
+      <div class="contact__bottom">
+        <a class="contact__admin" href="/admin" target="_blank" style="text-decoration:none;display:inline-block;">Administrar menú</a>
+      </div>
+    </footer>
+  </div>
+
+
+  <!-- ═══════════ CLUB SOUL ═══════════ -->
+  <div id="view-club" class="view">
+    <div class="club">
+      <div class="club__bar">
+        <button class="menu-home__back-btn" onclick="go('landing')">← Inicio</button>
+        <span class="club__badge">Club Soul</span>
+      </div>
+      <div class="club__head">
+        <div>
+          <h1 class="club__title">Tu Pasaporte<br><em>de Sabores</em></h1>
+          <p class="club__sub">Juega · Colecciona · Pertenece</p>
+        </div>
+        <svg class="mascot club__mascot" viewBox="0 0 100 120"><use href="#soulito"/></svg>
+      </div>
+
+      <div id="club-passport"></div>
+
+      <h2 class="club__h2">Minijuegos</h2>
+      <div id="club-games" class="gamelist"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════ PÁGINA DE MINIJUEGO ═══════════ -->
+  <div id="view-game" class="view">
+    <div class="club" id="game-page">
+      <div class="club__bar">
+        <button class="menu-home__back-btn" onclick="go('club')">← Minijuegos</button>
+        <span class="club__badge">Club Soul</span>
+      </div>
+      <div id="gp-hero" class="gp__hero"></div>
+      <div id="gp-stats"></div>
+      <div id="gp-body" class="club__card"></div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════ LOGIN ═══════════ -->
+  <div id="view-login" class="view">
+    <div class="login">
+      <div class="login__box">
+        <svg width="90" height="90" viewBox="0 0 120 120" fill="none" style="margin:0 auto">
+          <circle cx="60" cy="60" r="56" stroke="rgba(200,168,124,0.2)" stroke-width="1.5"/>
+          <circle cx="60" cy="60" r="48" stroke="rgba(200,168,124,0.08)" stroke-width="0.8"/>
+          <text x="60" y="50" text-anchor="middle" font-family="'DM Serif Display',serif" font-size="16" fill="#f7f2eb" letter-spacing="2">Soul</text>
+          <text x="60" y="67" text-anchor="middle" font-family="'Manrope',sans-serif" font-size="7.5" fill="rgba(200,168,124,0.7)" letter-spacing="5" font-weight="500">EXPERIENCE</text>
+        </svg>
+        <p class="login__label">Panel de Administración</p>
+        <input id="lp" class="login__inp" type="password" placeholder="Contraseña"/>
+        <p id="le" class="login__err">Contraseña incorrecta</p>
+        <button class="login__go" onclick="tryLogin()">Ingresar</button>
+        <button class="login__back" onclick="go('landing')">← Volver al inicio</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════ ADMIN ═══════════ -->
+  <div id="view-admin" class="view">
+    <div class="admin">
+      <div class="admin__bar">
+        <div class="admin__bar-left">
+          <span class="admin__bar-name">Soul Experience</span>
+          <span class="admin__bar-badge">Admin</span>
+        </div>
+        <div class="admin__bar-right">
+          <button class="bg" onclick="go('menu')">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8l-4 4 4 4M16 12H8"/></svg>
+            Ver Menú
+          </button>
+          <button class="bd" onclick="go('landing')">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            Salir
+          </button>
+        </div>
+      </div>
+      <div id="ab" class="admin__body"></div>
+    </div>
+  </div>
+
+
+  <div id="toast" class="toast"></div>
+
+  <!-- Configuración de API VPS (Coloca aquí la URL de tu Dokploy cuando esté desplegado) -->
+  <script>
+    window.SOUL_API_URL = window.SOUL_API_URL || '';
+  </script>
+
+  <!-- Script -->
+  <script src="js/app.js"></script>
+  <script src="js/club.js"></script>
+
+</body>
+</html>

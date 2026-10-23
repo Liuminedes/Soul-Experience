@@ -1,0 +1,47 @@
+/* Club Soul */
+.landing__btn--club {
+  background: linear-gradient(135deg, var(--caramel), #e3c79c);
+  color: var(--ink);
+  box-shadow: 0 4px 20px rgba(200, 168, 124, 0.45);
+}
+.landing__btn--club:hover { transform: translateY(-2px); }
+
+.club { max-width: 460px; margin: 0 auto; padding: 20px 20px 60px; color: var(--parch); font-family: var(--fu); min-height: 100vh; }
+.club__bar { display: flex; justify-content: space-between; align-items: center; }
+.club__badge { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--caramel); }
+.club__title { font-family: var(--fd); font-weight: 400; font-size: 40px; line-height: 1.1; margin: 28px 0 8px; }
+.club__title em { color: var(--caramel); }
+.club__sub { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; opacity: .6; margin-bottom: 24px; }
+.club__h2 { font-family: var(--fd); font-weight: 400; font-size: 24px; margin: 32px 0 12px; }
+
+.club__card {
+  background: rgba(255, 255, 255, .06); border: 1px solid rgba(200, 168, 124, .25);
+  border-radius: 20px; padding: 22px; backdrop-filter: blur(8px);
+  display: flex; flex-direction: column; gap: 12px;
+  animation: rise .6s var(--ease) both;
+}
+.club__card h3 { font-family: var(--fd); font-weight: 400; font-size: 24px; margin: 0; }
+.club__label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--caramel); margin: 0; }
+.club__muted { font-size: 13px; opacity: .7; margin: 0; display: flex; flex-direction: column; gap: 6px; }
+.club input:not([type=checkbox]) {
+  width: 100%; padding: 14px; border-radius: 12px; border: 1px solid rgba(200, 168, 124, .3);
+  background: rgba(0, 0, 0, .25); color: var(--parch); font: inherit; font-size: 15px;
+}
+.club__check { font-size: 12px; opacity: .8; display: flex; gap: 10px; align-items: flex-start; line-height: 1.4; }
+
+.club__btn, .club__opt {
+  display: block; text-align: center; width: 100%; padding: 15px; border-radius: 14px;
+  font: inherit; font-weight: 700; font-size: 15px; cursor: pointer; transition: transform .25s var(--ease);
+}
+.club__btn { background: var(--caramel); color: var(--ink); border: 0; text-decoration: none; }
+.club__btn--ghost { background: transparent; color: var(--caramel); border: 1px solid var(--caramel-s); }
+.club__opt { background: rgba(255, 255, 255, .07); color: var(--parch); border: 1px solid rgba(200, 168, 124, .25); text-align: left; font-weight: 500; }
+.club__opt:hover, .club__btn:hover { transform: translateY(-2px); }
+
+.club__result { display: flex; align-items: center; gap: 14px; }
+.club__result span { font-size: 44px; }
+
+.stamps { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin: 6px 0; }
+.stamp { aspect-ratio: 1; border-radius: 50%; border: 1.5px dashed var(--caramel-s); display: grid; place-items: center; color: var(--ink); font-size: 16px; }
+.stamp.on { background: var(--caramel); border-style: solid; animation: pop .5s var(--ease-spring) both; }
+@keyframes pop { from { transform: scale(0) rotate(-40deg); } to { transform: scale(1) rotate(0); } }

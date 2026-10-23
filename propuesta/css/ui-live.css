@@ -1,0 +1,98 @@
+/* ═════════ SELECTOR DE MINIJUEGOS ═════════ */
+.gamelist { display: flex; flex-direction: column; gap: 12px; }
+.gcard {
+  position: relative; overflow: hidden; display: flex; align-items: center; gap: 14px; width: 100%; text-align: left;
+  padding: 16px; border-radius: 22px; border: 0; color: #fff; font-family: var(--fu);
+  background: linear-gradient(135deg, var(--c1), var(--c2));
+  box-shadow: 0 10px 28px color-mix(in srgb, var(--c2) 55%, transparent), inset 0 1px 0 rgba(255, 255, 255, .3);
+  transition: transform .3s var(--ease); animation: rise .5s var(--ease) calc(var(--i) * .08s) both; cursor: pointer;
+}
+.gcard::after { content: ''; position: absolute; width: 120px; height: 120px; border-radius: 50%; right: -30px; top: -50px; background: rgba(255, 255, 255, .16); }
+.gcard:active { transform: scale(.97); }
+.gcard--soon { filter: grayscale(.55) brightness(.75); cursor: default; }
+.gcard__art { width: 60px; height: 60px; border-radius: 18px; flex: none; display: grid; place-items: center; background: rgba(0, 0, 0, .22); font-size: 32px; position: relative; z-index: 1; }
+.gcard__art svg { width: 30px; height: 38px; animation: float 3s ease-in-out infinite; }
+.gcard__t { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; position: relative; z-index: 1; }
+.gcard__t b { font: 400 21px/1.15 var(--fd); }
+.gcard__t small { font-size: 12px; opacity: .85; }
+.gcard__rec { position: relative; z-index: 1; font: 800 12px var(--fu); background: rgba(0, 0, 0, .28); padding: 6px 10px; border-radius: 99px; white-space: nowrap; }
+
+/* ═════════ PÁGINA DEL MINIJUEGO ═════════ */
+#game-page { background: radial-gradient(circle at 80% 0, color-mix(in srgb, var(--c1) 30%, transparent), transparent 50%); }
+.gp__hero {
+  display: flex; align-items: center; gap: 16px; margin: 22px 0 14px; padding: 22px; border-radius: 26px; position: relative; overflow: hidden;
+  background: linear-gradient(140deg, var(--c1), var(--c2)); box-shadow: 0 14px 40px color-mix(in srgb, var(--c2) 60%, transparent);
+  animation: scaleIn .5s var(--ease) both;
+}
+.gp__hero::after { content: ''; position: absolute; width: 180px; height: 180px; border-radius: 50%; right: -50px; top: -70px; background: rgba(255, 255, 255, .16); }
+.gp__hero h1 { font: 400 30px/1.1 var(--fd); color: #fff; margin-top: 4px; }
+.gp__art { width: 78px; height: 78px; flex: none; border-radius: 22px; background: rgba(0, 0, 0, .22); display: grid; place-items: center; font-size: 42px; position: relative; z-index: 1; }
+.gp__art svg { width: 40px; height: 52px; animation: float 2.6s ease-in-out infinite; }
+.gp__hero > div:last-child { position: relative; z-index: 1; }
+.gp__stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 14px; }
+.gp__tile { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 14px 6px; border-radius: 18px; background: rgba(255, 255, 255, .06); border: 1px solid rgba(255, 255, 255, .1); }
+.gp__tile b { font: 400 26px var(--fd); color: var(--parch); }
+.gp__tile span { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--caramel); }
+.gp__rank { margin-top: 14px; }
+.gp__rank div { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, .07); font-size: 14px; }
+#gp-body { margin-top: 14px; }
+.club__btn--play { background: linear-gradient(110deg, #ff9a4d, #ffcf8a); font-size: 16px; padding: 17px; animation: glowPulse 2.2s ease-in-out infinite; }
+
+/* ═════════ JUEGO: ATRAPA LOS GRANOS ═════════ */
+.game__rules { display: flex; gap: 8px; }
+.game__rules span { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 10px 6px; border-radius: 14px; background: rgba(255, 255, 255, .07); font: 800 14px var(--fu); }
+.game__rules svg { width: 18px; height: 24px; }
+.game__hud { display: flex; justify-content: space-between; }
+.pill { padding: 7px 14px; border-radius: 99px; background: rgba(255, 255, 255, .1); font: 700 14px var(--fu); color: var(--parch); }
+.pill--score { background: var(--caramel); color: var(--ink); }
+.game__timer { height: 6px; border-radius: 9px; background: rgba(255, 255, 255, .1); overflow: hidden; }
+.game__timer i { display: block; width: 100%; height: 100%; background: linear-gradient(90deg, #ff9a4d, #ffcf8a); }
+.game__area {
+  position: relative; height: 330px; border-radius: 20px; overflow: hidden; touch-action: manipulation; user-select: none;
+  background: linear-gradient(180deg, rgba(0, 0, 0, .15), rgba(255, 154, 77, .22)); border: 1px solid rgba(200, 168, 124, .25);
+}
+.game__catch { position: absolute; bottom: 4px; left: 50%; width: 90px; margin-left: -45px; pointer-events: none; }
+.game__catch.bump { animation: bump .25s var(--ease-spring); }
+@keyframes bump { 50% { transform: scale(1.18) translateY(-4px); } }
+.bean { position: absolute; top: -60px; left: var(--x); width: 52px; height: 66px; padding: 4px; cursor: pointer; animation: fall var(--d) linear forwards; }
+.bean svg { width: 100%; height: 100%; pointer-events: none; filter: drop-shadow(0 6px 6px rgba(0, 0, 0, .4)); }
+.bean--gold svg { animation: glow 1s ease-in-out infinite alternate; }
+@keyframes glow { to { filter: drop-shadow(0 0 10px #ffd23a); } }
+@keyframes fall { to { transform: translateY(var(--h)) rotate(var(--r)); } }
+.score-pop { position: absolute; font: 800 20px var(--fu); color: #ffcf8a; pointer-events: none; animation: popUp .7s ease-out forwards; text-shadow: 0 2px 8px rgba(0, 0, 0, .5); }
+.score-pop.neg { color: #ff6a5a; }
+@keyframes popUp { to { transform: translateY(-40px); opacity: 0; } }
+
+.game__end { display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; }
+.game__stars { display: flex; gap: 8px; }
+.game__stars span { font-size: 40px; color: rgba(255, 255, 255, .15); }
+.game__stars span.on { color: #ffd23a; text-shadow: 0 0 18px rgba(255, 210, 58, .7); animation: pop .6s var(--ease-spring) calc(var(--i) * .2s) both; }
+.game__big { font: 400 72px/1 var(--fd); color: var(--parch); animation: pop .6s var(--ease-spring) both; }
+
+/* ═════════ MODAL: NUESTRAS REDES ═════════ */
+#social-modal { align-items: flex-end; padding: 0; }
+#social-modal .modal {
+  max-width: 460px; border-radius: 30px 30px 0 0; padding: 70px 22px 26px; overflow: visible;
+  background: linear-gradient(180deg, #3a2518, #231710); border: 1px solid rgba(255, 154, 77, .25); border-bottom: 0;
+  box-shadow: 0 -20px 80px rgba(255, 154, 77, .18);
+  animation: sheetUp .5s var(--ease);
+}
+@keyframes sheetUp { from { transform: translateY(60%); opacity: 0; } }
+.social__mascot { position: absolute; top: -52px; left: 50%; width: 84px; margin-left: -42px; }
+#social-modal .modal__title { text-align: center; font-size: 28px; }
+#social-modal .modal__title em { color: var(--caramel); }
+#social-modal .modal__sub { text-align: center; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 22px; }
+#social-modal .modal__close { top: 14px; right: 14px; }
+#social-modal .social-link {
+  position: relative; overflow: hidden; border: 0; padding: 16px 18px; border-radius: 20px; margin-bottom: 12px;
+  animation: rise .5s var(--ease) both; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .25), 0 8px 22px rgba(0, 0, 0, .3);
+}
+#social-modal .social-link:nth-of-type(1) { background: linear-gradient(120deg, #25d366, #0f8f45); animation-delay: .1s; }
+#social-modal .social-link:nth-of-type(2) { background: linear-gradient(120deg, #f58529, #dd2a7b 55%, #8134af); animation-delay: .18s; }
+#social-modal .social-link:nth-of-type(3) { background: linear-gradient(120deg, #3b8bff, #1252c4); animation-delay: .26s; }
+#social-modal .social-link__icon { background: rgba(255, 255, 255, .22) !important; color: #fff !important; width: 46px; height: 46px; border-radius: 14px; }
+#social-modal .social-link__name { color: #fff; font-size: 17px; }
+#social-modal .social-link__handle { color: #fff; opacity: .85; }
+#social-modal .social-link__arrow { color: #fff; opacity: .9; }
+.social__club { width: 100%; margin-top: 4px; padding: 16px; border-radius: 18px; border: 1.5px dashed var(--caramel-s); background: rgba(200, 168, 124, .08); color: var(--caramel); font: 800 14px var(--fu); }
+@media (min-width: 600px) { #social-modal { align-items: center; padding: 24px; } #social-modal .modal { border-radius: 30px; border-bottom: 1px solid rgba(255, 154, 77, .25); } }
