@@ -22,25 +22,20 @@ const clubApi = (API_URL || '') + '/api/club/join';
 let qi = 0, score = {};
 
 const _go = go;
-go = v => { _go(v); if (v === 'club') renderClub(); if (v !== 'game') stopGame(); if (['landing', 'menu', 'club', 'game'].includes(v)) document.body.style.background = v === 'club' || v === 'game' ? '#2c1e16' : '#1b1410'; };
+go = v => { _go(v); $('buddy').classList.toggle('on', v === 'menu'); if (v === 'menu') say('¡Hola! Te acompaño 🐾', 'saluda'); if (v === 'club') renderClub(); if (v !== 'game') stopGame(); if (['landing', 'menu', 'club', 'game'].includes(v)) document.body.style.background = v === 'club' || v === 'game' ? '#2c1e16' : '#1b1410'; };
 
 /* ═══════ Vida: partículas, mascota, confeti ═══════ */
 const rnd = (a, b) => a + Math.random() * (b - a);
 ['fx', 'fx2'].forEach(id => { $(id).innerHTML = Array.from({ length: 16 }, (_, i) =>
   `<span style="--x:${rnd(2, 96)}%;--s:${rnd(14, 30)}px;--d:${rnd(9, 18)}s;--dl:${-rnd(0, 14)}s;--r:${rnd(-200, 200)}deg">${['☕', '✦', '🍪', '🍫', '✦', '🫘'][i % 6]}</span>`).join(''); });
 
-// los ojos de Soulito siguen el dedo/puntero
-document.addEventListener('pointermove', e => {
-  document.querySelectorAll('.mascot').forEach(m => {
-    const r = m.getBoundingClientRect();
-    const dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height / 2), d = Math.hypot(dx, dy) || 1;
-    m.style.setProperty('--px', dx / d); m.style.setProperty('--py', dy / d);
-  });
-});
-
-const PHRASES = ['¡Hola! 👋', '¿Un flat white? ☕', 'Juega y gana sellos ✦', '¿Ya probaste la pizza? 🍕', 'Hoy toca algo nuevo 🍋', '¡Eres Soul! 💛'];
+const PHRASES = [['¡Hola! 👋', 'saluda'], ['¿Un flat white? ☕', 'curiosa'], ['Juega y gana sellos ✦', 'traviesa'], ['¿Ya probaste la pizza? 🍕', 'lentes'], ['Hoy toca algo nuevo 🍋', 'sorprendida'], ['¡Eres Soul! 💛', 'celebra']];
 let ph = 0;
-setInterval(() => { const b = $('bubble'); if (!b) return; ph = (ph + 1) % PHRASES.length; b.textContent = PHRASES[ph]; b.style.animation = 'none'; void b.offsetWidth; b.style.animation = ''; }, 3500);
+setInterval(() => {
+  const b = $('bubble'); if (!b) return;
+  ph = (ph + 1) % PHRASES.length; b.textContent = PHRASES[ph][0]; b.style.animation = 'none'; void b.offsetWidth; b.style.animation = '';
+  const m = b.nextElementSibling; m.dataset.base = m.dataset.mood = PHRASES[ph][1];
+}, 3500);
 
 function confetti() {
   const f = document.createDocumentFragment();
@@ -68,7 +63,7 @@ function renderGameIntro() {
 }
 function startGame() {
   stopGame(); gs = 0; gl = GTIME;
-  $('gp-body').innerHTML = `<div class="game__hud"><span class="pill">⏱ <b id="g-t">${GTIME}</b>s</span><span class="pill pill--score"><b id="g-s">0</b> / ${GOAL}</span></div>
+  $('gp-body').innerHTML = `<div class="game__hud"><span class="pill">⏱ <b id="g-t">${GTIME}</b>s</span><i class="mascot game__mascot" data-mood="traviesa"></i><span class="pill pill--score"><b id="g-s">0</b> / ${GOAL}</span></div>
     <div class="game__timer"><i id="g-bar"></i></div>
     <div class="game__area" id="g-area"><svg class="game__catch" id="g-cup" viewBox="0 0 80 60"><use href="#cup"/></svg></div>`;
   requestAnimationFrame(() => { $('g-bar').style.transition = `width ${GTIME}s linear`; $('g-bar').style.width = '0%'; });
@@ -88,6 +83,7 @@ function startGame() {
       area.appendChild(p); setTimeout(() => p.remove(), 700);
       const cup = $('g-cup'); cup.classList.remove('bump'); void cup.getBoundingClientRect(); cup.classList.add('bump');
       if (pts < 0 && navigator.vibrate) navigator.vibrate(60);
+      mood(pts < 0 ? 'enojadita' : pts > 1 ? 'sorprendida' : 'feliz', 900);
       setTimeout(() => b.remove(), 300);
     };
     area.appendChild(b); setTimeout(() => b.remove(), 3000);
@@ -107,18 +103,19 @@ function endGame() {
     <div class="game__big">${gs}</div><p class="club__label">puntos</p>
     <p>${won ? (first ? '¡Sello conseguido! ✦' : '¡Gran partida!') : `Casi… necesitas ${GOAL} para el sello.`}</p>
     <button class="club__btn club__btn--play" onclick="startGame()">Jugar otra vez</button></div>`;
-  if (first) { confetti(); toast('¡Nuevo sello! ✦'); renderPassport(); }
+  if (first) { confetti(); toast('¡Nuevo sello! ✦'); renderPassport(); mood('celebra', 2500); }
+  else mood(won ? 'celebra' : 'dormilona', 2500);
 }
 
-/* menú: "Soulito sugiere" (producto al azar) */
+/* menú: "Soul sugiere" (producto al azar) */
 const _sh = showHome;
 showHome = () => { _sh(); suggest(); };
 function suggest() {
   const all = D.flatMap(c => c.items.map(i => [c, i])).filter(([c]) => !c.isPizza);
   if (!all.length) return;
   const [c, i] = all[Math.floor(Math.random() * all.length)];
-  $('suggest').innerHTML = `<svg class="mascot" viewBox="0 0 100 120"><use href="#soulito"/></svg>
-    <div class="suggest__t"><span class="club__label">Soulito sugiere hoy</span>
+  $('suggest').innerHTML = `<i class="mascot" data-mood="curiosa"></i>
+    <div class="suggest__t"><span class="club__label">Soul sugiere hoy</span>
       <b>${i.name}</b><small>${c.icon} ${c.name} · ${fmt(i.price)}</small></div>
     <div class="suggest__b"><button onclick="openProduct('${c.id}','${i.id}')">Ver</button><button onclick="suggest()" aria-label="Otra sugerencia">🎲</button></div>`;
 }
@@ -194,7 +191,7 @@ function joinClub(e) {
   club.nick = $('cj-nick').value.trim();
   club.whatsapp = $('cj-wa').value.replace(/\D/g, '');
   club.birthday = $('cj-bd').value;
-  clubSave(); sendMember(); confetti(); toast('¡Primer sello conseguido! ✦'); renderPassport(); renderQuiz();
+  clubSave(); sendMember(); confetti(); toast('¡Primer sello conseguido! ✦'); mood('celebra', 2500); renderPassport(); renderQuiz();
 }
 
 function renderQuiz() {
@@ -227,10 +224,35 @@ function answerQuiz(k) {
     const first = !club.profile;
     club.profile = Object.keys(score).sort((a, b) => score[b] - score[a])[0];
     club.qplays = (club.qplays || 0) + 1;
-    clubSave(); sendMember(); confetti(); gpStats();
+    clubSave(); sendMember(); confetti(); gpStats(); mood('celebra', 2500);
     if (club.nick && first) { toast('¡Nuevo sello! ✦'); renderPassport(); }
   }
   renderQuiz();
 }
 
 function restartQuiz() { qi = 0; score = {}; renderQuiz(); }
+
+/* ═══════ Compañera del menú: reacciona a lo que haces ═══════ */
+function say(t, m, ms = 2600) {
+  const b = $('buddy-say');
+  b.textContent = t; b.style.animation = 'none'; void b.offsetWidth; b.style.animation = '';
+  clearTimeout(say.t); say.t = setTimeout(() => b.textContent = '', ms);
+  mood(m, ms); wake();
+}
+const _oc = openCat;
+openCat = id => { _oc(id); const c = D.find(x => x.id === id); if (c) say(`¡Mmm, ${c.name.toLowerCase()}! ${c.icon}`, 'curiosa'); };
+const _bh = backToHome;
+backToHome = () => { _bh(); say('¿Qué más se te antoja?', 'feliz'); };
+const _op = openProduct;
+openProduct = (c, i) => { _op(c, i); say('Déjame ver de cerca… 🧐', 'lentes', 3000); };
+document.addEventListener('click', e => { if (e.target.closest('.pm__wa')) { say('¡Buena elección! 💛', 'celebra', 3000); confetti(); } });
+
+// sin actividad 25 s en el menú: se duerme; al volver, despierta
+let idle;
+function wake() {
+  const m = document.querySelector('#buddy .mascot');
+  if (m.dataset.mood === 'dormilona') return say('¡Ya desperté! 😺', 'sorprendida');
+  clearTimeout(idle);
+  idle = setTimeout(() => { if ($('buddy').classList.contains('on')) { m.dataset.mood = 'dormilona'; $('buddy-say').textContent = ''; } }, 25000);
+}
+['pointerdown', 'scroll', 'keydown'].forEach(ev => addEventListener(ev, wake, { passive: true }));

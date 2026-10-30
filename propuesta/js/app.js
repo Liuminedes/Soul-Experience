@@ -182,7 +182,7 @@ function openProduct(catId,itemId){
   const optsHtml=i.options?`<div class="pm__divider"></div><p class="pm__opts-label">Opciones disponibles</p><div class="pm__opts">${i.options.split('|').map(o=>`<span class="pm__opt">${o.trim()}</span>`).join('')}</div>`:'';
   $('product-modal-content').innerHTML=`
     <button class="modal__close" onclick="closeProduct()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-    <div class="pm__hero" style="--c1:${catc(c)[0]};--c2:${catc(c)[1]}"><span>${c.icon}</span></div>
+    <div class="pm__hero" style="--c1:${catc(c)[0]};--c2:${catc(c)[1]}"><span>${c.icon}</span><i class="mascot pm__mascot" data-mood="lentes"></i></div>
     <div class="pm__cat">${c.name}</div>
     <h2 class="pm__name">${i.name}</h2>
     ${i.nameEn?`<p class="pm__name-en">${i.nameEn}</p>`:''}
@@ -319,4 +319,4 @@ function uI(cid,iid){const d=gD();if(!d.name||!d.price)return;D=D.map(c=>c.id===
 function di(cid,iid){D=D.map(c=>c.id===cid?{...c,items:c.items.filter(i=>i.id!==iid)}:c);save();toast('Eliminado');renderAdmin()}
 
 /* ═══════ INIT ═══════ */
-document.addEventListener('DOMContentLoaded',()=>{D=load();go('landing');syncMenuFromApi();setTimeout(()=>{const s=$('splash');if(s){s.classList.add('bye');setTimeout(()=>s.remove(),800)}},1000)});
+document.addEventListener('DOMContentLoaded',()=>{D=load();go('landing');syncMenuFromApi();setTimeout(()=>{const s=$('splash');if(s){s.classList.add('bye');setTimeout(()=>s.remove(),800)}},1000)});

@@ -78,7 +78,7 @@
   animation: sheetUp .5s var(--ease);
 }
 @keyframes sheetUp { from { transform: translateY(60%); opacity: 0; } }
-.social__mascot { position: absolute; top: -52px; left: 50%; width: 84px; margin-left: -42px; }
+.social__mascot { position: absolute; top: -104px; left: 50%; width: 144px; margin-left: -72px; }
 #social-modal .modal__title { text-align: center; font-size: 28px; }
 #social-modal .modal__title em { color: var(--caramel); }
 #social-modal .modal__sub { text-align: center; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 22px; }

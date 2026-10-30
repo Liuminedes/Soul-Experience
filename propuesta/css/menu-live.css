@@ -18,9 +18,9 @@
 .menu-home__q { font-family: var(--fd); font-weight: 400; font-size: 32px; line-height: 1.1; color: var(--parch); margin: 26px 0 18px; }
 .menu-home__q em { color: var(--caramel); }
 
-/* sugerencia de Soulito */
+/* sugerencia de la mascota */
 .suggest { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 20px; color: var(--parch); background: linear-gradient(120deg, rgba(255, 154, 77, .28), rgba(200, 168, 124, .1)); border: 1px solid rgba(255, 154, 77, .4); animation: rise .6s var(--ease) both, glowPulse 3s ease-in-out infinite; }
-.suggest .mascot { width: 54px; flex: none; }
+.suggest .mascot { width: 92px; flex: none; margin: -12px -6px -12px -10px; }
 .suggest__t { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
 .suggest__t b { font: 400 20px var(--fd); line-height: 1.15; }
 .suggest__t small { opacity: .7; font-size: 12px; }

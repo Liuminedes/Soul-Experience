@@ -37,14 +37,7 @@
   box-shadow: 0 0 0 4px rgba(200, 168, 124, .35), 0 0 50px rgba(255, 154, 77, .45);
   animation: float 3s ease-in-out infinite;
 }
-.hero__mascot { position: absolute; right: -58px; bottom: -14px; width: 78px; }
-.mascot { width: 100%; height: auto; overflow: visible; --px: 0; --py: 0; animation: bob 2.4s ease-in-out infinite; }
-@keyframes bob { 50% { transform: translateY(-6px) rotate(2deg); } }
-.m-pupil { transform: translate(calc(var(--px) * 3.5px), calc(var(--py) * 3.5px)); }
-.m-eyes { transform-box: fill-box; transform-origin: center; animation: blink 4.5s infinite; }
-@keyframes blink { 0%, 94%, 100% { transform: scaleY(1); } 97% { transform: scaleY(.1); } }
-.m-wave { transform-box: fill-box; transform-origin: 0 100%; animation: wave 1.6s ease-in-out infinite; }
-@keyframes wave { 50% { transform: rotate(-22deg); } }
+.hero__mascot { position: absolute; right: -84px; bottom: -34px; width: 146px; }
 .bubble {
   position: absolute; right: -4px; top: -34px; white-space: nowrap; z-index: 2;
   background: var(--parch); color: var(--ink); font: 700 12px var(--fu);
@@ -84,7 +77,8 @@
 /* ═════════ CLUB VIVO ═════════ */
 .club { position: relative; background: radial-gradient(circle at 80% 0, rgba(255, 154, 77, .22), transparent 45%); }
 .club__head { display: flex; align-items: flex-end; justify-content: space-between; gap: 8px; }
-.club__mascot { width: 92px; flex: none; margin-bottom: 18px; }
+.game__mascot { width: 64px; margin: -10px 0; }
+.club__mascot { width: 156px; flex: none; margin-bottom: 18px; }
 .club__bar button { background: none; border: 0; color: var(--parch); font: 700 13px var(--fu); }
 .club__pass { background: linear-gradient(135deg, rgba(255, 154, 77, .22), rgba(200, 168, 124, .08)); position: relative; overflow: hidden; }
 .club__pass::after { content: ''; position: absolute; top: -50%; left: -30%; width: 40%; height: 200%; background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .12), transparent); transform: rotate(20deg); animation: shine 4s ease-in-out infinite; }

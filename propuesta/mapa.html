@@ -14,11 +14,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/mascot.css"/>
 <style>
 :root {
   --ink: #1b1410; --parch: #f7f2eb; --esp: #2c1e16; --caramel: #c8a87c; --ember: #ff9a4d;
   --fd: 'DM Serif Display', serif; --fu: 'Manrope', sans-serif;
-  --ease: cubic-bezier(0.16, 1, 0.3, 1); --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease: cubic-bezier(0.16, 1, 0.3, 1); --spring: cubic-bezier(0.34, 1.56, 0.64, 1); --ease-spring: var(--spring);
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
@@ -37,7 +38,6 @@ button { font-family: inherit; cursor: pointer; border: 0; background: none; col
 @keyframes ring { 0% { transform: scale(.4); opacity: .7; } 100% { transform: scale(1.6); opacity: 0; } }
 @keyframes drop { 0% { transform: translateY(-40px); opacity: 0; } 60% { transform: translateY(6px); opacity: 1; } 100% { transform: none; } }
 @keyframes floatUp { 0% { transform: translateY(0) rotate(0); opacity: 0; } 12% { opacity: .5; } 100% { transform: translateY(-110vh) rotate(var(--r)); opacity: 0; } }
-@keyframes blink { 0%, 94%, 100% { transform: scaleY(1); } 97% { transform: scaleY(.1); } }
 @keyframes wave { 50% { transform: rotate(-22deg); } }
 @keyframes shine { 0%, 55% { left: -60%; } 100% { left: 130%; } }
 @keyframes glowPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(255,154,77,.5), 0 8px 30px rgba(255,154,77,.3); } 50% { box-shadow: 0 0 0 10px rgba(255,154,77,0), 0 8px 40px rgba(255,154,77,.55); } }
@@ -104,14 +104,11 @@ button { font-family: inherit; cursor: pointer; border: 0; background: none; col
 
 /* WhatsApp + mascota */
 .cta { margin-top: 36px; position: relative; padding: 22px 20px 20px; border-radius: 26px; background: linear-gradient(135deg, rgba(37,211,102,.22), rgba(37,211,102,.06)); border: 1px solid rgba(37,211,102,.4); display: flex; align-items: center; gap: 14px; }
-.cta .mascot { width: 70px; flex: none; overflow: visible; animation: float 2.4s ease-in-out infinite; --px: 0; --py: 0; }
+.cta .mascot { width: 124px; flex: none; margin: -14px -8px -14px -12px; }
 .cta__t { flex: 1; }
 .cta__t b { display: block; font-family: var(--fd); font-weight: 400; font-size: 20px; line-height: 1.2; }
 .cta__t span { font-size: 12px; opacity: .7; }
 .cta__wa { margin-top: 10px; display: inline-flex; align-items: center; gap: 8px; padding: 11px 16px; border-radius: 14px; background: #25d366; color: #05381b; font-weight: 800; font-size: 13px; }
-.m-pupil { transform: translate(calc(var(--px) * 3.5px), calc(var(--py) * 3.5px)); }
-.m-eyes { transform-box: fill-box; transform-origin: center; animation: blink 4.5s infinite; }
-.m-wave { transform-box: fill-box; transform-origin: 0 100%; animation: wave 1.6s ease-in-out infinite; }
 
 .foot { margin-top: 40px; text-align: center; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.08); }
 .foot__name { font-family: var(--fd); font-size: 20px; }
@@ -124,22 +121,6 @@ button { font-family: inherit; cursor: pointer; border: 0; background: none; col
 </style>
 </head>
 <body>
-
-<!-- Mascota Soulito (misma del sitio principal) -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
-  <symbol id="soulito" viewBox="0 0 100 120">
-    <ellipse cx="50" cy="113" rx="24" ry="4.5" fill="#000" opacity=".28"/>
-    <g class="m-wave"><path d="M84 76c12-2 14-14 8-22" stroke="#6b3f22" stroke-width="7" stroke-linecap="round" fill="none"/></g>
-    <path d="M16 76C4 74 2 62 8 56" stroke="#6b3f22" stroke-width="7" stroke-linecap="round" fill="none"/>
-    <path d="M50 8C24 8 14 38 14 66c0 30 16 46 36 46s36-16 36-46C86 38 76 8 50 8z" fill="#6b3f22"/>
-    <ellipse cx="33" cy="38" rx="7" ry="15" fill="#fff" opacity=".14" transform="rotate(14 33 38)"/>
-    <path d="M50 9C45 20 55 28 50 38" stroke="#3e2210" stroke-width="4" fill="none" stroke-linecap="round"/>
-    <path d="M50 9c4-8 14-10 20-6-3 7-12 9-20 6z" fill="#4f9d4a"/>
-    <g class="m-eyes"><circle cx="37" cy="68" r="9.5" fill="#fff"/><circle cx="63" cy="68" r="9.5" fill="#fff"/>
-      <circle class="m-pupil" cx="37" cy="68" r="5" fill="#1b1410"/><circle class="m-pupil" cx="63" cy="68" r="5" fill="#1b1410"/></g>
-    <circle cx="27" cy="83" r="5" fill="#ff8a7a" opacity=".65"/><circle cx="73" cy="83" r="5" fill="#ff8a7a" opacity=".65"/>
-    <path d="M42 84q8 9 16 0" stroke="#1b1410" stroke-width="3" fill="none" stroke-linecap="round"/>
-  </symbol></defs></svg>
 
 <div class="fx" id="fx" aria-hidden="true"></div>
 
@@ -206,9 +187,9 @@ button { font-family: inherit; cursor: pointer; border: 0; background: none; col
   </div>
 
   <div class="cta reveal">
-    <svg class="mascot" viewBox="0 0 100 120"><use href="#soulito"/></svg>
+    <i class="mascot" data-mood="saluda"></i>
     <div class="cta__t">
-      <b>¿Te perdiste? Soulito te guía</b>
+      <b>¿Te perdiste? Soul te guía</b>
       <span>Escríbenos y te damos indicaciones.</span><br>
       <a class="cta__wa" href="https://wa.me/573203678524?text=Hola!%20Necesito%20indicaciones%20para%20llegar%20a%20Soul%20Experience" target="_blank" rel="noopener">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
@@ -232,13 +213,6 @@ const rnd = (a, b) => a + Math.random() * (b - a);
 document.getElementById('fx').innerHTML = Array.from({ length: 14 }, (_, i) =>
   `<span style="--x:${rnd(2, 96)}%;--s:${rnd(14, 28)}px;--d:${rnd(10, 18)}s;--dl:${-rnd(0, 14)}s;--r:${rnd(-200, 200)}deg">${['☕', '✦', '🍪', '🍫', '✦', '🫘'][i % 6]}</span>`).join('');
 
-// los ojos de Soulito siguen el puntero
-document.addEventListener('pointermove', e => {
-  document.querySelectorAll('.mascot').forEach(m => {
-    const r = m.getBoundingClientRect(), dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height / 2), d = Math.hypot(dx, dy) || 1;
-    m.style.setProperty('--px', dx / d); m.style.setProperty('--py', dy / d);
-  });
-});
 
 // aparecer al hacer scroll
 const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .15 });
@@ -249,5 +223,6 @@ function copyAddr() {
   (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(ok, () => { prompt('Copia la dirección:', t); });
 }
 </script>
+<script src="js/mascot.js"></script>
 </body>
 </html>
