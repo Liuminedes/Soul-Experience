@@ -37,15 +37,6 @@
   </div>
 
 
-  <!-- Símbolos del minijuego (la mascota es CSS: css/mascot.css) -->
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
-    <!-- granos del minijuego: normal, quemado y dorado -->
-    <symbol id="bean" viewBox="0 0 40 52"><ellipse cx="20" cy="26" rx="16" ry="23" fill="#7a4a2a" transform="rotate(18 20 26)"/><ellipse cx="14" cy="16" rx="4" ry="9" fill="#fff" opacity=".2" transform="rotate(18 14 16)"/><path d="M12 6c10 10-8 20 4 28s8 12 12 12" stroke="#3e2210" stroke-width="3" fill="none" stroke-linecap="round" transform="rotate(8 20 26)"/></symbol>
-    <symbol id="bean-bad" viewBox="0 0 40 52"><ellipse cx="20" cy="30" rx="15" ry="20" fill="#2a2420" transform="rotate(18 20 30)"/><path d="M12 14c10 10-8 18 4 26" stroke="#0e0b09" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M20 12c-7-5-3-11 0-12 0 5 8 6 5 12-1 2-4 2-5 0z" fill="#ff6a2a"/><path d="M20 12c-3-2-1-5 0-6 1 2 3 3 2 5z" fill="#ffd23a"/></symbol>
-    <symbol id="bean-gold" viewBox="0 0 40 52"><ellipse cx="20" cy="26" rx="16" ry="23" fill="#f5b93a" transform="rotate(18 20 26)"/><ellipse cx="14" cy="16" rx="4" ry="9" fill="#fff" opacity=".55" transform="rotate(18 14 16)"/><path d="M12 6c10 10-8 20 4 28s8 12 12 12" stroke="#b8741a" stroke-width="3" fill="none" stroke-linecap="round" transform="rotate(8 20 26)"/><path d="M34 4l1.5 4 4 1.5-4 1.5L34 15l-1.5-4-4-1.5 4-1.5z" fill="#fff"/></symbol>
-    <symbol id="cup" viewBox="0 0 80 60"><path d="M12 14h48v20c0 12-10 22-24 22S12 46 12 34z" fill="#f7f2eb"/><path d="M60 20h6c8 0 8 16 0 16h-6" stroke="#f7f2eb" stroke-width="5" fill="none"/><ellipse cx="36" cy="14" rx="24" ry="5" fill="#6b3f22"/><ellipse cx="36" cy="58" rx="30" ry="2" fill="#000" opacity=".25"/></symbol></defs></svg>
-
-
   <!-- ═══════════ LANDING PAGE ═══════════ -->
   <div id="view-landing" class="view active">
     <div class="landing">
@@ -86,10 +77,10 @@
           </button>
 
           <!-- 1b. Club Soul -->
-          <button class="landing__btn landing__btn--club" onclick="go('club')">
+          <a class="landing__btn landing__btn--club" href="https://soulexp-geniuslink.pages.dev/#club">
             <span class="landing__btn-icon">✦</span>
-            Club Soul · Tu Pasaporte
-          </button>
+            Únete al Club Soul
+          </a>
 
           <!-- 2. Ubicación -->
           <a class="landing__btn landing__btn--location" href="mapa.html">
@@ -117,6 +108,8 @@
             📞 +57 320 367 8524
           </div>
         </div>
+
+        <a class="landing__review" href="https://soulexp-geniuslink.pages.dev/#opiniones">⭐ ¿Ya nos visitaste? Califica tu experiencia</a>
 
         <div class="landing__divider"></div>
 
@@ -181,7 +174,7 @@
         </span>
       </a>
 
-      <button class="social__club" onclick="closeSocials();go('club')">✦ Gana sellos en el Club Soul</button>
+      <a class="social__club" href="https://soulexp-geniuslink.pages.dev/#club">✦ Únete al Club Soul</a>
     </div>
   </div>
 
@@ -227,6 +220,13 @@
       </div>
     </div>
 
+    <!-- Opinión: al final del menú, cuando la persona ya pidió y sigue mirando -->
+    <a class="review-card" href="https://soulexp-geniuslink.pages.dev/#opiniones">
+      <i class="mascot" data-mood="curiosa"></i>
+      <span class="review-card__t"><b>¿Qué tal tu experiencia?</b><small>Cuéntanos tu favorito de hoy · 1 minuto</small></span>
+      <span class="review-card__go">⭐</span>
+    </a>
+
     <!-- Contact footer -->
     <footer class="contact">
       <p class="contact__name">Soul Experience</p>
@@ -247,42 +247,6 @@
         <a class="contact__admin" href="/admin" target="_blank" style="text-decoration:none;display:inline-block;">Administrar menú</a>
       </div>
     </footer>
-  </div>
-
-
-  <!-- ═══════════ CLUB SOUL ═══════════ -->
-  <div id="view-club" class="view">
-    <div class="club">
-      <div class="club__bar">
-        <button class="menu-home__back-btn" onclick="go('landing')">← Inicio</button>
-        <span class="club__badge">Club Soul</span>
-      </div>
-      <div class="club__head">
-        <div>
-          <h1 class="club__title">Tu Pasaporte<br><em>de Sabores</em></h1>
-          <p class="club__sub">Juega · Colecciona · Pertenece</p>
-        </div>
-        <i class="mascot club__mascot" data-mood="feliz"></i>
-      </div>
-
-      <div id="club-passport"></div>
-
-      <h2 class="club__h2">Minijuegos</h2>
-      <div id="club-games" class="gamelist"></div>
-    </div>
-  </div>
-
-  <!-- ═══════════ PÁGINA DE MINIJUEGO ═══════════ -->
-  <div id="view-game" class="view">
-    <div class="club" id="game-page">
-      <div class="club__bar">
-        <button class="menu-home__back-btn" onclick="go('club')">← Minijuegos</button>
-        <span class="club__badge">Club Soul</span>
-      </div>
-      <div id="gp-hero" class="gp__hero"></div>
-      <div id="gp-stats"></div>
-      <div id="gp-body" class="club__card"></div>
-    </div>
   </div>
 
 
@@ -339,11 +303,11 @@
 
   <!-- Script -->
   <!-- compañera del menú: reacciona a lo que haces -->
-  <div id="buddy" class="buddy"><span class="bubble" id="buddy-say"></span><i class="mascot" data-mood="feliz"></i></div>
+  <div id="buddy" class="buddy"><a class="bubble" id="buddy-say"></a><i class="mascot" data-mood="feliz"></i></div>
 
   <script src="js/mascot.js"></script>
   <script src="js/app.js"></script>
-  <script src="js/club.js"></script>
+  <script src="js/vida.js"></script>
 
 </body>
 </html>

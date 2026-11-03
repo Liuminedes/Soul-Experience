@@ -74,29 +74,6 @@
 #view-landing .landing__actions > :nth-child(3) { animation: rise .7s var(--ease) .75s both; }
 #view-landing .landing__actions > :nth-child(4) { animation: rise .7s var(--ease) .85s both; }
 
-/* ═════════ CLUB VIVO ═════════ */
-.club { position: relative; background: radial-gradient(circle at 80% 0, rgba(255, 154, 77, .22), transparent 45%); }
-.club__head { display: flex; align-items: flex-end; justify-content: space-between; gap: 8px; }
-.game__mascot { width: 64px; margin: -10px 0; }
-.club__mascot { width: 156px; flex: none; margin-bottom: 18px; }
-.club__bar button { background: none; border: 0; color: var(--parch); font: 700 13px var(--fu); }
-.club__pass { background: linear-gradient(135deg, rgba(255, 154, 77, .22), rgba(200, 168, 124, .08)); position: relative; overflow: hidden; }
-.club__pass::after { content: ''; position: absolute; top: -50%; left: -30%; width: 40%; height: 200%; background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .12), transparent); transform: rotate(20deg); animation: shine 4s ease-in-out infinite; }
-.club__card.swap { animation: slideIn .45s var(--ease) both; }
-@keyframes slideIn { from { opacity: 0; transform: translateX(24px); } }
-.club__prog { height: 6px; border-radius: 9px; background: rgba(255, 255, 255, .1); overflow: hidden; }
-.club__prog i { display: block; height: 100%; background: linear-gradient(90deg, #ff9a4d, #ffcf8a); transition: width .5s var(--ease); }
-.club__opt:active { transform: scale(.97); background: rgba(255, 154, 77, .25); }
-.club__result span { animation: pop .7s var(--ease-spring) both; display: inline-block; font-size: 56px; }
-
-/* minijuego */
-.game__area { position: relative; height: 270px; border-radius: 16px; overflow: hidden; background: radial-gradient(circle at 50% 100%, rgba(255, 154, 77, .25), rgba(0, 0, 0, .35)); border: 1px solid rgba(200, 168, 124, .25); touch-action: manipulation; user-select: none; }
-.game__hud { display: flex; justify-content: space-between; font: 800 14px var(--fu); color: var(--caramel); }
-.bean { position: absolute; top: -50px; left: var(--x); font-size: 34px; line-height: 1; padding: 6px; cursor: pointer; animation: fall var(--d) linear forwards; }
-@keyframes fall { to { transform: translateY(330px) rotate(var(--r)); } }
-.bean.hit { animation: hit .3s forwards; }
-@keyframes hit { to { transform: scale(1.8); opacity: 0; } }
-
 /* confeti */
 .confetti { position: fixed; top: 40%; left: 50%; width: 9px; height: 14px; z-index: 1000; pointer-events: none; background: var(--c); animation: conf 1.3s cubic-bezier(.1, .7, .3, 1) forwards; }
 @keyframes conf { to { transform: translate(var(--dx), var(--dy)) rotate(var(--r)); opacity: 0; } }

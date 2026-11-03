@@ -83,3 +83,17 @@
 #view-menu .pizza-hero, #view-menu .topping-section { background: rgba(255, 255, 255, .07); border: 1px solid rgba(255, 255, 255, .1); }
 #view-menu .pizza-hero *, #view-menu .topping-section * { color: var(--parch); }
 #view-menu .topping-chip { background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .12); }
+
+/* tarjeta de opinión al final del menú */
+.review-card {
+  position: relative; z-index: 1; display: flex; align-items: center; gap: 12px; max-width: 460px; width: calc(100% - 32px); margin: 8px auto 0;
+  padding: 14px 18px 14px 10px; border-radius: 22px; color: var(--parch); text-decoration: none;
+  background: linear-gradient(120deg, rgba(255, 207, 138, .22), rgba(200, 168, 124, .08)); border: 1px solid rgba(255, 207, 138, .45);
+}
+.review-card .mascot { width: 84px; flex: none; margin: -18px 0 -10px; }
+.review-card__t { flex: 1; display: flex; flex-direction: column; gap: 3px; }
+.review-card__t b { font: 400 20px/1.15 var(--fd); }
+.review-card__t small { font-size: 12px; opacity: .75; }
+.review-card__go { font-size: 22px; animation: float 2.4s ease-in-out infinite; }
+.landing__review { display: block; text-align: center; margin: 14px 0 0; font: 700 13px var(--fu); color: var(--caramel); text-decoration: none; }
+#buddy-say[href] { cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }

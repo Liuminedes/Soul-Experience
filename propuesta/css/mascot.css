@@ -22,7 +22,8 @@
 
 /* compañera flotante del menú */
 .buddy { position: fixed; right: 4px; bottom: 4px; width: 136px; z-index: 40; display: none; }
-.buddy.on { display: block; animation: rise .5s var(--ease) both; }
+.buddy.on { display: block; animation: rise .5s var(--ease) both; transition: transform .4s var(--ease), opacity .4s; }
+.buddy.away { animation: none; transform: translateX(120%); opacity: 0; pointer-events: none; }
 .buddy .bubble { right: 14px; top: -22px; }
 .buddy .bubble:empty { display: none; }
 .pm__mascot { position: absolute; left: 0; bottom: -18px; width: 146px; z-index: 2; }
