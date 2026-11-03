@@ -1,10 +1,10 @@
 /* Mascota Soul: gata carey (dibujo aprobado por la clienta). <i class="mascot" data-mood="…"></i>
-   Gestos (data-mood) = imágenes en assets/mascota/<gesto>.webp, generadas con propuesta/tools/gen-mascota.mjs:
+   Gestos (data-mood) = imágenes en assets/mascota/<gesto>.webp, generadas con tools/gen-mascota.mjs:
    feliz, saluda, celebra, curiosa, lentes, traviesa, sorprendida, enojadita, dormilona. */
 const MOODS = ['feliz', 'saluda', 'celebra', 'curiosa', 'lentes', 'traviesa', 'sorprendida', 'enojadita', 'dormilona'];
 
 // precarga para que el cambio de gesto no parpadee
-addEventListener('load', () => MOODS.forEach(m => { new Image().src = new URL(`../assets/mascota/${m}.webp`, location.href).href; }));
+addEventListener('load', () => MOODS.forEach(m => { new Image().src = new URL(`assets/mascota/${m}.webp`, location.href).href; }));
 
 // gesto temporal en todas las mascotas; cada una vuelve a su gesto base (data-base) pasados ms
 function mood(m, ms = 1400) {

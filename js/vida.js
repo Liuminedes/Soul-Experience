@@ -1,4 +1,4 @@
-/* Vida de la propuesta: partículas, mascota, confeti, sugerencias y enlaces al Club y a opiniones */
+/* Vida del sitio: partículas, mascota, confeti, sugerencias y enlaces al Club y a opiniones */
 const CLUB_URL = 'https://soulexp-geniuslink.pages.dev/#club', OPINIONES_URL = 'https://soulexp-geniuslink.pages.dev/#opiniones';
 
 const _go = go;

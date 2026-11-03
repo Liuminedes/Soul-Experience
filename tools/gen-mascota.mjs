@@ -1,12 +1,12 @@
 // Genera las poses de la mascota a partir del dibujo aprobado (assets/mascota/referencia.webp).
-// Uso:  node propuesta/tools/gen-mascota.mjs            → genera las que falten
-//       node propuesta/tools/gen-mascota.mjs lentes feliz → regenera esas
+// Uso:  node tools/gen-mascota.mjs            → genera las que falten
+//       node tools/gen-mascota.mjs lentes feliz → regenera esas
 // Clave: OPENAI_API_KEY en el entorno o en .env de la raíz (ignorado por git).
 // Originales 1024px en assets/mascota/hd/. La web usa versiones recortadas y livianas:
 //   sharp(hd).trim().resize(360, 360, { fit: "inside" }).webp({ quality: 82 }) → assets/mascota/<gesto>.webp
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
 
-const ROOT = new URL('../../', import.meta.url);
+const ROOT = new URL('../', import.meta.url);
 const OUT = new URL('assets/mascota/', ROOT), HD = new URL('hd/', OUT);
 mkdirSync(HD, { recursive: true });
 const env = existsSync(new URL('.env', ROOT)) ? readFileSync(new URL('.env', ROOT), 'utf8') : '';

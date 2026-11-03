@@ -21,6 +21,11 @@
 
   <!-- Styles -->
   <link rel="stylesheet" href="css/styles.css"/>
+  <link rel="stylesheet" href="css/club.css"/>
+  <link rel="stylesheet" href="css/mascot.css"/>
+  <link rel="stylesheet" href="css/club-live.css"/>
+  <link rel="stylesheet" href="css/menu-live.css"/>
+  <link rel="stylesheet" href="css/ui-live.css"/>
 </head>
 <body>
 
@@ -36,22 +41,29 @@
     <div class="landing">
       <div class="landing__deco-line"></div>
       <div class="landing__deco-circle"></div>
+      <div class="fx" id="fx" aria-hidden="true"></div>
 
       <div class="landing__inner">
-        <!-- Logo -->
-        <div class="landing__logo">
-          <img src="assets/Soul_Experience.png" alt="Soul Experience" class="landing__logo-img" />
+        <!-- Logo + anillo giratorio + mascota -->
+        <div class="hero">
+          <svg class="hero__ring" viewBox="0 0 200 200" aria-hidden="true">
+            <defs><path id="ringp" d="M100,100 m-82,0 a82,82 0 1,1 164,0 a82,82 0 1,1 -164,0"/></defs>
+            <text><textPath href="#ringp">BUEN CAFÉ ✦ BUENA GENTE ✦ GRANDES HISTORIAS ✦ </textPath></text>
+          </svg>
+          <img src="assets/Soul_Experience.png" alt="Soul Experience" class="hero__logo" />
+          <div class="hero__mascot">
+            <span class="bubble" id="bubble">¡Hola! 👋</span>
+            <i class="mascot" data-mood="saluda"></i>
+          </div>
         </div>
 
         <!-- Brand info -->
         <h1 class="landing__name">Soul Experience</h1>
         <p class="landing__tagline">Café y bebidas que conectan</p>
-        <div class="landing__info">
-          <span>☕ Infusiones · Cacao · Pizza Artesanal</span>
-          <span>🍺 Cervezas Importadas & Artesanales</span>
-          <span>🍰 Vegano · Sin Gluten · Sin Azúcar</span>
-          <span>🐾 Pet Friendly</span>
-        </div>
+        <div class="ticker" aria-hidden="true"><div class="ticker__in">
+          <span>☕ Café de origen</span><span>🍕 Pizza artesanal</span><span>🍫 Cacao 75%</span><span>🍺 Cervezas artesanales</span><span>🌱 Vegano · Sin gluten</span><span>🐾 Pet friendly</span>
+          <span>☕ Café de origen</span><span>🍕 Pizza artesanal</span><span>🍫 Cacao 75%</span><span>🍺 Cervezas artesanales</span><span>🌱 Vegano · Sin gluten</span><span>🐾 Pet friendly</span>
+        </div></div>
 
         <!-- 3 Action Buttons -->
         <div class="landing__actions">
@@ -62,6 +74,12 @@
             </span>
             Ver Menú Digital
           </button>
+
+          <!-- 1b. Club Soul -->
+          <a class="landing__btn landing__btn--club" href="https://soulexp-geniuslink.pages.dev/#club">
+            <span class="landing__btn-icon">✦</span>
+            Únete al Club Soul
+          </a>
 
           <!-- 2. Ubicación -->
           <a class="landing__btn landing__btn--location" href="mapa.html">
@@ -90,6 +108,8 @@
           </div>
         </div>
 
+        <a class="landing__review" href="https://soulexp-geniuslink.pages.dev/#opiniones">⭐ ¿Ya nos visitaste? Califica tu experiencia</a>
+
         <div class="landing__divider"></div>
 
         <div class="landing__footer">
@@ -107,8 +127,9 @@
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
 
-      <h2 class="modal__title">Síguenos</h2>
-      <p class="modal__sub">Conecta con nosotros en redes</p>
+      <i class="mascot social__mascot" data-mood="saluda"></i>
+      <h2 class="modal__title">Únete a la <em>comunidad</em></h2>
+      <p class="modal__sub">Buen café · Buena gente · Grandes historias</p>
 
       <!-- WhatsApp -->
       <a class="social-link social-link--whatsapp" href="https://wa.me/573203678524" target="_blank">
@@ -151,6 +172,8 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </span>
       </a>
+
+      <a class="social__club" href="https://soulexp-geniuslink.pages.dev/#club">✦ Únete al Club Soul</a>
     </div>
   </div>
 
@@ -163,6 +186,7 @@
 
   <!-- ═══════════ MENU VIEW ═══════════ -->
   <div id="view-menu" class="view">
+    <div class="fx fx--fixed" id="fx2" aria-hidden="true"></div>
     <!-- Home: category cards -->
     <div id="home-screen">
       <div class="menu-home">
@@ -176,6 +200,8 @@
             Inicio
           </button>
         </div>
+        <div id="suggest" class="suggest"></div>
+        <h2 class="menu-home__q">¿Qué se te antoja <em>hoy?</em></h2>
         <div id="cat-cards"></div>
       </div>
     </div>
@@ -192,6 +218,13 @@
         <div id="detail-items"></div>
       </div>
     </div>
+
+    <!-- Opinión: al final del menú, cuando la persona ya pidió y sigue mirando -->
+    <a class="review-card" href="https://soulexp-geniuslink.pages.dev/#opiniones">
+      <i class="mascot" data-mood="curiosa"></i>
+      <span class="review-card__t"><b>¿Qué tal tu experiencia?</b><small>Cuéntanos tu favorito de hoy · 1 minuto</small></span>
+      <span class="review-card__go">⭐</span>
+    </a>
 
     <!-- Contact footer -->
     <footer class="contact">
@@ -268,7 +301,12 @@
   </script>
 
   <!-- Script -->
+  <!-- compañera del menú: reacciona a lo que haces -->
+  <div id="buddy" class="buddy"><a class="bubble" id="buddy-say"></a><i class="mascot" data-mood="feliz"></i></div>
+
+  <script src="js/mascot.js"></script>
   <script src="js/app.js"></script>
+  <script src="js/vida.js"></script>
 
 </body>
 </html>

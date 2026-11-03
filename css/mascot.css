@@ -1,18 +1,18 @@
 /* Mascota Soul: una imagen por gesto (assets/mascota/<gesto>.webp) + animación de pose. */
 .mascot {
   display: block; position: relative; aspect-ratio: 1; cursor: pointer;
-  background: url(../../assets/mascota/feliz.webp) center bottom / contain no-repeat;
+  background: url(../assets/mascota/feliz.webp) center bottom / contain no-repeat;
   filter: drop-shadow(0 8px 10px rgba(0, 0, 0, .4)); transform-origin: 50% 100%;
   animation: bob 2.6s ease-in-out infinite;
 }
-.mascot[data-mood="saluda"] { background-image: url(../../assets/mascota/saluda.webp); }
-.mascot[data-mood="celebra"] { background-image: url(../../assets/mascota/celebra.webp); animation: jump .5s ease-in-out 3; }
-.mascot[data-mood="curiosa"] { background-image: url(../../assets/mascota/curiosa.webp); }
-.mascot[data-mood="lentes"] { background-image: url(../../assets/mascota/lentes.webp); animation: hop .45s var(--ease-spring); }
-.mascot[data-mood="traviesa"] { background-image: url(../../assets/mascota/traviesa.webp); }
-.mascot[data-mood="sorprendida"] { background-image: url(../../assets/mascota/sorprendida.webp); animation: hop .45s var(--ease-spring); }
-.mascot[data-mood="enojadita"] { background-image: url(../../assets/mascota/enojadita.webp); animation: shake .35s 3; }
-.mascot[data-mood="dormilona"] { background-image: url(../../assets/mascota/dormilona.webp); animation: breathe 3.2s ease-in-out infinite; }
+.mascot[data-mood="saluda"] { background-image: url(../assets/mascota/saluda.webp); }
+.mascot[data-mood="celebra"] { background-image: url(../assets/mascota/celebra.webp); animation: jump .5s ease-in-out 3; }
+.mascot[data-mood="curiosa"] { background-image: url(../assets/mascota/curiosa.webp); }
+.mascot[data-mood="lentes"] { background-image: url(../assets/mascota/lentes.webp); animation: hop .45s var(--ease-spring); }
+.mascot[data-mood="traviesa"] { background-image: url(../assets/mascota/traviesa.webp); }
+.mascot[data-mood="sorprendida"] { background-image: url(../assets/mascota/sorprendida.webp); animation: hop .45s var(--ease-spring); }
+.mascot[data-mood="enojadita"] { background-image: url(../assets/mascota/enojadita.webp); animation: shake .35s 3; }
+.mascot[data-mood="dormilona"] { background-image: url(../assets/mascota/dormilona.webp); animation: breathe 3.2s ease-in-out infinite; }
 
 @keyframes bob { 50% { transform: translateY(-4px); } }
 @keyframes jump { 50% { transform: translateY(-16px) scale(1.04, .96); } }

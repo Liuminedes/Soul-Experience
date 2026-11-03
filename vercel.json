@@ -1,6 +1,7 @@
 {
   "redirects": [
-    { "source": "/propuesta", "destination": "/propuesta/", "permanent": false }
+    { "source": "/propuesta", "destination": "/", "permanent": true },
+    { "source": "/propuesta/:path*", "destination": "/", "permanent": true }
   ],
   "rewrites": [
     { "source": "/mapa", "destination": "/mapa.html" },
