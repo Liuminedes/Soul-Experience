@@ -54,7 +54,7 @@
 /* botones */
 #view-landing .landing__btn { backdrop-filter: blur(10px); }
 #view-landing .landing__btn--menu { background: rgba(255, 255, 255, .08); color: var(--parch); border: 1.5px solid rgba(200, 168, 124, .45); }
-#view-landing .landing__btn--location, #view-landing .landing__btn--social { background: rgba(255, 255, 255, .05); color: var(--parch); border: 1.5px solid rgba(255, 255, 255, .12); }
+#view-landing .landing__btn--review, #view-landing .landing__btn--location, #view-landing .landing__btn--social { background: rgba(255, 255, 255, .05); color: var(--parch); border: 1.5px solid rgba(255, 255, 255, .12); }
 #view-landing .landing__btn:active { transform: scale(.97); }
 .landing__btn--club {
   background: linear-gradient(110deg, #ff9a4d, #c8a87c, #ffcf8a, #ff9a4d) !important; background-size: 250% 100% !important;
@@ -73,6 +73,7 @@
 #view-landing .landing__actions > :nth-child(2) { animation: gradMove 5s linear infinite, glowPulse 2.2s ease-in-out infinite, rise .7s var(--ease) .65s both; }
 #view-landing .landing__actions > :nth-child(3) { animation: rise .7s var(--ease) .75s both; }
 #view-landing .landing__actions > :nth-child(4) { animation: rise .7s var(--ease) .85s both; }
+#view-landing .landing__actions > :nth-child(5) { animation: rise .7s var(--ease) .95s both; }
 
 /* confeti */
 .confetti { position: fixed; top: 40%; left: 50%; width: 9px; height: 14px; z-index: 1000; pointer-events: none; background: var(--c); animation: conf 1.3s cubic-bezier(.1, .7, .3, 1) forwards; }

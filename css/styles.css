@@ -197,12 +197,12 @@ input { font-family: var(--fu); border: none; outline: none; background: none; }
   box-shadow: 0 8px 28px rgba(27, 20, 16, 0.25);
 }
 
-.landing__btn--location {
+.landing__btn--location, .landing__btn--review {
   background: rgba(255, 255, 255, 0.18);
   color: var(--ink);
   border: 1.5px solid rgba(255, 255, 255, 0.2);
 }
-.landing__btn--location:hover {
+.landing__btn--location:hover, .landing__btn--review:hover {
   background: rgba(255, 255, 255, 0.28);
   border-color: rgba(255, 255, 255, 0.3);
   transform: translateY(-2px);
