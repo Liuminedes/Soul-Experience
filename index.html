@@ -17,7 +17,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Lobster&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
 
   <!-- Styles -->
   <link rel="stylesheet" href="css/styles.css"/>
@@ -37,18 +37,34 @@
 
 
   <!-- ═══════════ LANDING PAGE ═══════════ -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="rama" viewBox="0 0 140 140">
+    <path d="M8 132 C40 100 70 80 132 10" fill="none" stroke="#7a5236" stroke-width="3" stroke-linecap="round"/>
+    <g fill="#5f8a3a"><ellipse cx="34" cy="96" rx="20" ry="8" transform="rotate(-70 34 96)"/><ellipse cx="62" cy="58" rx="22" ry="9" transform="rotate(-20 62 58)"/><ellipse cx="96" cy="42" rx="20" ry="8" transform="rotate(-75 96 42)"/><ellipse cx="118" cy="14" rx="16" ry="7" transform="rotate(-15 118 14)"/></g>
+    <g fill="#7ea54f"><ellipse cx="58" cy="94" rx="18" ry="7" transform="rotate(10 58 94)"/><ellipse cx="86" cy="72" rx="18" ry="7" transform="rotate(25 86 72)"/></g>
+    <g fill="#b8322a"><circle cx="46" cy="80" r="6"/><circle cx="54" cy="74" r="5.5"/><circle cx="80" cy="54" r="6"/><circle cx="104" cy="30" r="5"/></g>
+    <g fill="#e0563f"><circle cx="40" cy="74" r="5"/><circle cx="88" cy="50" r="5"/></g>
+  </symbol>
+      </svg>
   <div id="view-landing" class="view active">
     <div class="landing">
       <div class="landing__deco-line"></div>
       <div class="landing__deco-circle"></div>
       <div class="fx" id="fx" aria-hidden="true"></div>
+      
+      <svg class="rama rama--tl" aria-hidden="true"><use href="#rama"/></svg>
+      <svg class="rama rama--tr" aria-hidden="true"><use href="#rama"/></svg>
+      <svg class="rama rama--ml" aria-hidden="true"><use href="#rama"/></svg>
+      <svg class="rama rama--br" aria-hidden="true"><use href="#rama"/></svg>
+      <svg class="rama rama--bl" aria-hidden="true"><use href="#rama"/></svg>
+      <svg class="rama rama--mr" aria-hidden="true"><use href="#rama"/></svg>
 
       <div class="landing__inner">
         <!-- Logo + anillo giratorio + mascota -->
         <div class="hero">
           <svg class="hero__ring" viewBox="0 0 200 200" aria-hidden="true">
             <defs><path id="ringp" d="M100,100 m-82,0 a82,82 0 1,1 164,0 a82,82 0 1,1 -164,0"/></defs>
-            <text><textPath href="#ringp">BUEN CAFÉ ✦ BUENA GENTE ✦ GRANDES HISTORIAS ✦ </textPath></text>
+            <text><textPath href="#ringp" textLength="512" lengthAdjust="spacing">BUEN CAFÉ ✦ MOMENTOS INOLVIDABLES ✦ ANTOJOS ARTESANALES ✦ PARA TODA LA FAMILIA ✦</textPath></text>
           </svg>
           <img src="assets/Soul_Experience.png" alt="Soul Experience" class="hero__logo" />
           <div class="hero__mascot">
@@ -59,10 +75,10 @@
 
         <!-- Brand info -->
         <h1 class="landing__name">Soul Experience</h1>
-        <p class="landing__tagline">Café y bebidas que conectan</p>
+        <p class="landing__tagline">Más que un café, somos una experiencia</p>
         <div class="ticker" aria-hidden="true"><div class="ticker__in">
-          <span>☕ Café de origen</span><span>🍕 Pizza artesanal</span><span>🍫 Cacao 75%</span><span>🍺 Cervezas artesanales</span><span>🌱 Vegano · Sin gluten</span><span>🐾 Pet friendly</span>
-          <span>☕ Café de origen</span><span>🍕 Pizza artesanal</span><span>🍫 Cacao 75%</span><span>🍺 Cervezas artesanales</span><span>🌱 Vegano · Sin gluten</span><span>🐾 Pet friendly</span>
+          <span>☕ Café de origen</span><span>🍕 Pizza artesanal</span><span>🍫 Cacao</span><span>🍺 Cervezas artesanales</span><span>🌱 Vegano · Sin gluten · Sin azúcar</span><span>🍵 Té e infusiones</span><span>🐾 Pet friendly</span>
+          <span>☕ Café de origen</span><span>🍕 Pizza artesanal</span><span>🍫 Cacao</span><span>🍺 Cervezas artesanales</span><span>🌱 Vegano · Sin gluten · Sin azúcar</span><span>🍵 Té e infusiones</span><span>🐾 Pet friendly</span>
         </div></div>
 
         <!-- 3 Action Buttons -->
@@ -193,6 +209,8 @@
   <!-- ═══════════ MENU VIEW ═══════════ -->
   <div id="view-menu" class="view">
     <div class="fx fx--fixed" id="fx2" aria-hidden="true"></div>
+    <svg class="rama rama--fix rama--tl" aria-hidden="true"><use href="#rama"/></svg>
+    <svg class="rama rama--fix rama--br" aria-hidden="true"><use href="#rama"/></svg>
     <!-- Home: category cards -->
     <div id="home-screen">
       <div class="menu-home">

@@ -2,12 +2,13 @@
 const CLUB_URL = 'https://soulexp-geniuslink.pages.dev/#club', OPINIONES_URL = 'https://soulexp-geniuslink.pages.dev/#opiniones';
 
 const _go = go;
-go = v => { _go(v); $('buddy').classList.toggle('on', v === 'menu'); if (v === 'menu') { say('¡Hola! Te acompaño 🐾', 'saluda'); invites(); } if (v === 'landing' || v === 'menu') document.body.style.background = '#7a5640'; };
+go = v => { _go(v); $('buddy').classList.toggle('on', v === 'menu'); if (v === 'menu') { say('¡Hola! Te acompaño 🐾', 'saluda'); invites(); } if (v === 'landing' || v === 'menu') document.body.style.background = '#F5EBDD'; };
 
 /* ═══════ Vida: partículas, mascota, confeti ═══════ */
 const rnd = (a, b) => a + Math.random() * (b - a);
 ['fx', 'fx2'].forEach(id => { $(id).innerHTML = Array.from({ length: 16 }, (_, i) =>
-  `<span style="--x:${rnd(2, 96)}%;--s:${rnd(14, 30)}px;--d:${rnd(9, 18)}s;--dl:${-rnd(0, 14)}s;--r:${rnd(-200, 200)}deg">${['☕', '✦', '🍪', '🍫', '✦', '🫘'][i % 6]}</span>`).join(''); });
+  `<span style="--x:${rnd(2, 96)}%;--s:${rnd(14, 30)}px;--d:${rnd(9, 18)}s;--dl:${-rnd(0, 14)}s;--r:${rnd(-200, 200)}deg">${['☕', '✦', '🍪', '🍫', '✦', '🫘'][i % 6]}</span>`).join('') +
+  Array.from({ length: 14 }, () => `<b class="tw" style="left:${rnd(3, 95)}%;top:${rnd(3, 95)}%;--s:${rnd(8, 18)}px;--d:${rnd(1.8, 3.6)}s;--dl:${-rnd(0, 3)}s">✦</b>`).join(''); });
 
 const PHRASES = [['¡Hola! 👋', 'saluda'], ['¿Un flat white? ☕', 'curiosa'], ['Únete al Club Soul ✦', 'traviesa'], ['¿Ya probaste la pizza? 🍕', 'lentes'], ['Hoy toca algo nuevo 🍋', 'sorprendida'], ['¡Eres Soul! 💛', 'celebra']];
 let ph = 0;
