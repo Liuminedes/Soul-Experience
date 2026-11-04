@@ -319,6 +319,37 @@
       font-size: 13px;
       font-weight: 600;
     }
+    .edit-form label { display: block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: rgba(27,20,16,.6); }
+    .edit-form label small { text-transform: none; letter-spacing: 0; font-weight: 500; color: rgba(27,20,16,.45); margin-left: 4px; }
+    .edit-form label > input, .edit-form textarea { margin-top: 4px; }
+    .edit-form textarea { width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid rgba(27,20,16,.2); font: inherit; font-size: 14px; margin-bottom: 10px; outline: none; resize: vertical; }
+    .edit-form textarea:focus { border-color: var(--accent); }
+    .form-half { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    @media (max-width: 600px) { .form-half { grid-template-columns: 1fr; } .item-row { flex-wrap: wrap; } .item-row .item-actions { width: 100%; justify-content: flex-end; margin-top: 6px; } }
+    .item-en { font-size: 12px; color: #888; }
+    .item-opts { font-size: 12px; color: var(--green); margin-top: 4px; line-height: 1.5; }
+    .item-tags { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 4px; }
+    .item-tags span { font-size: 10px; font-weight: 700; background: var(--green-soft); color: var(--green); padding: 2px 8px; border-radius: 8px; }
+
+    /* Chips de ingredientes */
+    .chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 8px; border: 1px solid rgba(27,20,16,.2); border-radius: 10px; background: #fff; margin: 4px 0 12px; }
+    .chip { display: inline-flex; align-items: center; gap: 4px; background: var(--accent-soft); color: var(--esp); font-size: 13px; font-weight: 600; padding: 5px 6px 5px 11px; border-radius: 20px; }
+    .chip button { width: 20px; height: 20px; border-radius: 50%; font-size: 15px; line-height: 1; color: rgba(27,20,16,.5); }
+    .chip button:hover { background: var(--red-soft); color: var(--red); }
+    .chips .chip-in { flex: 1; min-width: 160px; width: auto; border: 0; margin: 0; padding: 5px 6px; font-size: 13px; }
+
+    /* Grupos de la pizza */
+    .tops { margin-top: 18px; padding-top: 14px; border-top: 1.5px solid rgba(27,20,16,.08); }
+    .tops-title { font-weight: 800; font-size: 14px; color: var(--esp); margin-bottom: 10px; }
+    .tops-title small { display: block; font-weight: 500; font-size: 12px; color: rgba(27,20,16,.5); }
+    .top-sec { background: rgba(255,255,255,.6); border-radius: 12px; padding: 12px; margin-bottom: 10px; }
+    .top-head { display: flex; gap: 8px; align-items: center; }
+    .top-ico { font-size: 20px; }
+    .top-head input { flex: 1; min-width: 0; padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(27,20,16,.2); font: inherit; font-weight: 700; font-size: 14px; outline: none; }
+    .top-head .top-note { flex: .7; font-weight: 500; }
+
+    .search { width: 100%; padding: 13px 18px; border-radius: 14px; border: 1.5px solid rgba(255,255,255,.6); background: rgba(255,255,255,.85); font: inherit; font-size: 15px; margin-bottom: 20px; outline: none; }
+    .search:focus { border-color: var(--caramel); }
     .btn-save { background: var(--green); color: #fff; }
     .btn-cancel { background: rgba(27,20,16,0.08); color: var(--ink); }
 
@@ -521,6 +552,8 @@
         </div>
       </section>
 
+      <input id="q" class="search" type="search" placeholder="🔍 Buscar producto, ingrediente o categoría…" oninput="filterAdmin()"/>
+
       <main id="cat-list"></main>
 
       <button class="btn-add-cat" onclick="openCategoryModal()">
@@ -587,6 +620,7 @@
     const $ = id => document.getElementById(id);
     const fmt = n => new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 }).format(n);
     const uid = () => Math.random().toString(36).slice(2, 8);
+    const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
     function showToast(msg) {
       const t = $('toast');
@@ -754,40 +788,49 @@
 
       let html = '';
       menuData.forEach((cat) => {
+        if (!cat.items) cat.items = [];
         html += `
           <div class="cat-box" id="cat-${cat.id}">
             <div class="cat-head">
               <div class="cat-title">
-                <span>${cat.icon || '☕'}</span>
-                <span>${cat.name}</span>
-                <span class="cat-count">${(cat.items || []).length}</span>
+                <span>${esc(cat.icon || '☕')}</span>
+                <span>${esc(cat.name)}</span>
+                <span class="cat-count">${cat.items.length}</span>
               </div>
               <div class="item-actions">
+                <button class="btn-icon" onclick="moveCat('${cat.id}', -1)" title="Subir categoría">↑</button>
+                <button class="btn-icon" onclick="moveCat('${cat.id}', 1)" title="Bajar categoría">↓</button>
                 <button class="btn-icon" onclick="openCategoryModal('${cat.id}')" title="Editar Categoría">✏️</button>
                 <button class="btn-icon del" onclick="deleteCat('${cat.id}')" title="Eliminar Categoría">🗑️</button>
               </div>
             </div>
             <div class="cat-items">
-              ${(cat.items || []).map(item => `
+              ${cat.items.map(item => `
                 <div class="item-row" id="item-${item.id}">
                   <div class="item-info">
-                    <div class="item-name">${item.name}</div>
-                    ${item.nameEn ? `<div style="font-size:12px;color:#888;">${item.nameEn}</div>` : ''}
-                    ${item.desc ? `<div class="item-desc">${item.desc}</div>` : ''}
+                    <div class="item-name">${esc(item.name)}</div>
+                    ${item.nameEn ? `<div class="item-en">${esc(item.nameEn)}</div>` : ''}
+                    ${item.desc ? `<div class="item-desc">${esc(item.desc)}</div>` : ''}
+                    ${item.options ? `<div class="item-opts">🥗 ${esc(item.options.split('|').join(' · '))}</div>` : ''}
+                    ${(item.tags || []).length ? `<div class="item-tags">${item.tags.map(t => `<span>${esc(t)}</span>`).join('')}</div>` : ''}
                   </div>
                   <div class="item-price">${fmt(item.price)}</div>
                   <div class="item-actions">
-                    <button class="btn-icon" onclick="editItemForm('${cat.id}', '${item.id}')">✏️</button>
-                    <button class="btn-icon del" onclick="deleteItem('${cat.id}', '${item.id}')">🗑️</button>
+                    <button class="btn-icon" onclick="moveItem('${cat.id}', '${item.id}', -1)" title="Subir">↑</button>
+                    <button class="btn-icon" onclick="moveItem('${cat.id}', '${item.id}', 1)" title="Bajar">↓</button>
+                    <button class="btn-icon" onclick="editItemForm('${cat.id}', '${item.id}')" title="Editar">✏️</button>
+                    <button class="btn-icon del" onclick="deleteItem('${cat.id}', '${item.id}')" title="Eliminar">🗑️</button>
                   </div>
                 </div>
               `).join('')}
             </div>
             <button class="btn-add-item" onclick="addItemForm('${cat.id}')">+ Agregar Producto</button>
+            ${cat.toppings ? toppingsHtml(cat) : ''}
           </div>
         `;
       });
       $('cat-list').innerHTML = html;
+      filterAdmin();
     }
 
     async function deleteCat(catId) {
@@ -808,75 +851,168 @@
       saveToCloud();
     }
 
-    function addItemForm(catId) {
-      const catBox = document.getElementById('cat-' + catId);
-      const existing = catBox.querySelector('.edit-form');
-      if (existing) existing.remove();
-
-      const form = document.createElement('div');
-      form.className = 'edit-form';
-      form.innerHTML = `
-        <div class="form-duo">
-          <input id="new-item-name" placeholder="Nombre del producto (ej: Latte Vainilla)" autofocus/>
-          <input id="new-item-price" type="number" placeholder="Precio ($)"/>
-        </div>
-        <input id="new-item-desc" placeholder="Descripción breve"/>
-        <div class="form-actions">
-          <button class="btn-cancel" onclick="this.closest('.edit-form').remove()">Cancelar</button>
-          <button class="btn-save" onclick="saveNewItem('${catId}')">Guardar</button>
-        </div>
-      `;
-      catBox.querySelector('.cat-items').appendChild(form);
+    /* ══════ FORMULARIO DE PRODUCTO (crear / editar, todos los campos) ══════ */
+    // Solo un formulario abierto a la vez: los ids f-* son únicos
+    function itemFormHtml(i, catId, itemId) {
+      return `
+        <div class="edit-form">
+          <div class="form-duo">
+            <label>Nombre<input id="f-name" value="${esc(i.name)}" placeholder="Ej: Latte Vainilla"/></label>
+            <label>Precio<input id="f-price" type="number" value="${i.price ?? ''}" placeholder="$"/></label>
+          </div>
+          <label>Nombre en inglés<input id="f-nameEn" value="${esc(i.nameEn)}" placeholder="Ej: Vanilla Latte"/></label>
+          <div class="form-half">
+            <label>Descripción<textarea id="f-desc" rows="2">${esc(i.desc)}</textarea></label>
+            <label>Descripción en inglés<textarea id="f-descEn" rows="2">${esc(i.descEn)}</textarea></label>
+          </div>
+          <label>Etiquetas <small>separadas por coma (vegano, sin gluten, sin azúcar…)</small><input id="f-tags" value="${esc((i.tags || []).join(', '))}"/></label>
+          <label>Ingredientes u opciones para escoger <small>escribe y pulsa Enter · × para quitar · vacío si no aplica</small></label>
+          ${chipsHtml(i.options ? i.options.split('|') : [], 'f-opts')}
+          <div class="form-actions">
+            <button class="btn-cancel" onclick="renderAdmin()">Cancelar</button>
+            <button class="btn-save" onclick="saveItem('${catId}', ${itemId ? `'${itemId}'` : 'null'})">${itemId ? 'Actualizar' : 'Guardar'}</button>
+          </div>
+        </div>`;
     }
 
-    function saveNewItem(catId) {
-      const name = $('new-item-name').value.trim();
-      const price = parseInt($('new-item-price').value) || 0;
-      const desc = $('new-item-desc').value.trim();
-      if (!name || !price) {
-        showToast('Nombre y precio requeridos');
-        return;
-      }
-      const cat = menuData.find(c => c.id === catId);
-      if (cat) {
-        cat.items.push({ id: uid(), name, price, desc, tags: [] });
-        renderAdmin();
-        saveToCloud();
-      }
+    function addItemForm(catId) {
+      renderAdmin();
+      const box = $('cat-' + catId);
+      box.querySelector('.cat-items').insertAdjacentHTML('beforeend', itemFormHtml({}, catId, null));
+      $('f-name').focus();
     }
 
     function editItemForm(catId, itemId) {
-      const cat = menuData.find(c => c.id === catId);
-      const item = cat?.items.find(i => i.id === itemId);
+      renderAdmin();
+      const item = menuData.find(c => c.id === catId)?.items.find(i => i.id === itemId);
       if (!item) return;
-
-      const itemEl = document.getElementById('item-' + itemId);
-      itemEl.innerHTML = `
-        <div class="edit-form" style="width:100%;margin:0;">
-          <div class="form-duo">
-            <input id="edit-name-${item.id}" value="${item.name}"/>
-            <input id="edit-price-${item.id}" type="number" value="${item.price}"/>
-          </div>
-          <input id="edit-desc-${item.id}" value="${item.desc || ''}" placeholder="Descripción"/>
-          <div class="form-actions">
-            <button class="btn-cancel" onclick="renderAdmin()">Cancelar</button>
-            <button class="btn-save" onclick="updateItem('${catId}', '${item.id}')">Actualizar</button>
-          </div>
-        </div>
-      `;
+      const row = $('item-' + itemId);
+      row.outerHTML = itemFormHtml(item, catId, itemId);
+      $('f-name').focus();
     }
 
-    function updateItem(catId, itemId) {
+    function saveItem(catId, itemId) {
       const cat = menuData.find(c => c.id === catId);
-      const item = cat?.items.find(i => i.id === itemId);
-      if (!item) return;
-
-      item.name = document.getElementById('edit-name-' + item.id).value.trim();
-      item.price = parseInt(document.getElementById('edit-price-' + item.id).value) || 0;
-      item.desc = document.getElementById('edit-desc-' + item.id).value.trim();
-
+      if (!cat) return;
+      const name = $('f-name').value.trim();
+      const price = parseInt($('f-price').value) || 0;
+      if (!name || !price) { showToast('Nombre y precio requeridos'); return; }
+      let item = itemId ? cat.items.find(i => i.id === itemId) : null;
+      if (!item) { item = { id: uid() }; cat.items.push(item); }
+      Object.assign(item, {
+        name, price,
+        nameEn: $('f-nameEn').value.trim(),
+        desc: $('f-desc').value.trim(),
+        descEn: $('f-descEn').value.trim(),
+        tags: $('f-tags').value.split(',').map(t => t.trim().toLowerCase()).filter(Boolean),
+      });
+      const opts = chipVals($('f-opts'));
+      if (opts.length) item.options = opts.join('|'); else delete item.options;
       renderAdmin();
       saveToCloud();
+    }
+
+    /* ══════ EDITOR DE INGREDIENTES (chips) ══════ */
+    const chipHtml = v => `<span class="chip" data-v="${esc(v)}">${esc(v.split('|')[0])}<button type="button" onclick="chipDel(this)" aria-label="Quitar">×</button></span>`;
+    const chipsHtml = (list, id, top) => `<div class="chips" ${id ? `id="${id}"` : ''} ${top ? `data-top="${top}"` : ''}>${list.map(chipHtml).join('')}<input class="chip-in" placeholder="+ Agregar ingrediente" onkeydown="chipKey(event)" onblur="chipAdd(this)"/></div>`;
+    // lo escrito sin pulsar Enter entra por el onblur antes del clic en Guardar
+    const chipVals = box => [...box.querySelectorAll('.chip')].map(c => c.dataset.v);
+
+    function chipKey(e) {
+      if (e.key === 'Enter' || e.key === ',') { e.preventDefault(); chipAdd(e.target); }
+      else if (e.key === 'Backspace' && !e.target.value) { const last = e.target.previousElementSibling; if (last) { last.remove(); chipChanged(e.target.parentElement); } }
+    }
+    function chipAdd(inp) {
+      const box = inp.parentElement;
+      const vals = inp.value.split(',').map(v => v.trim()).filter(Boolean)
+        // en productos el separador es "|"; en la pizza "Español|English" (si no ponen inglés se repite el nombre)
+        .map(v => box.dataset.top ? (v.includes('|') ? v.split('|').map(s => s.trim()).join('|') : v + '|' + v) : v.replace(/\|/g, '/'));
+      if (!vals.length) return;
+      inp.insertAdjacentHTML('beforebegin', vals.map(chipHtml).join(''));
+      inp.value = '';
+      chipChanged(box);
+    }
+    function chipDel(btn) { const box = btn.closest('.chips'); btn.parentElement.remove(); chipChanged(box); }
+    // los chips de la pizza se guardan al momento; los del producto al pulsar Guardar/Actualizar
+    function chipChanged(box) {
+      if (!box.dataset.top) return;
+      const [cid, k] = box.dataset.top.split(':');
+      const sec = menuData.find(c => c.id === cid)?.toppings?.[k];
+      if (!sec) return;
+      sec.items = chipVals(box);
+      saveToCloud();
+    }
+
+    /* ══════ GRUPOS DE INGREDIENTES DE LA PIZZA ══════ */
+    function toppingsHtml(cat) {
+      return `<div class="tops">
+        <div class="tops-title">Ingredientes para armar la pizza <small>se guardan solos · "Nombre | English" para poner la traducción</small></div>
+        ${Object.entries(cat.toppings).map(([k, s]) => `
+          <div class="top-sec">
+            <div class="top-head">
+              <span class="top-ico">${esc(s.icon || '•')}</span>
+              <input value="${esc(s.title)}" placeholder="Nombre del grupo" onchange="topSet('${cat.id}','${k}','title',this.value)"/>
+              <input class="top-note" value="${esc(s.note)}" placeholder="Nota (ej: Elige 1)" onchange="topSet('${cat.id}','${k}','note',this.value)"/>
+              <button class="btn-icon del" onclick="topDel('${cat.id}','${k}')" title="Eliminar grupo">🗑️</button>
+            </div>
+            ${chipsHtml(s.items || [], '', cat.id + ':' + k)}
+          </div>`).join('')}
+        <button class="btn-add-item" onclick="topAdd('${cat.id}')">+ Agregar grupo de ingredientes</button>
+      </div>`;
+    }
+    function topSet(cid, k, field, val) {
+      const sec = menuData.find(c => c.id === cid)?.toppings?.[k];
+      if (!sec) return;
+      val = val.trim();
+      // si el inglés era copia del español, se mantiene sincronizado
+      const en = field + 'En';
+      if (!sec[en] || sec[en] === sec[field]) sec[en] = val;
+      sec[field] = val;
+      saveToCloud();
+    }
+    function topAdd(cid) {
+      const cat = menuData.find(c => c.id === cid);
+      cat.toppings['g' + uid()] = { title: 'Nuevo grupo', titleEn: 'Nuevo grupo', icon: '✨', note: '', noteEn: '', items: [] };
+      renderAdmin();
+      saveToCloud();
+    }
+    async function topDel(cid, k) {
+      const ok = await customConfirm('¿Eliminar grupo?', 'Se borrará el grupo y todos sus ingredientes.');
+      if (!ok) return;
+      delete menuData.find(c => c.id === cid).toppings[k];
+      renderAdmin();
+      saveToCloud();
+    }
+
+    /* ══════ ORDEN ══════ */
+    function swap(arr, i, d) {
+      const j = i + d;
+      if (i < 0 || j < 0 || j >= arr.length) return false;
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+      return true;
+    }
+    function moveCat(id, d) {
+      if (swap(menuData, menuData.findIndex(c => c.id === id), d)) { renderAdmin(); saveToCloud(); }
+    }
+    function moveItem(cid, iid, d) {
+      const items = menuData.find(c => c.id === cid).items;
+      if (swap(items, items.findIndex(i => i.id === iid), d)) { renderAdmin(); saveToCloud(); }
+    }
+
+    /* ══════ BUSCADOR ══════ */
+    const norm = s => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+    function filterAdmin() {
+      const q = norm($('q').value.trim());
+      document.querySelectorAll('.cat-box').forEach(box => {
+        const catHit = !q || norm(box.querySelector('.cat-title').textContent).includes(q);
+        let any = catHit;
+        box.querySelectorAll('.item-row').forEach(r => {
+          const hit = catHit || norm(r.textContent).includes(q);
+          r.style.display = hit ? '' : 'none';
+          any = any || hit;
+        });
+        box.style.display = any ? '' : 'none';
+      });
     }
 
     async function initAdmin() {
