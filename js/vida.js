@@ -2,7 +2,7 @@
 const CLUB_URL = 'https://soulexp-geniuslink.pages.dev/#club', OPINIONES_URL = 'https://soulexp-geniuslink.pages.dev/#opiniones';
 
 const _go = go;
-go = v => { _go(v); $('buddy').classList.toggle('on', v === 'menu'); if (v === 'menu') { say('¡Hola! Te acompaño 🐾', 'saluda'); invites(); } if (v === 'landing' || v === 'menu') document.body.style.background = '#1b1410'; };
+go = v => { _go(v); $('buddy').classList.toggle('on', v === 'menu'); if (v === 'menu') { say('¡Hola! Te acompaño 🐾', 'saluda'); invites(); } if (v === 'landing' || v === 'menu') document.body.style.background = '#7a5640'; };
 
 /* ═══════ Vida: partículas, mascota, confeti ═══════ */
 const rnd = (a, b) => a + Math.random() * (b - a);

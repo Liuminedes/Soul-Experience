@@ -1,5 +1,5 @@
 /* ═════════ LANDING VIVA ═════════ */
-#view-landing .landing { background: #1b1410; }
+#view-landing .landing { background: #7a5640; }
 #view-landing .landing::before {
   background:
     radial-gradient(circle at 20% 15%, rgba(255, 154, 77, .38), transparent 42%),

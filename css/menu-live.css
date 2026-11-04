@@ -1,5 +1,5 @@
 /* ═════════ MENÚ VIVO ═════════ */
-#view-menu { background: #1b1410; min-height: 100vh; position: relative; overflow: hidden; }
+#view-menu { background: #7a5640; min-height: 100vh; position: relative; overflow: hidden; }
 #view-menu::before {
   content: ''; position: fixed; inset: 0; pointer-events: none;
   background:
