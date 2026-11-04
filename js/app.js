@@ -182,7 +182,7 @@ function openProduct(catId,itemId){
   const optsHtml=i.options?`<div class="pm__divider"></div><p class="pm__opts-label">Opciones disponibles</p><div class="pm__opts">${i.options.split('|').map(o=>`<span class="pm__opt">${o.trim()}</span>`).join('')}</div>`:'';
   $('product-modal-content').innerHTML=`
     <button class="modal__close" onclick="closeProduct()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-    <div class="pm__hero" style="--c1:${catc(c)[0]};--c2:${catc(c)[1]}"><span>${c.icon}</span><i class="mascot pm__mascot" data-mood="lentes"></i></div>
+    <div class="pm__hero" style="--c1:${catc(c)[0]};--c2:${catc(c)[1]}">${cico(c,'pm__ico')}<i class="mascot pm__mascot" data-mood="lentes"></i></div>
     <div class="pm__cat">${c.name}</div>
     <h2 class="pm__name">${i.name}</h2>
     ${i.nameEn?`<p class="pm__name-en">${i.nameEn}</p>`:''}
@@ -210,12 +210,15 @@ function showHome(){$('home-screen').style.display='block';$('detail-screen').st
 // Colores por categoría (las creadas desde el admin usan la paleta de respaldo)
 const CATC={hot:['#ff9a4d','#b8461b'],cold:['#4dc3ff','#1b5fa8'],frappe:['#d78bff','#6a2fa8'],lemon:['#ffe14d','#7fa800'],shakes:['#ff7eb6','#a8245f'],spirit:['#d9683f','#4a1a14'],filter:['#e0c08a','#7a5530'],wine:['#c2406a','#4a0f26'],sodas:['#4dd6c1','#13705f'],beer:['#f5b93a','#9a5a08'],sweet:['#ff9ec4','#a63d70'],salty:['#f0a35e','#8a4a14'],pizza:['#ef5a4a','#7a1a14'],extras:['#a39482','#4a3f34']};
 const CATF=[['#ff9a4d','#b8461b'],['#4dc3ff','#1b5fa8'],['#d78bff','#6a2fa8'],['#4dd6c1','#13705f']];
+// ilustraciones de categoría (assets/menu/<id>.webp); las categorías nuevas del admin siguen con su emoji
+const CIMG='hot cold frappe lemon shakes spirit filter wine sodas beer sweet salty pizza extras'.split(' ');
+const cico=(c,cls)=>CIMG.includes(c.id)?`<img class="${cls} ico-img" src="assets/menu/${c.id}.webp" alt="">`:`<span class="${cls}">${c.icon}</span>`;
 const catc=c=>CATC[c.id]||CATF[Math.max(0,D.indexOf(c))%CATF.length];
 function renderCatCards(){
   let h='';D.forEach((c,i)=>{
     const[c1,c2]=catc(c);
     h+=`<div class="cat-card${c.isPizza?' cat-card--wide':''}" onclick="openCat('${c.id}')" style="--c1:${c1};--c2:${c2};--i:${i};animation:rise 0.5s var(--ease) ${i*0.05}s both">
-      <span class="cat-card__emoji">${c.icon}</span>
+      ${cico(c,'cat-card__emoji')}
       <div class="cat-card__text"><div class="cat-card__title">${c.name}</div>
       <div class="cat-card__count">${c.items.length} producto${c.items.length!==1?'s':''}</div></div></div>`;
   });$('cat-cards').innerHTML=h;
@@ -227,7 +230,7 @@ function backToHome(){curCat=null;dTag=null;showHome();window.scrollTo(0,0)}
 function renderDetail(){
   const c=D.find(x=>x.id===curCat);if(!c)return backToHome();
   const[c1,c2]=catc(c);$('detail-screen').style.cssText=`--c1:${c1};--c2:${c2}`;
-  $('detail-head').innerHTML=`<div class="detail__head"><span class="detail__icon">${c.icon}</span><div><div class="detail__title">${c.name}</div>${c.nameEn?`<div class="detail__title-en">${c.nameEn}</div>`:''}<div class="detail__line"></div></div></div>`;
+  $('detail-head').innerHTML=`<div class="detail__head">${cico(c,'detail__icon')}<div><div class="detail__title">${c.name}</div>${c.nameEn?`<div class="detail__title-en">${c.nameEn}</div>`:''}<div class="detail__line"></div></div></div>`;
 
   // Pizza special view
   if(c.isPizza && c.toppings){
@@ -235,7 +238,7 @@ function renderDetail(){
     const pi=c.items[0];
     let h=`<div class="pizza-builder" style="animation:rise 0.5s var(--ease) both">
       <div class="pizza-hero">
-        <div class="pizza-hero__emoji">🍕</div>
+        <img class="pizza-hero__emoji ico-img" src="assets/menu/pizza.webp" alt="">
         <div class="pizza-hero__info">
           <h3 class="pizza-hero__title">${pi.name}</h3>
           <p class="pizza-hero__title-en">${pi.nameEn}</p>

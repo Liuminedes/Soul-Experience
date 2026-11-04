@@ -97,3 +97,11 @@
 .review-card__t small { font-size: 12px; opacity: .75; }
 .review-card__go { font-size: 22px; animation: float 2.4s ease-in-out infinite; }
 #buddy-say[href] { cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+
+/* ilustraciones de categoría en lugar de emojis */
+img.ico-img { object-fit: contain; filter: drop-shadow(0 8px 12px rgba(0, 0, 0, .28)); }
+img.cat-card__emoji { width: 92px; height: 92px; margin: -6px 0 0 -6px; }
+.cat-card--wide img.cat-card__emoji { width: 104px; height: 104px; margin-top: -52px; }
+#detail-screen img.detail__icon { width: 96px; height: 96px; flex: none; }
+.pm__hero img.pm__ico { position: relative; z-index: 1; width: 112px; height: 112px; animation: float 2.6s ease-in-out infinite; }
+img.pizza-hero__emoji { width: 120px; height: 120px; display: block; margin: 0 auto; }

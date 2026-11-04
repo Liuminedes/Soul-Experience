@@ -8,28 +8,31 @@
   animation: drift 14s ease-in-out infinite alternate;
 }
 @keyframes drift { to { transform: translate(-4%, 3%) scale(1.12); } }
-#view-landing .landing__name {
-  font: 400 clamp(52px, 14vw, 68px)/1.05 'Lobster', var(--fd); color: #3b2418;
+/* "Bienvenido a" y lema en letra cursiva café con reflejo dorado */
+#view-landing .landing__hi, #view-landing .landing__tagline {
+  font-family: 'Lobster', var(--fd); font-weight: 400; color: #3b2418;
   background: linear-gradient(100deg, #3b2418 30%, #a8743f 45%, #e8bf74 50%, #a8743f 55%, #3b2418 70%) 0 0 / 250% 100%;
   -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 4px 14px rgba(201, 146, 46, .45)); animation: rise .8s var(--ease) .3s both, titleShine 5s linear 1s infinite;
+  filter: drop-shadow(0 3px 10px rgba(201, 146, 46, .4)); animation: rise .8s var(--ease) .3s both, titleShine 5s linear 1s infinite;
 }
+#view-landing .landing__hi { font-size: clamp(44px, 12vw, 58px); line-height: 1.1; margin: 0 0 6px; }
+#view-landing .landing__tagline { font-size: clamp(19px, 5.5vw, 30px); white-space: nowrap; letter-spacing: 0; line-height: 1.2; margin: 4px 0 12px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 @keyframes titleShine { to { background-position: -250% 0; } }
-#view-landing .landing__tagline { color: #8a5a32; font-size: 15px; letter-spacing: .5px; }
 #view-landing .landing__detail-row { color: #5a3f2e; }
 #view-landing .landing__admin-btn { color: rgba(59, 36, 24, .25); }
 #view-landing .landing__divider { background: linear-gradient(90deg, transparent, rgba(59, 36, 24, .2), transparent); }
 #view-landing .landing__deco-line, #view-landing .landing__deco-circle { display: none; }
 
 /* ramas de café en los bordes */
-.rama { position: absolute; width: 130px; height: 130px; pointer-events: none; opacity: .9; animation: sway 6s ease-in-out infinite alternate; }
-.rama--tl { top: -18px; left: -22px; transform: rotate(180deg) scaleX(-1); }
-.rama--tr { top: 120px; right: -30px; width: 100px; height: 100px; transform: rotate(200deg); opacity: .7; }
-.rama--ml { top: 52%; left: -38px; width: 96px; height: 96px; transform: rotate(-10deg); opacity: .65; }
-.rama--br { bottom: -16px; right: -18px; transform: rotate(0deg); }
-.rama--bl { bottom: 18%; left: -30px; width: 110px; height: 110px; transform: rotate(-80deg) scaleX(-1); opacity: .75; }
-.rama--mr { top: 64%; right: -34px; width: 100px; height: 100px; transform: rotate(160deg); opacity: .7; }
-.rama--fix { position: fixed; z-index: 0; opacity: .55; }
+.rama { position: absolute; width: 150px; height: auto; pointer-events: none; filter: drop-shadow(0 6px 10px rgba(59, 36, 24, .22)); animation: sway 6s ease-in-out infinite alternate; }
+.rama--tl { top: -20px; left: -34px; transform: rotate(180deg) scaleX(-1); }
+.rama--tr { top: 64px; right: -50px; width: 110px; transform: rotate(200deg); }
+.rama--ml { top: 50%; left: -120px; width: 200px; transform: rotate(-12deg); }
+.rama--br { bottom: -18px; right: -30px; }
+.rama--bl { bottom: 4%; left: -26px; width: 96px; transform: rotate(-15deg); }
+.rama--mr { top: 70%; right: -120px; width: 200px; transform: rotate(168deg); }
+.rama--fix { position: fixed; z-index: 0; opacity: .75; }
 @keyframes sway { to { translate: 0 4px; rotate: 3deg; } }
 
 /* partículas flotantes */
@@ -74,15 +77,23 @@
 
 /* botones */
 #view-landing .landing__btn { backdrop-filter: blur(10px); }
-#view-landing .landing__btn { box-shadow: 0 6px 18px rgba(59, 36, 24, .14); }
-#view-landing .landing__btn--menu { background: #3b2418; color: #F5EBDD; border: 1.5px solid #3b2418; }
-#view-landing .landing__btn--review { background: #EADBC4; color: #3b2418; border: 1.5px solid rgba(59, 36, 24, .18); }
-#view-landing .landing__btn--location { background: #B5532E; color: #fff; border: 1.5px solid #B5532E; }
-#view-landing .landing__btn--social { background: #6B7A3A; color: #fff; border: 1.5px solid #6B7A3A; }
+/* botones al estilo de las tarjetas del menú: degradado vivo, brillo de color y burbuja decorativa */
+#view-landing .landing__btn {
+  background: linear-gradient(150deg, var(--b1), var(--b2)); color: var(--fg); border: 0; border-radius: 22px;
+  box-shadow: 0 10px 26px color-mix(in srgb, var(--b2) 50%, transparent), inset 0 1px 0 rgba(255, 255, 255, .35);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, var(--ts, .25));
+}
+#view-landing .landing__btn::after { content: ''; inset: auto; width: 110px; height: 110px; border-radius: 50%; right: -30px; bottom: -62px; background: rgba(255, 255, 255, .18); }
+#view-landing .landing__btn-icon { position: relative; z-index: 1; animation: float 3s ease-in-out infinite; }
+#view-landing .landing__btn--menu { --b1: #9a6440; --b2: #3b2418; --fg: #fff; }
+#view-landing .landing__btn--review { --b1: #fff3dc; --b2: #e8c993; --fg: #3b2418; --ts: 0; }
+#view-landing .landing__btn--location { --b1: #f4935f; --b2: #b5482a; --fg: #fff; }
+#view-landing .landing__btn--social { --b1: #a9bd5c; --b2: #5c7230; --fg: #fff; }
 #view-landing .landing__btn:active { transform: scale(.97); }
 .landing__btn--club {
-  background: linear-gradient(110deg, #c9922e, #e0b45c, #f3d38c, #c9922e) !important; background-size: 250% 100% !important;
-  color: var(--ink) !important; font-size: 18px !important; padding: 22px 24px !important;
+  --b2: #d4912a; --fg: #3b2418; --ts: 0;
+  background: linear-gradient(110deg, #f6c453, #d4912a, #ffd97a, #f6c453) 0 0 / 250% 100% !important;
+  color: #3b2418 !important; font-size: 18px !important; padding: 22px 24px !important;
 }
 .landing__btn--club::before {
   content: ''; position: absolute; top: 0; left: -60%; width: 40%; height: 100%;
