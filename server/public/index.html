@@ -429,6 +429,11 @@
       border-color: var(--caramel);
       box-shadow: 0 0 0 3px rgba(200,168,124,0.2);
     }
+    .slug-row { display: flex; align-items: center; gap: 6px; }
+    .slug-row span { font-weight: 700; color: rgba(27,20,16,.55); }
+    .slug-hint { font-size: 11px; color: rgba(27,20,16,.5); margin-top: 4px; }
+    .cat-url { display: block; font-family: var(--fu); font-size: 12px; font-weight: 600; color: var(--accent); margin-top: 2px; }
+    .cat-url:hover { text-decoration: underline; }
     .modal-btns {
       display: flex;
       gap: 10px;
@@ -585,6 +590,11 @@
         <label class="modal-label">Nombre en Inglés (Opcional)</label>
         <input id="modal-cat-name-en" class="modal-input" placeholder="Ej: Cold Drinks" />
       </div>
+      <div class="modal-input-group">
+        <label class="modal-label">Dirección en la web</label>
+        <div class="slug-row"><span>/menu/</span><input id="modal-cat-slug" class="modal-input" placeholder="se crea con el nombre" oninput="this.dataset.touched = 1"/></div>
+        <p class="slug-hint">Cambiarla rompe los links que ya se hayan compartido.</p>
+      </div>
       <div class="modal-btns">
         <button class="modal-btn-cancel" onclick="closeCatModal()">Cancelar</button>
         <button class="modal-btn-confirm" onclick="saveCategoryModal()">Guardar Categoría</button>
@@ -620,6 +630,10 @@
     const $ = id => document.getElementById(id);
     const fmt = n => new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 }).format(n);
     const uid = () => Math.random().toString(36).slice(2, 8);
+    // igual que en la web (js/rutas.js): "Bebidas Frías" → bebidas-frias
+    const slugify = s => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+    const SITE = 'https://soul-experience-cafe.vercel.app';
+    const catSlug = c => c.slug || slugify(c.name);
     const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
     function showToast(msg) {
@@ -651,11 +665,15 @@
         $('modal-cat-name').value = cat ? cat.name : '';
         $('modal-cat-name-en').value = cat ? (cat.nameEn || '') : '';
         initEmojiPicker(cat ? cat.icon : '☕');
+        $('modal-cat-slug').value = cat ? catSlug(cat) : '';
+        $('modal-cat-slug').dataset.touched = 1; // en una categoría existente la dirección no cambia sola
       } else {
         $('modal-cat-title').textContent = 'Nueva Categoría';
         $('modal-cat-name').value = '';
         $('modal-cat-name-en').value = '';
         initEmojiPicker('☕');
+        $('modal-cat-slug').value = '';
+        delete $('modal-cat-slug').dataset.touched;
       }
       $('modal-cat').classList.add('open');
       setTimeout(() => $('modal-cat-name').focus(), 150);
@@ -673,6 +691,10 @@
         showToast('El nombre de la categoría es requerido');
         return;
       }
+      // dirección única: si ya la usa otra categoría se le agrega -2, -3…
+      const base = slugify($('modal-cat-slug').value) || slugify(name) || 'categoria';
+      let slug = base;
+      for (let n = 2; menuData.some(c => c.id !== editingCatId && catSlug(c) === slug); n++) slug = base + '-' + n;
 
       if (editingCatId) {
         const cat = menuData.find(c => c.id === editingCatId);
@@ -680,6 +702,7 @@
           cat.name = name;
           cat.nameEn = nameEn;
           cat.icon = selectedCatEmoji;
+          cat.slug = slug;
         }
       } else {
         menuData.push({
@@ -687,6 +710,7 @@
           name,
           nameEn,
           icon: selectedCatEmoji,
+          slug,
           items: []
         });
       }
@@ -794,7 +818,7 @@
             <div class="cat-head">
               <div class="cat-title">
                 <span>${esc(cat.icon || '☕')}</span>
-                <span>${esc(cat.name)}</span>
+                <span>${esc(cat.name)}<a class="cat-url" href="${SITE}/menu/${catSlug(cat)}" target="_blank" rel="noopener">/menu/${catSlug(cat)}</a></span>
                 <span class="cat-count">${cat.items.length}</span>
               </div>
               <div class="item-actions">
@@ -1023,6 +1047,7 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       $('login-pwd').addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
+      $('modal-cat-name').addEventListener('input', e => { const sl = $('modal-cat-slug'); if (!sl.dataset.touched) sl.value = slugify(e.target.value); });
       if (token) {
         initAdmin();
       }

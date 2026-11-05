@@ -212,7 +212,7 @@ const CATC={hot:['#ff9a4d','#b8461b'],cold:['#4dc3ff','#1b5fa8'],frappe:['#d78bf
 const CATF=[['#ff9a4d','#b8461b'],['#4dc3ff','#1b5fa8'],['#d78bff','#6a2fa8'],['#4dd6c1','#13705f']];
 // ilustraciones de categoría (assets/menu/<id>.webp); las categorías nuevas del admin siguen con su emoji
 const CIMG='hot cold frappe lemon shakes spirit filter wine sodas beer sweet salty pizza extras'.split(' ');
-const cico=(c,cls)=>CIMG.includes(c.id)?`<img class="${cls} ico-img" src="assets/menu/${c.id}.webp" alt="">`:`<span class="${cls}">${c.icon}</span>`;
+const cico=(c,cls)=>CIMG.includes(c.id)?`<img class="${cls} ico-img" src="/assets/menu/${c.id}.webp" alt="">`:`<span class="${cls}">${c.icon}</span>`;
 const catc=c=>CATC[c.id]||CATF[Math.max(0,D.indexOf(c))%CATF.length];
 function renderCatCards(){
   let h='';D.forEach((c,i)=>{
@@ -238,7 +238,7 @@ function renderDetail(){
     const pi=c.items[0];
     let h=`<div class="pizza-builder" style="animation:rise 0.5s var(--ease) both">
       <div class="pizza-hero">
-        <img class="pizza-hero__emoji ico-img" src="assets/menu/pizza.webp" alt="">
+        <img class="pizza-hero__emoji ico-img" src="/assets/menu/pizza.webp" alt="">
         <div class="pizza-hero__info">
           <h3 class="pizza-hero__title">${pi.name}</h3>
           <p class="pizza-hero__title-en">${pi.nameEn}</p>
