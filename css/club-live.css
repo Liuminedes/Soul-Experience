@@ -17,6 +17,8 @@
 }
 #view-landing .landing__hi { font-size: clamp(44px, 12vw, 58px); line-height: 1.1; margin: 0 0 6px; }
 #view-landing .landing__tagline { font-size: clamp(19px, 5.5vw, 30px); white-space: nowrap; letter-spacing: 0; line-height: 1.2; margin: 4px 0 12px; }
+/* en celulares muy angostos el lema no cabe en una línea: se parte en dos en vez de cortarse */
+@media (max-width: 359px) { #view-landing .landing__tagline { white-space: normal; text-wrap: balance; } }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 @keyframes titleShine { to { background-position: -250% 0; } }
 #view-landing .landing__detail-row { color: #5a3f2e; }
@@ -33,6 +35,15 @@
 .rama--bl { bottom: 4%; left: -26px; width: 96px; transform: rotate(-15deg); }
 .rama--mr { top: 70%; right: -120px; width: 200px; transform: rotate(168deg); }
 .rama--fix { position: fixed; z-index: 0; opacity: .75; }
+/* las ramas siempre detrás del contenido; en celular se van más al borde para no meterse en títulos ni botones */
+#view-landing .landing__inner { position: relative; z-index: 2; }
+#view-landing .rama:not(.rama--fix) { z-index: 1; }
+@media (max-width: 480px) {
+  .rama--tl { top: -34px; left: -48px; width: 124px; }
+  .rama--tr { right: -58px; width: 96px; }
+  .rama--ml { left: -160px; }
+  .rama--mr { right: -160px; }
+}
 @keyframes sway { to { translate: 0 4px; rotate: 3deg; } }
 
 /* partículas flotantes */
@@ -58,7 +69,8 @@
   box-shadow: 0 0 0 4px rgba(200, 168, 124, .5), 0 10px 40px rgba(138, 90, 50, .3);
   animation: float 3s ease-in-out infinite;
 }
-.hero__mascot { position: absolute; right: -84px; bottom: -34px; width: 146px; }
+/* la gata no baja del bloque del logo (no tapa el lema) y en pantallas angostas se acerca para no salirse */
+.hero__mascot { position: absolute; right: max(-84px, calc(103px - 50vw)); bottom: 4px; width: clamp(118px, 39vw, 146px); }
 .bubble {
   position: absolute; right: -4px; top: -34px; white-space: nowrap; z-index: 2;
   background: var(--parch); color: var(--ink); font: 700 12px var(--fu);
