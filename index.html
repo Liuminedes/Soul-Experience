@@ -53,21 +53,16 @@
       <img class="rama rama--mr" src="/assets/deco/rama-lateral.webp" alt="" aria-hidden="true">
 
       <div class="landing__inner">
-        <!-- Logo + anillo giratorio + mascota -->
-        <h1 class="landing__hi">Bienvenido a <span class="sr">Soul Experience</span></h1>
-        <div class="hero">
-          <svg class="hero__ring" viewBox="0 0 200 200" aria-hidden="true">
-            <defs><path id="ringp" d="M100,100 m-82,0 a82,82 0 1,1 164,0 a82,82 0 1,1 -164,0"/></defs>
-            <text><textPath href="#ringp" textLength="512" lengthAdjust="spacing">BUEN CAFÉ ✦ MOMENTOS INOLVIDABLES ✦ ANTOJOS ARTESANALES ✦ PARA TODA LA FAMILIA ✦</textPath></text>
-          </svg>
-          <img src="/assets/Soul_Experience.png" alt="Soul Experience" class="hero__logo" />
+        <!-- Cabecera (propuesta A del manual): logo oficial, foto real del local y Mokka -->
+        <header class="lp-head">
+          <img class="lp-logo" src="/assets/marca/logo.webp" alt="Soul Experience" width="150" height="150"/>
+          <p class="lp-slogan">Un lugar para descubrir y compartir</p>
           <div class="hero__mascot">
             <span class="bubble" id="bubble">¡Hola! Soy Mokka 👋</span>
             <i class="mascot" data-mood="saluda"></i>
           </div>
-        </div>
-
-        <!-- Brand info -->
+        </header>
+        <h1 class="sr">Soul Experience — Café y bebidas en Quinta Paredes, Bogotá</h1>
         <p class="landing__tagline">Más que un café, somos una experiencia</p>
         <div class="ticker" aria-hidden="true"><div class="ticker__in">
           <span>☕ Café de origen</span><span>🍕 Pizza artesanal</span><span>🍫 Cacao</span><span>🍺 Cervezas artesanales</span><span>🌱 Vegano · Sin gluten · Sin azúcar</span><span>🍵 Té e infusiones</span><span>🐾 Pet friendly</span>
@@ -115,6 +110,26 @@
           </button>
         </div>
 
+        <!-- El lugar: foto real con el pie del manual -->
+        <figure class="lp-place">
+          <img src="/assets/marca/local.webp" alt="Terraza de Soul Experience en Quinta Paredes" width="900" height="388" loading="lazy"/>
+          <figcaption>Un espacio auténtico donde naturaleza, gastronomía y encuentros se convierten en experiencias.</figcaption>
+        </figure>
+
+        <!-- Experiencias y sabores (manual, aplicación A) -->
+        <section class="lp-exp">
+          <h2 class="lp-h2">Aquí siempre hay algo por descubrir</h2>
+          <p class="lp-label">Experiencias que se viven</p>
+          <div class="lp-tiles">
+            <figure><img src="/assets/marca/exp-terraza.webp" alt="" loading="lazy"/><figcaption>Catas y encuentros</figcaption></figure>
+            <figure><img src="/assets/marca/exp-jeep.webp" alt="" loading="lazy"/><figcaption>Compartir en Soul</figcaption></figure>
+            <figure><img src="/assets/marca/exp-noche.webp" alt="" loading="lazy"/><figcaption>Noches especiales</figcaption></figure>
+          </div>
+          <h2 class="lp-h2 lp-h2--sm">Sabores para todos los momentos</h2>
+          <p class="lp-sub">Café de origen · Gastronomía · Alternativas para descubrir</p>
+        </section>
+
+        <p class="lp-visit">Visítanos en <b>Quinta Paredes</b></p>
         <!-- Details -->
         <div class="landing__details">
           <a class="landing__detail-row landing__detail-row--link" href="/encuentranos">

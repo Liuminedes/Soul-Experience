@@ -1,6 +1,6 @@
-/* ═════════ MANUAL DE MARCA v2.1 sobre la estética viva del sitio ═════════
-   El sitio conserva su vida (degradados, brillos, partículas, Mokka, animaciones); de aquí salen la paleta,
-   las tipografías y los tamaños de lectura del manual. */
+/* ═════════ IDENTIDAD DE MARCA (Manual de marca v2.1) ═════════
+   Paleta, tipografías, jerarquía y calma visual del manual. Va al final de las demás hojas.
+   Bases claras · estructura en café · terracota para el segundo nivel · acentos vivos solo en detalles. */
 :root {
   --choco: #2B1408; --tostado: #4A2A16; --terra: #83421F;
   --naranja: #E23D03; --cereza: #C8102E; --bosque: #176D24; --hoja: #1FC71F;
@@ -9,47 +9,130 @@
   --fu: 'Montserrat', -apple-system, sans-serif;  /* interfaz, menú, precios y botones */
   --ink: var(--choco); --esp: var(--choco);
 }
-body { font-family: var(--fu); }
+body { font-family: var(--fu); color: var(--choco); background: var(--marfil); }
 :focus-visible { outline: 3px solid var(--terra); outline-offset: 3px; }
-
 /* Cormorant se ve fina en peso normal: los titulares van en negrita */
 .menu-home__q, .cat-card__title, .detail__title, .icard__name, .suggest__t b, .review-card__t b,
 .pm__name, .modal__title, .contact__name, .pizza-hero__title, .topping-section__title { font-weight: 700; }
-.menu-home__q { font-size: 36px; font-weight: 600; }
-.cat-card__title { font-size: 24px; }
 
-/* ── Fondos: crema del manual con los degradados de siempre ── */
-#view-landing .landing, #view-menu { background: var(--crema); }
-.ticker__in span { font-size: 13px; }
-#view-landing .landing__detail-row { font-size: 14px; opacity: .9; color: var(--tostado); }
+/* ══════ INICIO (aplicación A del manual) ══════ */
+#view-landing .landing { background: linear-gradient(180deg, var(--crema) 0 330px, var(--marfil) 560px); justify-content: flex-start; padding-top: 30px; }
+#view-landing .landing::before { animation: none; background: radial-gradient(circle at 50% 0, rgba(131, 66, 31, .07), transparent 55%); }
+#view-landing .landing__inner { position: relative; z-index: 2; }
+.lp-head { text-align: center; animation: rise .7s var(--ease) both; }
+.lp-logo { display: block; width: 150px; height: 150px; margin: 0 auto; object-fit: contain; filter: drop-shadow(0 4px 10px rgba(43, 20, 8, .14)); }
+.lp-slogan { margin: 6px 0 0; font: 700 11px var(--fu); letter-spacing: 1.6px; text-transform: uppercase; color: var(--choco); }
+/* Mokka junto al logo, sobre el crema limpio (ahí contrasta); el lema cursivo y la franja vienen de club-live.css */
+.lp-head { position: relative; }
+.lp-head .hero__mascot { position: absolute; z-index: 3; right: -14px; top: 46px; width: clamp(88px, 28vw, 112px); }
+.lp-head .bubble { top: -46px; right: -6px; width: max-content; max-width: 118px; white-space: normal; text-align: center; line-height: 1.25; background: #fff; color: var(--choco); font: 600 12px var(--fu); box-shadow: 0 6px 16px rgba(43, 20, 8, .2); border: 1px solid rgba(131, 66, 31, .15); }
+#view-landing .landing__tagline { margin: 14px 0 10px; }
+#view-landing .landing__actions { margin-top: 4px; }
 
-/* ── Título cursivo con reflejo, ahora en chocolate y terracota ── */
-#view-landing .landing__hi, #view-landing .landing__tagline {
-  color: var(--choco);
-  background-image: linear-gradient(100deg, #2B1408 30%, #83421F 45%, #e8b25a 50%, #83421F 55%, #2B1408 70%);
+/* la foto del lugar, en su propia tarjeta */
+.lp-place { margin: 26px 0 0; text-align: center; }
+.lp-place img { display: block; width: 100%; height: 190px; object-fit: cover; border-radius: 18px; box-shadow: 0 10px 24px rgba(43, 20, 8, .16); }
+.lp-place figcaption { margin: 10px 6px 0; font: 500 12px/1.5 var(--fu); color: var(--terra); }
+
+/* botones: menú en chocolate y Club en terracota (acciones principales); el resto, accesos claros */
+#view-landing .landing__btn {
+  justify-content: center; gap: 12px; min-height: 56px; padding: 16px 44px; border-radius: 14px; text-align: center;
+  font: 700 17px var(--fu); letter-spacing: 0; text-shadow: none;
+  background: #fff; color: var(--choco); border: 1.5px solid rgba(131, 66, 31, .22); box-shadow: 0 2px 10px rgba(43, 20, 8, .06);
 }
-.hero__ring text { fill: var(--terra); }
-#view-menu .menu-home__head-logo { color: var(--choco); }
-#view-menu .menu-home__head-badge, #view-menu .menu-home__back-btn { color: var(--terra); }
+#view-landing .landing__btn::before { content: none; }
+#view-landing .landing__btn::after { content: '›'; display: block; position: absolute; inset: auto 18px auto auto; top: 50%; transform: translateY(-52%); width: auto; height: auto; background: none; font-size: 24px; line-height: 1; opacity: .7; }
+#view-landing .landing__btn-icon, .landing__btn--club .landing__btn-icon { animation: none; font-size: 18px; }
+#view-landing .landing__btn--menu { background: var(--choco); color: var(--marfil); border-color: var(--choco); box-shadow: 0 8px 22px rgba(43, 20, 8, .25); }
+#view-landing .landing__btn--club { background: var(--terra) !important; color: var(--marfil) !important; border-color: var(--terra); font-size: 17px !important; padding: 16px 44px !important; box-shadow: 0 8px 22px rgba(131, 66, 31, .28); }
+#view-landing .landing__actions > * { animation: rise .6s var(--ease) both !important; }
+#view-landing .landing__actions > :nth-child(2) { animation-delay: .08s !important; }
+#view-landing .landing__actions > :nth-child(n+3) { animation-delay: .16s !important; min-height: 50px; font-size: 16px; padding: 13px 44px; }
+#view-landing .landing__btn:hover { transform: translateY(-1px); }
+
+/* experiencias y sabores */
+.lp-exp { margin-top: 30px; text-align: left; }
+.lp-h2 { margin: 0 0 4px; font: italic 600 27px/1.1 var(--fd); color: var(--choco); }
+.lp-h2--sm { font-size: 23px; margin-top: 4px; }
+.lp-label { margin: 0 0 10px; font: 700 11px var(--fu); letter-spacing: 1.4px; text-transform: uppercase; color: var(--terra); }
+.lp-tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 26px; }
+.lp-tiles figure { position: relative; margin: 0; aspect-ratio: 1 / 1.1; border-radius: 12px; overflow: hidden; background: var(--tostado); }
+.lp-tiles img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.lp-tiles figcaption { position: absolute; inset: auto 0 0; padding: 7px 8px; background: rgba(43, 20, 8, .86); color: #fff; font: 600 11px/1.2 var(--fu); }
+.lp-sub { margin: 0; font: 500 14px/1.5 var(--fu); color: var(--tostado); }
+.lp-visit { margin: 26px 0 0; padding-top: 18px; border-top: 1px solid rgba(131, 66, 31, .2); font: 500 15px var(--fu); color: var(--choco); }
+#view-landing .landing__details { margin-top: 8px; }
+#view-landing .landing__detail-row { font-size: 14px; color: var(--tostado); opacity: 1; }
+#view-landing .landing__detail-row--link { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(131, 66, 31, .4); }
+
+/* adornos en calma: ramas quietas y siempre detrás; sin partículas ni destellos */
+.fx span, .fx .tw { display: none; }
+.rama { animation: none; opacity: .9; }
+#view-landing .rama--ml, #view-landing .rama--mr { display: none; }
+
+/* ══════ MENÚ ══════ */
+#view-menu { background: var(--marfil); }
+#view-menu::before { animation: none; background: radial-gradient(circle at 50% 0, rgba(131, 66, 31, .07), transparent 50%); }
+#view-menu .menu-home__head { background: rgba(252, 236, 224, .94); border-bottom-color: rgba(131, 66, 31, .15); }
+#view-menu .menu-home__head-logo { font: 700 24px var(--fd); color: var(--choco); }
+#view-menu .menu-home__head-badge { color: var(--terra); background: rgba(131, 66, 31, .1); }
+#view-menu .menu-home__back-btn, #view-menu .detail__back { color: var(--choco); min-height: 44px; font-size: 14px; }
+.menu-home__q { font: 600 36px/1.05 var(--fd); color: var(--choco); }
 .menu-home__q em { color: var(--terra); }
-#view-menu .icard__name, .suggest, .review-card { color: var(--choco); }
 
-/* ── Botones: mismos degradados vivos; colores afinados a la paleta del manual ── */
-#view-landing .landing__btn--menu { --b1: #6b3b1f; --b2: #2B1408; }
-#view-landing .landing__btn--review { --b1: #fff1e0; --b2: #f0cfa6; --fg: #2B1408; }
-#view-landing .landing__btn--location { --b1: #f08a55; --b2: #a8431f; }
-#view-landing .landing__btn--social { --b1: #5fae4d; --b2: #176D24; }
-.landing__btn--club { color: var(--choco) !important; }
+/* categorías: tarjeta clara; la ilustración sobre un círculo del color de la categoría */
+.cat-card { background: #fff; border: 1px solid rgba(131, 66, 31, .14); box-shadow: 0 6px 18px rgba(43, 20, 8, .07); min-height: 194px; }
+.cat-card::after { width: 96px; height: 96px; left: 10px; top: 10px; right: auto; bottom: auto; background: color-mix(in srgb, var(--c1) 16%, transparent); }
+img.cat-card__emoji { width: 84px; height: 84px; margin: -2px 0 0 -2px; }
+.cat-card__emoji, #detail-screen .detail__icon, .pm__hero img.pm__ico { animation: none; }
+.cat-card:hover .cat-card__emoji { transform: none; }
+img.ico-img { filter: drop-shadow(0 6px 8px rgba(43, 20, 8, .18)); }
+.cat-card__title { font: 700 24px/1.05 var(--fd); color: var(--choco); text-shadow: none; }
+.cat-card__count { font-size: 12px; font-weight: 600; color: var(--c1); }
+.cat-card--wide { min-height: 130px; }
+.cat-card--wide::after { left: auto; right: 14px; top: 50%; margin-top: -48px; }
+.cat-card--wide img.cat-card__emoji { width: 96px; height: 96px; margin-top: -48px; right: 14px; }
 
-/* ── Menú: la misma fuerza de color, sin azules ni morados (ver CATC en app.js) ── */
-.cat-card__count { font-size: 12px; font-weight: 600; }
-#view-menu .icard__desc { font-size: 15px; color: rgba(43, 20, 8, .7); }
-#view-menu .icard__name-en { font-size: 13px; }
-#view-menu .menu-home__back-btn, #view-menu .detail__back { min-height: 44px; font-size: 14px; }
+#detail-screen .detail__head { box-shadow: 0 10px 28px rgba(43, 20, 8, .2); }
+#detail-screen .detail__title { font-weight: 700; text-shadow: none; }
+#view-menu .icard { background: #fff; border-color: rgba(131, 66, 31, .12); border-left-color: var(--c1); }
+#view-menu .icard__name { font-weight: 700; color: var(--choco); font-size: 23px; }
+#view-menu .icard__desc { font-size: 15px; font-weight: 400; color: rgba(43, 20, 8, .72); }
+#view-menu .icard__name-en { font-size: 13px; color: rgba(43, 20, 8, .55); }
+#view-menu .icard__price { background: var(--c1); color: #fff; font-weight: 700; box-shadow: none; }
+#view-menu .dtag { background: rgba(131, 66, 31, .08); color: var(--choco); min-height: 40px; font-size: 13px; }
 
-/* ── Ventanas: café chocolate del manual; textos de lectura de 16px y cierre de 44px ── */
-.modal { background: var(--choco); }
-.pm__desc { font-size: 16px; }
-.modal__close { width: 44px; height: 44px; }
-.pm__opt { font-size: 15px; }
+.suggest, .review-card { background: var(--crema); border: 1px solid rgba(131, 66, 31, .2); color: var(--choco); animation: rise .6s var(--ease) both; }
+.suggest__t b, .review-card__t b { font: 700 22px/1.1 var(--fd); }
+.suggest__t small, .review-card__t small { font-size: 13px; opacity: .8; }
 .suggest .club__label { color: var(--terra); font-weight: 700; }
+.suggest__b button { background: var(--choco); color: var(--marfil); font: 700 13px var(--fu); min-height: 40px; }
+.suggest__b button + button { background: rgba(43, 20, 8, .08); color: var(--choco); }
+.review-card__go { animation: none; color: var(--terra); }
+#view-menu .pizza-hero, #view-menu .topping-section { background: #fff; border-color: rgba(131, 66, 31, .14); }
+#view-menu .pizza-hero *, #view-menu .topping-section * { color: var(--choco); }
+#view-menu .contact { background: var(--choco); }
+.contact__name { color: var(--marfil); }
+.contact__tag, .contact__row { color: var(--marfil); font-size: 15px; }
+.contact__wa { background: var(--crema); color: var(--choco); }
+
+/* Mokka: presencia ocasional (inicio, sugerencia, ficha, opinión y redes); sin compañera flotante sobre el contenido */
+#buddy { display: none !important; }
+
+/* ══════ VENTANAS (producto y redes) en superficie clara ══════ */
+.modal { background: var(--marfil); border-color: rgba(131, 66, 31, .15); box-shadow: 0 24px 70px rgba(43, 20, 8, .35); }
+.modal__close { background: rgba(43, 20, 8, .07); color: var(--choco); width: 44px; height: 44px; }
+.modal--product .modal__close { background: rgba(43, 20, 8, .5); color: #fff; }
+.pm__cat { color: var(--terra); font-size: 13px; }
+.pm__name { font-size: 32px; color: var(--choco); }
+.pm__name-en, .pm__desc-en { color: rgba(43, 20, 8, .55); font-size: 14px; }
+.pm__price { color: var(--terra); }
+.pm__desc { color: rgba(43, 20, 8, .8); font-size: 16px; }
+.pm__divider { background: linear-gradient(90deg, rgba(131, 66, 31, .25), transparent); }
+.pm__opts-label { color: var(--terra); }
+.pm__opt { background: #fff; color: var(--choco); border: 1px solid rgba(131, 66, 31, .2); font-size: 15px; }
+#social-modal .modal { background: var(--marfil); border-color: rgba(131, 66, 31, .15); box-shadow: 0 -16px 50px rgba(43, 20, 8, .2); }
+#social-modal .modal__title { font-size: 32px; color: var(--choco); }
+#social-modal .modal__title em { color: var(--terra); }
+#social-modal .modal__sub { color: var(--tostado); opacity: 1; }
+.social__club { border-color: rgba(131, 66, 31, .4); background: rgba(131, 66, 31, .06); color: var(--terra); font-size: 15px; }

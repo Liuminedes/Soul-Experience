@@ -17,7 +17,7 @@ setInterval(() => {
   const b = $('bubble'); if (!b) return;
   ph = (ph + 1) % PHRASES.length; b.textContent = PHRASES[ph][0]; b.style.animation = 'none'; void b.offsetWidth; b.style.animation = '';
   const m = b.nextElementSibling; m.dataset.base = m.dataset.mood = PHRASES[ph][1];
-}, 3500);
+}, 7000);
 
 function confetti() {
   const f = document.createDocumentFragment();
@@ -56,7 +56,7 @@ const _bh = backToHome;
 backToHome = () => { _bh(); say('¿Qué más se te antoja?', 'feliz'); };
 const _op = openProduct;
 openProduct = (c, i) => { _op(c, i); say('Déjame ver de cerca… 🧐', 'lentes', 3000); };
-document.addEventListener('click', e => { if (e.target.closest('.pm__wa')) { say('¡Buena elección! 💛', 'celebra', 3000); confetti(); } });
+document.addEventListener('click', e => { if (e.target.closest('.pm__wa')) say('¡Buena elección! 💛', 'celebra', 3000); });
 
 // sin actividad 25 s en el menú: se duerme; al volver, despierta
 let idle;
