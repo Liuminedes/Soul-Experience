@@ -1,0 +1,55 @@
+/* ═════════ MANUAL DE MARCA v2.1 sobre la estética viva del sitio ═════════
+   El sitio conserva su vida (degradados, brillos, partículas, Mokka, animaciones); de aquí salen la paleta,
+   las tipografías y los tamaños de lectura del manual. */
+:root {
+  --choco: #2B1408; --tostado: #4A2A16; --terra: #83421F;
+  --naranja: #E23D03; --cereza: #C8102E; --bosque: #176D24; --hoja: #1FC71F;
+  --crema: #FCECE0; --marfil: #F8F6F2;
+  --fd: 'Cormorant Garamond', Georgia, serif;     /* titulares y citas */
+  --fu: 'Montserrat', -apple-system, sans-serif;  /* interfaz, menú, precios y botones */
+  --ink: var(--choco); --esp: var(--choco);
+}
+body { font-family: var(--fu); }
+:focus-visible { outline: 3px solid var(--terra); outline-offset: 3px; }
+
+/* Cormorant se ve fina en peso normal: los titulares van en negrita */
+.menu-home__q, .cat-card__title, .detail__title, .icard__name, .suggest__t b, .review-card__t b,
+.pm__name, .modal__title, .contact__name, .pizza-hero__title, .topping-section__title { font-weight: 700; }
+.menu-home__q { font-size: 36px; font-weight: 600; }
+.cat-card__title { font-size: 24px; }
+
+/* ── Fondos: crema del manual con los degradados de siempre ── */
+#view-landing .landing, #view-menu { background: var(--crema); }
+.ticker__in span { font-size: 13px; }
+#view-landing .landing__detail-row { font-size: 14px; opacity: .9; color: var(--tostado); }
+
+/* ── Título cursivo con reflejo, ahora en chocolate y terracota ── */
+#view-landing .landing__hi, #view-landing .landing__tagline {
+  color: var(--choco);
+  background-image: linear-gradient(100deg, #2B1408 30%, #83421F 45%, #e8b25a 50%, #83421F 55%, #2B1408 70%);
+}
+.hero__ring text { fill: var(--terra); }
+#view-menu .menu-home__head-logo { color: var(--choco); }
+#view-menu .menu-home__head-badge, #view-menu .menu-home__back-btn { color: var(--terra); }
+.menu-home__q em { color: var(--terra); }
+#view-menu .icard__name, .suggest, .review-card { color: var(--choco); }
+
+/* ── Botones: mismos degradados vivos; colores afinados a la paleta del manual ── */
+#view-landing .landing__btn--menu { --b1: #6b3b1f; --b2: #2B1408; }
+#view-landing .landing__btn--review { --b1: #fff1e0; --b2: #f0cfa6; --fg: #2B1408; }
+#view-landing .landing__btn--location { --b1: #f08a55; --b2: #a8431f; }
+#view-landing .landing__btn--social { --b1: #5fae4d; --b2: #176D24; }
+.landing__btn--club { color: var(--choco) !important; }
+
+/* ── Menú: la misma fuerza de color, sin azules ni morados (ver CATC en app.js) ── */
+.cat-card__count { font-size: 12px; font-weight: 600; }
+#view-menu .icard__desc { font-size: 15px; color: rgba(43, 20, 8, .7); }
+#view-menu .icard__name-en { font-size: 13px; }
+#view-menu .menu-home__back-btn, #view-menu .detail__back { min-height: 44px; font-size: 14px; }
+
+/* ── Ventanas: café chocolate del manual; textos de lectura de 16px y cierre de 44px ── */
+.modal { background: var(--choco); }
+.pm__desc { font-size: 16px; }
+.modal__close { width: 44px; height: 44px; }
+.pm__opt { font-size: 15px; }
+.suggest .club__label { color: var(--terra); font-weight: 700; }

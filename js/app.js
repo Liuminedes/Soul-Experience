@@ -207,9 +207,9 @@ document.addEventListener('keydown',e=>{if(e.key==='Enter'&&$('view-login').clas
 
 /* ═══════ MENU HOME ═══════ */
 function showHome(){$('home-screen').style.display='block';$('detail-screen').style.display='none';renderCatCards()}
-// Colores por categoría (las creadas desde el admin usan la paleta de respaldo)
-const CATC={hot:['#ff9a4d','#b8461b'],cold:['#4dc3ff','#1b5fa8'],frappe:['#d78bff','#6a2fa8'],lemon:['#ffe14d','#7fa800'],shakes:['#ff7eb6','#a8245f'],spirit:['#d9683f','#4a1a14'],filter:['#e0c08a','#7a5530'],wine:['#c2406a','#4a0f26'],sodas:['#4dd6c1','#13705f'],beer:['#f5b93a','#9a5a08'],sweet:['#ff9ec4','#a63d70'],salty:['#f0a35e','#8a4a14'],pizza:['#ef5a4a','#7a1a14'],extras:['#a39482','#4a3f34']};
-const CATF=[['#ff9a4d','#b8461b'],['#4dc3ff','#1b5fa8'],['#d78bff','#6a2fa8'],['#4dd6c1','#13705f']];
+// Colores por categoría: cálidos y verde bosque del manual (sin azules ni morados); las creadas desde el admin rotan entre los de respaldo
+const CATC={hot:['#ff9a4d','#b8461b'],cold:['#4fa65a','#176D24'],frappe:['#c98a52','#5a3318'],lemon:['#ffe14d','#7fa800'],shakes:['#f0708a','#C8102E'],spirit:['#d9683f','#4a1a14'],filter:['#e0c08a','#7a5530'],wine:['#c2406a','#4a0f26'],sodas:['#6fc27a','#13632a'],beer:['#f5b93a','#9a5a08'],sweet:['#f58aa5','#a8244a'],salty:['#f0a35e','#8a4a14'],pizza:['#ef5a4a','#7a1a14'],extras:['#a39482','#4a3f34']};
+const CATF=[['#ff9a4d','#b8461b'],['#4fa65a','#176D24'],['#f0708a','#C8102E'],['#c98a52','#5a3318']];
 // ilustraciones de categoría (assets/menu/<id>.webp); las categorías nuevas del admin siguen con su emoji
 const CIMG='hot cold frappe lemon shakes spirit filter wine sodas beer sweet salty pizza extras'.split(' ');
 const cico=(c,cls)=>CIMG.includes(c.id)?`<img class="${cls} ico-img" src="/assets/menu/${c.id}.webp" alt="">`:`<span class="${cls}">${c.icon}</span>`;

@@ -12,12 +12,12 @@
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="css/mascot.css"/>
 <style>
 :root {
   --ink: #1b1410; --parch: #f7f2eb; --esp: #2c1e16; --caramel: #c8a87c; --ember: #ff9a4d;
-  --fd: 'DM Serif Display', serif; --fu: 'Manrope', sans-serif;
+  --fd: 'Cormorant Garamond', Georgia, serif; --fu: 'Montserrat', sans-serif;
   --ease: cubic-bezier(0.16, 1, 0.3, 1); --spring: cubic-bezier(0.34, 1.56, 0.64, 1); --ease-spring: var(--spring);
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -57,7 +57,7 @@ button { font-family: inherit; cursor: pointer; border: 0; background: none; col
 .pin::before, .pin::after { content: ''; position: absolute; inset: 0; border-radius: 50%; border: 2px solid var(--ember); animation: ring 2.4s ease-out infinite; }
 .pin::after { animation-delay: 1.2s; }
 .pin span { font-size: 54px; animation: drop .9s var(--spring) both .2s; filter: drop-shadow(0 8px 14px rgba(255,154,77,.5)); }
-.hero__title { font-family: var(--fd); font-weight: 400; font-size: clamp(38px, 10vw, 52px); line-height: 1.05; }
+.hero__title { font-family: var(--fd); font-weight: 700; font-size: clamp(38px, 10vw, 52px); line-height: 1.05; }
 .hero__title em { color: var(--caramel); }
 .hero__sub { margin-top: 8px; font-size: 14px; opacity: .65; }
 
@@ -77,7 +77,7 @@ button { font-family: inherit; cursor: pointer; border: 0; background: none; col
 
 /* secciones */
 .sec { margin-top: 34px; }
-.sec__title { font-family: var(--fd); font-weight: 400; font-size: 28px; }
+.sec__title { font-family: var(--fd); font-weight: 700; font-size: 28px; }
 .sec__title em { color: var(--caramel); }
 .sec__sub { font-size: 13px; opacity: .55; margin: 4px 0 16px; }
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s var(--ease), transform .6s var(--ease); transition-delay: calc(var(--i, 0) * 70ms); }
